@@ -104,7 +104,7 @@ function applyConfig(){
  const logo=document.getElementById("brandLogo");logo.src=CONFIG.logo;logo.onerror=()=>{logo.style.display="none";document.getElementById("logoFallback").style.display="inline"};
  const hero=document.querySelector(".hero");hero.style.backgroundImage=`linear-gradient(90deg,#070b24 2%,#0a0b25d9 42%,#0a0b2530 100%),url("${CONFIG.portada}")`;
  const status=document.getElementById("storeState");status.textContent=CONFIG.tiendaAbierta?"🟢 Tienda abierta":"🔴 Tienda cerrada";status.classList.toggle("closed",!CONFIG.tiendaAbierta);
- const wa=whatsappBase();const mensaje="¡Hola! \u{1F44B} Llegué a CINECLIK y quisiera hacer una consulta sobre sus películas y pedidos. \u{1F3AC}\u{1F37F}";const waMensaje=wa?wa+"?text="+encodeURIComponent(mensaje):"";for(const id of ["footerWhatsApp","whatsappFloat"]){const el=document.getElementById(id);el.href=waMensaje||"#";el.onclick=e=>{if(!wa){e.preventDefault();alert("Configura tu número de WhatsApp en CONFIG al comienzo del código HTML.")}}}
+ const wa=whatsappBase();const mensaje="Hola! Llegue a CINECLIK y quisiera hacer una consulta sobre sus peliculas y pedidos.";const waMensaje=wa?wa+"?text="+encodeURIComponent(mensaje):"";for(const id of ["footerWhatsApp","whatsappFloat"]){const el=document.getElementById(id);el.href=waMensaje||"#";el.onclick=e=>{if(!wa){e.preventDefault();alert("Configura tu numero de WhatsApp en CONFIG al comienzo del codigo HTML.")}}}
 }
 function renderCatalog(){
  const query=(document.getElementById("searchInput").value||"").toLowerCase();
