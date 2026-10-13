@@ -36,6 +36,21 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
   box-shadow: 0 0 18px #FFC92875;
   transform: translateY(-2px);
 }
+  /* Botón de tráiler en las tarjetas del catálogo */
+.trailer-catalog {
+  color: #FFC928 !important;
+  border: 1px solid #FFC928 !important;
+  background: #10152B !important;
+  box-shadow: 0 0 8px #FFC92825;
+  font-weight: 700;
+  transition: background .2s, box-shadow .2s, transform .2s;
+}
+
+.trailer-catalog:hover {
+  background: #24213A !important;
+  box-shadow: 0 0 16px #FFC92870;
+  transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -143,7 +158,7 @@ function renderCatalog(){
  const items=PELICULAS.filter(m=>m.activa&&(currentCategory==="Todas"||m.categoria===currentCategory)&&m.titulo.toLowerCase().includes(query));
  const catalog=document.getElementById("catalog");
  if(!items.length){catalog.innerHTML='<div class="empty">No encontramos películas con ese nombre. Prueba otra búsqueda.</div>';return}
- catalog.innerHTML=items.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
+ catalog.innerHTML=items.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
 }
 document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-category]");if(!b)return;currentCategory=b.dataset.category;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===b));renderCatalog()});
 function openDetail(id){
