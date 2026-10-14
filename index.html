@@ -115,7 +115,7 @@ const CONFIG = {
  textoFranja: "¡Momento de peli gratis!",
  tituloCombo: "Momento de peli gratis",
  textoCombo: "Prepara las palomitas y disfruta tu película.",
- urlPeliculaGratis: "https://stream.mux.com/S2QvM74UDL6ef65xNvjUTafEB6gQDunIe01oyzS00ycR8.m3u8",
+ urlPeliculaGratis: "https://player.mux.com/S2QvM74UDL6ef65xNvjUTafEB6gQDunIe01oyzS00ycR8",
  duracionOfertaHoras: 24, // Cuenta regresiva de demostración por visita.
  tiendaAbierta: false, // Cambia a false cuando no estés atendiendo.
  moneda: "S/",
@@ -191,7 +191,6 @@ function closeTrailer(){document.getElementById("trailerBackdrop").classList.rem
     "Momento de peli gratis";
 
   let video = "";
-  let youtubeId = "";
 
   if (!url || url.includes("ID_DEL_VIDEO")) {
     player.innerHTML =
@@ -199,6 +198,7 @@ function closeTrailer(){document.getElementById("trailerBackdrop").classList.rem
   } else {
     try {
       const link = new URL(url);
+      let youtubeId = "";
 
       if (link.hostname === "youtu.be") {
         youtubeId = link.pathname.slice(1);
@@ -221,15 +221,14 @@ function closeTrailer(){document.getElementById("trailerBackdrop").classList.rem
       } else if (
         link.protocol === "https:" &&
         (
-          link.hostname === "facebook.com" ||
-          link.hostname.endsWith(".facebook.com") ||
-          link.hostname === "fb.watch"
+          link.hostname === "stream.mux.com" ||
+          link.hostname === "player.mux.com"
         )
       ) {
-        video =
-          "https://www.facebook.com/plugins/video.php?href=" +
-          encodeURIComponent(url) +
-          "&show_text=false";
+        video = link.hostname === "player.mux.com"
+          ? url
+          : "https://player.mux.com/" +
+            link.pathname.split("/").filter(Boolean)[0];
       }
     } catch (error) {}
 
@@ -239,7 +238,7 @@ function closeTrailer(){document.getElementById("trailerBackdrop").classList.rem
           title="Momento de peli gratis"
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowfullscreen></iframe>`
-      : '<p class="muted">Revisa que el enlace de la pelicula sea valido.</p>';
+      : '<p class="muted">Enlace no valido. Usa una URL de YouTube o MUX.</p>';
   }
 
   backdrop.classList.add("show");
