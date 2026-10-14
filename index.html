@@ -129,7 +129,26 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
     animation: none;
   }
 }
+/* CINECLIK: ajustes de portada para celulares */
+@media (max-width: 600px) {
+  .hero {
+    background-position: 62% center;
+    min-height: 690px;
+  }
 
+  .hero-content {
+    padding: 28px 20px;
+  }
+
+  .hero-offer {
+    left: 20px;
+    right: auto;
+    bottom: 20px;
+    min-width: 0;
+    width: min(285px, calc(100% - 40px));
+    box-sizing: border-box;
+  }
+}
 </style>
 </head>
 <body>
