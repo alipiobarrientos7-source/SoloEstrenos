@@ -51,6 +51,85 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
   box-shadow: 0 0 16px #FFC92870;
   transform: translateY(-2px);
 }
+  
+/* CINECLIK: brillo neón para la tarjeta de película gratis */
+.combo {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #6655ff !important;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 0 12px #6755ff55,
+    0 0 28px #00d9ff22,
+    inset 0 0 18px #6655ff12;
+  animation: comboGlow 3s ease-in-out infinite alternate;
+}
+
+/* Destello que recorre el borde */
+.combo::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    #00d9ff 310deg,
+    #ff55d6 330deg,
+    transparent 350deg
+  );
+  animation: comboSpark 7s linear infinite;
+}
+
+/* Fondo interior de la tarjeta */
+.combo::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 20px;
+  background: #0d1532;
+}
+
+@keyframes comboSpark {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes comboGlow {
+  from {
+    box-shadow:
+      0 0 8px #6655ff44,
+      0 0 18px #00d9ff18,
+      inset 0 0 12px #6655ff10;
+  }
+  to {
+    box-shadow:
+      0 0 15px #6655ff88,
+      0 0 32px #00d9ff44,
+      inset 0 0 20px #ff55d61a;
+  }
+}
+
+/* Resplandor al pasar el ratón */
+.combo:hover {
+  border-color: #00d9ff !important;
+  box-shadow:
+    0 0 18px #00d9ff77,
+    0 0 38px #ff55d644;
+}
+
+/* Respeta a quien prefiere menos animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .combo,
+  .combo::before {
+    animation: none;
+  }
+}
+
 </style>
 </head>
 <body>
