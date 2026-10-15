@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d19">
+  <title>CINECLIK PLAY | Tu película, a un solo clic</title>
+  <meta name="description" content="Introduce tu código de acceso para ver tu película en CINECLIK PLAY.">
+  <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100d19;
+      --panel: #191323;
+      --panel-2: #21182e;
+      --purple: #8b36e8;
+      --purple-light: #c4a0ff;
+      --red: #ff526d;
+      --text: #fff;
+      --muted: #bdb3ca;
+      --border: #49315f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 15% 0%, rgba(139,54,232,.22), transparent 38%),
+        radial-gradient(ellipse at 90% 25%, rgba(255,82,109,.12), transparent 32%),
+        var(--bg);
+      display: flex; flex-direction: column;
+    }
+    header {
+      width: min(1100px, 100%); margin: 0 auto; padding: 24px 22px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .logo {
+      width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
+      background: linear-gradient(135deg, #382050, #21162f); border:1px solid #67439a;
+      font-size:25px; box-shadow: 0 0 24px rgba(139,54,232,.18);
+    }
+    .brand-name { font-size:1.15rem; font-weight:900; letter-spacing:.08em; }
+    .brand-sub { display:block; margin-top:2px; color:var(--purple-light); font-size:.75rem; letter-spacing:.22em; font-weight:800; }
+    .tag { color:var(--muted); font-size:.82rem; }
+    main { width:min(850px, 100%); margin:auto; padding:24px 22px 54px; flex:1; }
+    .intro { text-align:center; margin: 18px auto 28px; max-width:650px; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px; color:var(--purple-light);
+      font-size:.78rem; letter-spacing:.15em; font-weight:800; text-transform:uppercase;
+      border:1px solid var(--border); background:rgba(33,24,46,.75);
+      border-radius:999px; padding:8px 12px;
+    }
+    h1 { font-size:clamp(2rem, 5vw, 3.25rem); line-height:1.08; margin:18px 0 12px; letter-spacing:-.04em; }
+    h1 span { background:linear-gradient(90deg, #c4a0ff, #ff526d); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .intro p { color:var(--muted); line-height:1.65; margin:0; }
+    .card {
+      background:linear-gradient(145deg, rgba(33,24,46,.96), rgba(25,19,35,.98));
+      border:1px solid var(--border); border-radius:22px; padding:clamp(18px, 4vw, 30px);
+      box-shadow:0 20px 70px rgba(0,0,0,.25);
+    }
+    label { display:block; margin-bottom:10px; color:#d9c9ef; font-size:.82rem; font-weight:800; letter-spacing:.1em; }
+    .entry { display:flex; gap:10px; }
+    input {
+      min-width:0; flex:1; border:1px solid #554269; border-radius:12px;
+      padding:15px 16px; background:#100d19; color:#fff; font-size:1rem;
+      outline:none; text-transform:uppercase;
+    }
+    input:focus { border-color:var(--purple-light); box-shadow:0 0 0 3px rgba(196,160,255,.12); }
+    button {
+      border:0; border-radius:12px; padding:15px 20px; color:white; font-weight:800;
+      font-size:.95rem; cursor:pointer; background:linear-gradient(110deg, #8b36e8, #c02b8f);
+      box-shadow:0 8px 24px rgba(139,54,232,.22); transition:transform .15s, opacity .15s;
+    }
+    button:hover { transform:translateY(-1px); }
+    button:disabled { opacity:.65; cursor:wait; transform:none; }
+    .message { margin-top:14px; color:var(--muted); font-size:.92rem; line-height:1.5; min-height:1.4em; }
+    .message.error { color:#ff9aaa; }
+    .message.success { color:#9ce8bc; }
+    .player-wrap { display:none; margin-top:24px; }
+    .player-wrap.visible { display:block; }
+    .movie-title { font-size:1.2rem; font-weight:800; margin:0 0 14px; }
+    mux-player { display:block; width:100%; aspect-ratio:16/9; --media-object-fit:contain; --media-background-color:#050407; border:1px solid #49315f; border-radius:14px; overflow:hidden; }
+    .note { color:#968aa5; font-size:.78rem; line-height:1.55; margin-top:18px; text-align:center; }
+    footer { text-align:center; padding:22px; color:#857990; font-size:.78rem; border-top:1px solid rgba(73,49,95,.45); }
+    @media (max-width:600px) {
+      header { padding:18px 16px; }
+      .tag { display:none; }
+      main { padding:16px 14px 38px; }
+      .entry { flex-direction:column; }
+      button { width:100%; }
+      .card { border-radius:17px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="./" aria-label="CINECLIK PLAY">
+      <div class="logo" aria-hidden="true">🎬</div>
+      <div><div class="brand-name">CINECLIK</div><span class="brand-sub">PLAY</span></div>
+    </a>
+    <div class="tag">Tu película, a un solo clic</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="eyebrow">✦ Acceso para compradores</div>
+      <h1>Tu próxima historia<br><span>comienza aquí</span></h1>
+      <p>Introduce el código que recibiste por WhatsApp para abrir tu película.</p>
+    </section>
+
+    <section class="card" aria-labelledby="form-title">
+      <form id="access-form">
+        <label id="form-title" for="code">CÓDIGO DE ACCESO</label>
+        <div class="entry">
+          <input id="code" name="code" type="text" placeholder="Ej. CINE-8452" autocomplete="off" autocapitalize="characters" maxlength="30" required>
+          <button id="submit-button" type="submit">▶ &nbsp; VER MI PELÍCULA</button>
+        </div>
+      </form>
+      <div id="message" class="message" role="status" aria-live="polite">Escribe tu código tal como lo recibiste.</div>
+
+      <section id="player-wrap" class="player-wrap" aria-live="polite">
+        <h2 id="movie-title" class="movie-title"></h2>
+        <div id="player-container"></div>
+      </section>
+      <p class="note">Si tienes problemas con tu código, comunícate con el soporte de CINECLIK por WhatsApp.</p>
+    </section>
+  </main>
+
+  <footer>© 2026 CINECLIK PLAY · Todos los derechos reservados.</footer>
+
+  <script>
+    const VALIDATION_URL = "https://cineclik-validacion.alipiobarrientos7.workers.dev/validar";
+    const form = document.getElementById("access-form");
+    const codeInput = document.getElementById("code");
+    const submitButton = document.getElementById("submit-button");
+    const message = document.getElementById("message");
+    const playerWrap = document.getElementById("player-wrap");
+    const playerContainer = document.getElementById("player-container");
+    const movieTitle = document.getElementById("movie-title");
+
+    function showMessage(text, type = "") {
+      message.textContent = text;
+      message.className = "message" + (type ? " " + type : "");
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const codigo = codeInput.value.trim().toUpperCase();
+      if (!codigo) {
+        showMessage("Introduce tu código de acceso.", "error");
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "COMPROBANDO…";
+      showMessage("Estamos verificando tu código…");
+      playerWrap.classList.remove("visible");
+      playerContainer.replaceChildren();
+
+      try {
+        const response = await fetch(VALIDATION_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ codigo })
+        });
+        const data = await response.json();
+
+        if (!response.ok || !data.valido) {
+          showMessage(data.mensaje || "Código incorrecto o inactivo. Revisa e inténtalo de nuevo.", "error");
+          return;
+        }
+
+        if (!/^[A-Za-z0-9_-]+$/.test(data.playbackId || "")) {
+          showMessage("El código es válido, pero el ID de reproducción no tiene un formato válido. Contacta con soporte.", "error");
+          return;
+        }
+
+        movieTitle.textContent = data.titulo || "Tu película";
+        const player = document.createElement("mux-player");
+        player.setAttribute("playback-id", data.playbackId);
+        player.setAttribute("stream-type", "on-demand");
+        player.setAttribute("controls", "");
+        player.setAttribute("playsinline", "");
+        player.style.width = "100%";
+        player.style.aspectRatio = "16 / 9";
+        playerContainer.appendChild(player);
+        playerWrap.classList.add("visible");
+        showMessage("Código validado. ¡Que disfrutes tu película!", "success");
+        playerWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        showMessage("No pudimos conectar con el servicio. Inténtalo nuevamente en unos minutos.", "error");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = "▶ &nbsp; VER MI PELÍCULA";
+      }
+    });
+  </script>
+</body>
+</html>
