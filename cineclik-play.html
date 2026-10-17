@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100d19">
+  <meta name="theme-color" content="#041326">
   <title>CINECLIK PLAY | Tu película, a un solo clic</title>
   <meta name="description" content="Introduce tu código de acceso para ver tu película en CINECLIK PLAY.">
   <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
@@ -25,8 +25,8 @@
       margin: 0; min-height: 100vh; color: var(--text);
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(ellipse at 15% 0%, rgba(139,54,232,.22), transparent 38%),
-        radial-gradient(ellipse at 90% 25%, rgba(255,82,109,.12), transparent 32%),
+        radial-gradient(ellipse at 15% 0%, rgba(0,124,255,.22), transparent 38%),
+        radial-gradient(ellipse at 90% 25%, rgba(0,213,255,.12), transparent 32%),
         var(--bg);
       display: flex; flex-direction: column;
     }
@@ -36,9 +36,9 @@
     }
     .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
     .logo {
-      width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
-      background: linear-gradient(135deg, #382050, #21162f); border:1px solid #67439a;
-      font-size:25px; box-shadow: 0 0 24px rgba(139,54,232,.18);
+      width:58px; height:58px; border-radius:16px; display:grid; place-items:center;
+      background: linear-gradient(145deg, #073763, #041326); border:1px solid #00cfff;
+      font-size:25px; box-shadow: 0 0 24px rgba(0,207,255,.22);
     }
     .brand-name { font-size:1.15rem; font-weight:900; letter-spacing:.08em; }
     .brand-sub { display:block; margin-top:2px; color:var(--purple-light); font-size:.75rem; letter-spacing:.22em; font-weight:800; }
@@ -48,29 +48,29 @@
     .eyebrow {
       display:inline-flex; align-items:center; gap:8px; color:var(--purple-light);
       font-size:.78rem; letter-spacing:.15em; font-weight:800; text-transform:uppercase;
-      border:1px solid var(--border); background:rgba(33,24,46,.75);
+      border:1px solid var(--border); background:rgba(7,29,53,.75);
       border-radius:999px; padding:8px 12px;
     }
     h1 { font-size:clamp(2rem, 5vw, 3.25rem); line-height:1.08; margin:18px 0 12px; letter-spacing:-.04em; }
-    h1 span { background:linear-gradient(90deg, #c4a0ff, #ff526d); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    h1 span { background:linear-gradient(90deg, #00dfff, #087cff); -webkit-background-clip:text; background-clip:text; color:transparent; }
     .intro p { color:var(--muted); line-height:1.65; margin:0; }
     .card {
-      background:linear-gradient(145deg, rgba(33,24,46,.96), rgba(25,19,35,.98));
+      background:linear-gradient(145deg, rgba(7,29,53,.96), rgba(4,19,38,.98));
       border:1px solid var(--border); border-radius:22px; padding:clamp(18px, 4vw, 30px);
       box-shadow:0 20px 70px rgba(0,0,0,.25);
     }
-    label { display:block; margin-bottom:10px; color:#d9c9ef; font-size:.82rem; font-weight:800; letter-spacing:.1em; }
+    label { display:block; margin-bottom:10px; color:#b7dcff; font-size:.82rem; font-weight:800; letter-spacing:.1em; }
     .entry { display:flex; gap:10px; }
     input {
-      min-width:0; flex:1; border:1px solid #554269; border-radius:12px;
-      padding:15px 16px; background:#100d19; color:#fff; font-size:1rem;
+      min-width:0; flex:1; border:1px solid #07569a; border-radius:12px;
+      padding:15px 16px; background:#041326; color:#fff; font-size:1rem;
       outline:none; text-transform:uppercase;
     }
-    input:focus { border-color:var(--purple-light); box-shadow:0 0 0 3px rgba(196,160,255,.12); }
+    input:focus { border-color:var(--purple-light); box-shadow:0 0 0 3px rgba(0,213,255,.15); }
     button {
       border:0; border-radius:12px; padding:15px 20px; color:white; font-weight:800;
-      font-size:.95rem; cursor:pointer; background:linear-gradient(110deg, #8b36e8, #c02b8f);
-      box-shadow:0 8px 24px rgba(139,54,232,.22); transition:transform .15s, opacity .15s;
+      font-size:.95rem; cursor:pointer; background:linear-gradient(110deg, #087cff, #00cfff);
+      box-shadow:0 8px 24px rgba(0,168,255,.22); transition:transform .15s, opacity .15s;
     }
     button:hover { transform:translateY(-1px); }
     button:disabled { opacity:.65; cursor:wait; transform:none; }
@@ -80,9 +80,9 @@
     .player-wrap { display:none; margin-top:24px; }
     .player-wrap.visible { display:block; }
     .movie-title { font-size:1.2rem; font-weight:800; margin:0 0 14px; }
-    mux-player { display:block; width:100%; aspect-ratio:16/9; --media-object-fit:contain; --media-background-color:#050407; border:1px solid #49315f; border-radius:14px; overflow:hidden; }
-    .note { color:#968aa5; font-size:.78rem; line-height:1.55; margin-top:18px; text-align:center; }
-    footer { text-align:center; padding:22px; color:#857990; font-size:.78rem; border-top:1px solid rgba(73,49,95,.45); }
+    mux-player { display:block; width:100%; aspect-ratio:16/9; --media-object-fit:contain; --media-background-color:#050407; border:1px solid #07569a; border-radius:14px; overflow:hidden; }
+    .note { color:#9bb8d7; font-size:.78rem; line-height:1.55; margin-top:18px; text-align:center; }
+    footer { text-align:center; padding:22px; color:#8aa8c8; font-size:.78rem; border-top:1px solid rgba(7,86,154,.45); }
     @media (max-width:600px) {
       header { padding:18px 16px; }
       .tag { display:none; }
@@ -96,7 +96,17 @@
 <body>
   <header>
     <a class="brand" href="./" aria-label="CINECLIK PLAY">
-      <div class="logo" aria-hidden="true">🎬</div>
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="34" height="34" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cineclikBlue" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#00DFFF"/>
+              <stop offset="100%" stop-color="#087CFF"/>
+            </linearGradient>
+          </defs>
+          <path d="M13 5 L41 24 L13 43 Q8 45 8 39 V9 Q8 3 13 5Z" fill="url(#cineclikBlue)"/>
+        </svg>
+      </div>
       <div><div class="brand-name">CINECLIK</div><span class="brand-sub">PLAY</span></div>
     </a>
     <div class="tag">Tu película, a un solo clic</div>
