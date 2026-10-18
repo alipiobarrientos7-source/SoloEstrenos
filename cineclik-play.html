@@ -93,56 +93,6 @@
       button { width:100%; }
       .card { border-radius:17px; }
     }
-
-
-    /* CINECLIK PLAY: animaciones visuales solamente; no modifica el logo ni la lógica */
-    @keyframes cineclikFondoLuz {
-      0%, 100% { background-position: 0% 0%, 100% 25%, 0 0; }
-      50% { background-position: 25% 12%, 75% 40%, 0 0; }
-    }
-    body {
-      background-size: 140% 140%, 140% 140%, auto;
-      animation: cineclikFondoLuz 18s ease-in-out infinite;
-    }
-
-    /* Contorno de la tarjeta de código: azul eléctrico y cian */
-    .card {
-      animation: cineclikBordeTarjeta 5s ease-in-out infinite;
-      transition: box-shadow .35s ease, border-color .35s ease;
-    }
-    @keyframes cineclikBordeTarjeta {
-      0%, 100% {
-        border-color: #07569a;
-        box-shadow: 0 20px 70px rgba(0,0,0,.25), 0 0 8px rgba(0,124,255,.08);
-      }
-      50% {
-        border-color: #00d5ff;
-        box-shadow: 0 20px 70px rgba(0,0,0,.25), 0 0 18px rgba(0,213,255,.16);
-      }
-    }
-    .card:hover {
-      box-shadow: 0 20px 70px rgba(0,0,0,.25), 0 0 22px rgba(0,213,255,.18);
-    }
-
-    /* Botón de reproducción: el degradado se desplaza suavemente */
-    button {
-      background-size: 200% 200%;
-      animation: cineclikBrilloBoton 4s ease-in-out infinite;
-    }
-    @keyframes cineclikBrilloBoton {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    button:hover:not(:disabled) {
-      box-shadow: 0 8px 28px rgba(0,168,255,.36), 0 0 16px rgba(0,213,255,.18);
-    }
-
-    /* Respetar la preferencia del sistema para reducir movimiento */
-    @media (prefers-reduced-motion: reduce) {
-      body, .card, button { animation: none !important; }
-      .card, button { transition: none !important; }
-    }
-
   </style>
 </head>
 <body>
@@ -252,5 +202,4 @@
   </script>
 </body>
 </html>
-
 
