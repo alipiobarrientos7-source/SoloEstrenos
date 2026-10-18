@@ -149,64 +149,6 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
   .stock {
   display: none !important;
 }
-  /* CINECLIK PLAY: contorno exterior con neón animado */
-.play-cta {
-  animation: cineclikBordeNeon 4s ease-in-out infinite;
-  transition: box-shadow 0.3s ease;
-}
-
-/* Botón de acceso: brillo degradado en movimiento */
-.play-cta .play-link {
-  background-size: 200% 200%;
-  animation: cineclikBotonNeon 4s ease infinite;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* Más brillo al pasar el cursor */
-.play-cta:hover {
-  box-shadow:
-    0 0 18px #873dff55,
-    0 0 32px #ff22c833;
-}
-
-.play-cta .play-link:hover {
-  box-shadow:
-    0 0 16px #00e5ff88,
-    0 0 30px #ff22c877;
-  transform: translateY(-2px);
-}
-
-/* Movimiento del contorno */
-@keyframes cineclikBordeNeon {
-  0%, 100% {
-    border-color: #873dff;
-    box-shadow: 0 0 8px #873dff22;
-  }
-  50% {
-    border-color: #ff22c8;
-    box-shadow:
-      0 0 14px #ff22c855,
-      0 0 24px #873dff33;
-  }
-}
-
-/* Reflejo de color en el botón */
-@keyframes cineclikBotonNeon {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Respetar a quienes prefieren menos animaciones */
-@media (prefers-reduced-motion: reduce) {
-  .play-cta,
-  .play-cta .play-link {
-    animation: none;
-  }
-}
 </style>
 </head>
 <body>
