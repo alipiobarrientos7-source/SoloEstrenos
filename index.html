@@ -8,24 +8,28 @@
 <style>
 :root{--bg:#05081c;--panel:#0b1230;--cyan:#00e5ff;--pink:#ff22c8;--purple:#873dff;--green:#00d68f;--text:#f6f7ff;--muted:#aab6d8}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#171044 0,transparent 34%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1240px,94%);margin:auto}
-header{position:sticky;top:0;z-index:20;background:#05081cf2;backdrop-filter:blur(12px);border-bottom:1px solid #24345e}.nav{min-height:70px;display:flex;align-items:center;gap:20px}.brand{display:flex;align-items:center;gap:10px;min-width:205px}.brand-mark{width:64px;height:64px;object-fit:contain;font-size:34px;color:var(--cyan);filter:none}.brand-name{font-size:24px;font-weight:900;letter-spacing:1px}.gradient{background:linear-gradient(90deg,var(--cyan),#9a5cff,var(--pink),var(--cyan));background-size:250% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:shine 5s linear infinite}.tagline{font-size:11px;color:#c6d2f2;margin-top:2px}.navlinks{display:flex;gap:23px;margin:auto}.navlinks a{font-size:14px}.navlinks a:hover{color:var(--cyan)}.nav-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}.iconbtn{background:transparent;color:white;border:0;font-size:22px;position:relative;padding:8px}.cart-count{position:absolute;right:-1px;top:0;background:var(--pink);font-size:10px;border-radius:50%;padding:3px 6px}.store-state{border:1px solid var(--green);color:var(--green);background:#062b26;border-radius:99px;padding:8px 10px;font-size:11px;font-weight:bold;white-space:nowrap}.store-state.closed{border-color:#ff5a7a;color:#ff9aaf;background:#32101f}.nav-actions .iconbtn[aria-label="Buscar"],
-.nav-actions .iconbtn[aria-label="Buscar películas"] {
-display: none;
-}
-.nav-actions > .play-link {
-  display: none;
-}                                                                                                                           
-.play-link{display:inline-flex;align-items:center;gap:7px;border:1px solid #00e5ff;border-radius:9px;padding:9px 12px;background:linear-gradient(105deg,#4b40ff,#d622df);color:#fff;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 0 16px #873dff45;transition:transform .2s,filter .2s}
-.play-link:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 0 20px #00e5ff35}
-.play-cta{margin:22px auto 28px;padding:18px 20px;border:1px solid #5733bd;border-radius:14px;background:linear-gradient(100deg,#11133a,#171039,#24102f);display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 0 22px #873dff18}
-.play-cta h2{font-size:clamp(17px,2.5vw,22px);margin:0 0 5px}
-.play-cta p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-.play-cta .play-link{padding:12px 16px;font-size:13px}
-@media(max-width:620px){.play-link{padding:8px 9px;font-size:10px;gap:4px}.play-cta{align-items:stretch;flex-direction:column;text-align:center}.play-cta .play-link{justify-content:center;width:100%}}
-
+header{position:sticky;top:0;z-index:20;background:#05081cf2;backdrop-filter:blur(12px);border-bottom:1px solid #24345e}.nav{min-height:70px;display:flex;align-items:center;gap:20px}.brand{display:flex;align-items:center;gap:10px;min-width:205px}.brand-mark{width:42px;height:42px;object-fit:contain;font-size:34px;color:var(--cyan);text-shadow:0 0 15px var(--purple)}.brand-name{font-size:24px;font-weight:900;letter-spacing:1px}.gradient{background:linear-gradient(90deg,var(--cyan),#9a5cff,var(--pink),var(--cyan));background-size:250% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:shine 5s linear infinite}.tagline{font-size:11px;color:#c6d2f2;margin-top:2px}.navlinks{display:flex;gap:23px;margin:auto}.navlinks a{font-size:14px}.navlinks a:hover{color:var(--cyan)}.nav-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}.iconbtn{background:transparent;color:white;border:0;font-size:22px;position:relative;padding:8px}.cart-count{position:absolute;right:-1px;top:0;background:var(--pink);font-size:10px;border-radius:50%;padding:3px 6px}.store-state{border:1px solid var(--green);color:var(--green);background:#062b26;border-radius:99px;padding:8px 10px;font-size:11px;font-weight:bold;white-space:nowrap}.store-state.closed{border-color:#ff5a7a;color:#ff9aaf;background:#32101f}
 .hero{position:relative;overflow:hidden;min-height:355px;margin:18px auto 26px;border:1px solid #6437e8;border-radius:20px;background:linear-gradient(90deg,#070b24 2%,#0a0b25d9 42%,#0a0b2530 100%),url('assets/portada.jpg') center/cover no-repeat;box-shadow:0 0 35px #612bff32}.hero:after{content:"";position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple))}.hero-content{position:relative;z-index:1;padding:34px;max-width:650px}.ticker{display:inline-block;border:1px solid var(--pink);border-radius:9px;padding:8px 12px;color:#fff;font-size:12px;font-weight:bold;box-shadow:0 0 15px #ff22c85c;animation:pulse 2s infinite}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.02;margin:18px 0 8px;text-transform:uppercase}.script{font-style:italic;font-size:clamp(27px,4vw,43px);font-weight:bold}.hero p{color:#e2e9ff}.timer{display:flex;gap:8px;margin-top:18px}.timebox{background:#070b23db;border:1px solid #743cff;border-radius:9px;padding:9px 12px;text-align:center;min-width:63px}.timebox b{display:block;font-size:21px}.timebox span{font-size:10px;color:#bdc8ea}.hero-offer{position:absolute;right:25px;bottom:25px;background:#070b23e8;border:1px solid var(--cyan);padding:17px;border-radius:14px;min-width:155px;box-shadow:0 0 25px #00e5ff30;z-index:2}.hero-offer small{color:var(--muted)}.old{text-decoration:line-through;color:#9aa7c9}.hero-offer strong{display:block;font-size:27px;color:#fff;background:linear-gradient(90deg,#ff1767,#ff22c8);padding:8px;border-radius:8px;margin:7px 0}.stock{font-size:11px;color:var(--cyan);font-weight:bold}
 .section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:30px 0 16px}.section-head h2{font-size:21px;margin:0}.filters{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #283966;background:#0a1230;color:#d8e4ff;padding:8px 13px;border-radius:99px;font-size:12px}.chip.active,.chip:hover{border-color:var(--cyan);background:#182c63;box-shadow:0 0 12px #00e5ff30}.search{display:flex;gap:10px;margin-bottom:14px}.search input{flex:1;min-width:0;background:#0b1230;border:1px solid #293d70;border-radius:9px;color:white;padding:11px 13px}.catalog{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}.movie-card{position:relative;overflow:hidden;border-radius:13px;border:1px solid #30477e;background:#080e28;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:pointer;min-width:0}.movie-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 0 1px var(--cyan),0 0 24px #ad25ff58}.poster{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#131d3c}.movie-info{padding:10px}.movie-title{font-weight:bold;font-size:13px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.4;min-height:2.8em}.price-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:7px 0}.price{font-weight:900;color:#ff4ed5}.old-price{font-size:10px;color:#8492b8;text-decoration:line-through}.stockline{font-size:10px;color:var(--green)}.card-actions{display:flex;gap:6px;margin-top:9px}.mini-btn{flex:1;background:#0e1b3f;color:white;border:1px solid #3c4f84;border-radius:7px;padding:7px 4px;font-size:11px}.mini-btn:hover{border-color:var(--cyan)}.mini-btn.primary{background:linear-gradient(100deg,#5540ff,#d51bdf);border:0}.ribbon{position:absolute;top:9px;left:8px;background:#ff1767;border-radius:5px;padding:5px 7px;font-size:10px;font-weight:bold;z-index:1}.empty{grid-column:1/-1;color:var(--muted);padding:35px;text-align:center}
 .promo-strip{margin:30px 0;padding:16px;text-align:center;border-radius:12px;border:1px solid #5733bd;background:linear-gradient(90deg,#13113d,#111a3d,#271039);font-weight:bold}.promo-strip span{color:var(--cyan)}.how{margin:48px 0 32px;display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:center}.how h2{font-size:29px;margin:0 0 8px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}.step{border-right:1px solid #26355f;padding-right:12px}.step:last-child{border:0}.step-num{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));font-weight:bold;margin-bottom:10px}.step p{font-size:13px;color:var(--muted);line-height:1.5}.combo{border:1px solid #273d76;border-radius:15px;padding:20px;background:linear-gradient(135deg,#12143c,#07122b);text-align:center}.combo .pop{font-size:42px}.combo h3{font-size:24px;margin:8px 0;color:#ff72dc}.muted{color:var(--muted);font-size:13px;line-height:1.5}.btn{border:0;border-radius:9px;padding:12px 16px;color:white;font-weight:bold;background:linear-gradient(100deg,#4b40ff,#d622df);box-shadow:0 5px 20px #762dff38}.btn.green{background:linear-gradient(100deg,#00a96b,#00d68f);color:#031b19}.btn.outline{background:#09132d;border:1px solid var(--cyan)}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
+/* Preguntas frecuentes CINECLIK */
+.faq-section{margin:44px auto 42px;max-width:980px}
+.faq-heading{text-align:center;margin-bottom:22px}
+.faq-heading h2{font-size:clamp(25px,4vw,32px);margin:0 0 8px}
+.faq-heading p{color:var(--muted);margin:0;line-height:1.6}
+.faq-list{display:grid;gap:11px}
+.faq-item{background:linear-gradient(135deg,#0b1230,#0a1028);border:1px solid #293966;border-radius:12px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.faq-item[open]{border-color:var(--purple);box-shadow:0 0 18px #873dff22}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 18px;font-weight:700;color:#f6f7ff}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';flex:0 0 auto;color:var(--cyan);font-size:24px;font-weight:400;line-height:1}
+.faq-item[open] summary::after{content:'−';color:var(--pink)}
+.faq-answer{padding:0 18px 18px;color:#b8c6e8;font-size:14px;line-height:1.7}
+.faq-contact{text-align:center;margin-top:22px}
+.faq-contact p{color:var(--muted);margin:0 0 12px}
+@media(max-width:620px){.faq-section{margin:32px auto}.faq-item summary{padding:15px;font-size:14px}.faq-answer{padding:0 15px 15px;font-size:13px}}
+
 footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:12px}.footrow{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.footbrand{font-size:21px;font-weight:900;color:white}.copyright{text-align:center;margin-top:20px;color:#8291b8}
 .modal-backdrop{position:fixed;inset:0;background:#02040bd9;z-index:60;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.show{display:flex}.modal{position:relative;width:min(900px,100%);max-height:92vh;overflow:auto;border:1px solid #7545f5;border-radius:18px;background:#080e27;box-shadow:0 0 45px #7e32ff44;padding:20px}.close{position:absolute;right:14px;top:12px;border:0;background:#182348;color:white;border-radius:50%;width:34px;height:34px;font-size:20px;z-index:2}.detail-grid{display:grid;grid-template-columns:210px minmax(0,1fr) 210px;gap:18px}.detail-poster{width:100%;border-radius:12px;border:1px solid var(--cyan)}.detail h2{margin:0 0 8px}.detail-price{font-size:26px;color:#ff5bd5;font-weight:bold;margin:14px 0}.detail-box{background:#0c1532;border:1px solid #263963;border-radius:10px;padding:12px;margin-bottom:10px}.suggestions{display:flex;gap:8px;flex-wrap:wrap}.suggestion{width:58px;cursor:pointer}.suggestion img{width:58px;height:78px;object-fit:cover;border-radius:5px}.suggestion small{font-size:9px;display:block;margin-top:4px}
 .trailer-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#000}.trailer-title{padding-right:42px}
@@ -135,33 +139,13 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
     0 0 18px #00d9ff77,
     0 0 38px #ff55d644;
 }
+
 /* Respeta a quien prefiere menos animaciones */
 @media (prefers-reduced-motion: reduce) {
   .combo,
   .combo::before {
     animation: none;
   }
-}
-  #heroStock {
-  display: none;
-}
-  .stock {
-  display: none !important;
-}
-  /* Colores de etiquetas CINECLIK */
-.ribbon.cineclik-play {
-  background: #ff1767;
-  color: #ffffff;
-}
-
-.ribbon.drive {
-  background: #168bff;
-  color: #ffffff;
-}
-
-.ribbon.mux {
-  background: #00b894;
-  color: #061525;
 }
 </style>
 </head>
@@ -175,7 +159,7 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 <header><div class="wrap nav">
  <a class="brand" href="#inicio"><img class="brand-mark" id="brandLogo" src="assets/logo.jpg" alt="Logo de la tienda" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='inline'"><span id="logoFallback" class="brand-mark" style="display:none">▶</span><div><div class="brand-name gradient" id="brandName">CINECLIK</div><div class="tagline" id="brandTagline">Tus películas, en un solo clic</div></div></a>
  <nav class="navlinks"><a href="#inicio">Inicio</a><a href="#peliculas">Películas</a><a href="#ofertas">Ofertas</a><a href="#contacto">Contacto</a></nav>
- <div class="nav-actions"><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener" aria-label="Entrar a CINECLIK Play">▶ CINECLIK PLAY</a><button class="store-state" id="storeState" title="Estado de la tienda">🟢 Tienda abierta</button><button class="iconbtn" aria-label="Buscar" onclick="focusSearch()">⌕</button><button class="iconbtn" aria-label="Abrir carrito" onclick="toggleCart(true)">🛒<span class="cart-count" id="cartCount">0</span></button></div>
+ <div class="nav-actions"><button class="store-state" id="storeState" title="Estado de la tienda">🟢 Tienda abierta</button><button class="iconbtn" aria-label="Buscar" onclick="focusSearch()">⌕</button><button class="iconbtn" aria-label="Abrir carrito" onclick="toggleCart(true)">🛒<span class="cart-count" id="cartCount">0</span></button></div>
 </div></header>
 <main class="wrap">
 <section class="hero" id="inicio"><div class="hero-content">
@@ -188,9 +172,7 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
   <div class="timebox"><b id="seconds">00</b><span>Segundos</span></div>
 </div>
 </div><div class="hero-offer" id="heroOffer"><small>OFERTA DESTACADA</small><div class="old" id="heroOld">Antes: S/ 25.00</div><strong id="heroPrice">S/ 18.00</strong><div class="stock" id="heroStock">STOCK: 8</div></div></section>
-
- <section class="play-cta" aria-label="Acceso a CINECLIK Play"><div><h2>🍿 ¿Ya compraste tu película?</h2><p>Entra a CINECLIK PLAY e introduce tu código de acceso para comenzar a verla.</p></div><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener">▶ ENTRAR A CINECLIK PLAY ↗</a></section>
- <div class="section-head" id="peliculas">
+<div class="section-head" id="peliculas">
   <h2>🎬 Películas destacadas</h2>
   <div class="filters" id="filters">
     <button class="chip active" data-category="Todas">Todas</button>
@@ -209,8 +191,44 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 <div class="search"><input id="searchInput" aria-label="Buscar película" placeholder="Buscar película..." oninput="renderCatalog()"></div>
 <section class="catalog" id="catalog" aria-live="polite"></section>
 <div class="promo-strip" id="ofertas"><span id="stripText">🎬 ¡Tu entretenimiento empieza aquí, con nosotros! 🍿</span></div>
-<section class="how"><div><h2><span class="gradient">¡Es muy fácil!</span></h2><div class="muted">Disfruta tus películas en solo 3 pasos</div><div class="steps"><div class="step"><div class="step-num">1</div><div>🎞️ <b>Elige tu película</b></div><p>Explora el catálogo y agrega tus estrenos favoritos.</p></div><div class="step"><div class="step-num">2</div><div>🛒 <b>Añade al carrito</b></div><p>Puedes elegir varias películas antes de finalizar.</p></div><div class="step"><div class="step-num">3</div><div>💬 <b>Envíanos tu pedido</b></div><p>Te contactaremos por WhatsApp para confirmar tu código de acceso.</p></div></div></div><aside class="combo"><div class="pop">🍿</div><h3 id="comboTitle">Lleva más por menos</h3><p class="muted" id="comboText">Combos especiales y promociones exclusivas.</p><button class="btn outline" onclick="openFreeMovie()">▶ Ver película gratis</button></aside></section>
+<section class="how"><div><h2><span class="gradient">¡Es muy fácil!</span></h2><div class="muted">Disfruta tus películas en solo 3 pasos</div><div class="steps"><div class="step"><div class="step-num">1</div><div>🎞️ <b>Elige tu película</b></div><p>Explora el catálogo y agrega lo que más te guste.</p></div><div class="step"><div class="step-num">2</div><div>🛒 <b>Añade al carrito</b></div><p>Puedes elegir varias películas antes de finalizar.</p></div><div class="step"><div class="step-num">3</div><div>💬 <b>Envíanos tu pedido</b></div><p>Te contactaremos por WhatsApp para confirmar los detalles.</p></div></div></div><aside class="combo"><div class="pop">🍿</div><h3 id="comboTitle">Lleva más por menos</h3><p class="muted" id="comboText">Combos especiales y promociones exclusivas.</p><button class="btn outline" onclick="openFreeMovie()">▶ Ver película gratis</button></aside></section>
 </main>
+<section class="faq-section wrap" id="preguntas-frecuentes" aria-labelledby="faq-title">
+  <div class="faq-heading">
+    <h2 id="faq-title"><span class="gradient">Preguntas frecuentes</span></h2>
+    <p>Resolvemos tus dudas para que disfrutes tu próxima película con tranquilidad.</p>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>¿En qué calidad están disponibles las películas?</summary>
+      <div class="faq-answer">Todas nuestras películas están disponibles en calidad Full HD 1080p.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo recibiré mi película después de comprarla?</summary>
+      <div class="faq-answer">La modalidad de entrega depende de la película: puede ser mediante streaming con MUX Player o a través de un enlace de Google Drive. Te indicaremos la modalidad correspondiente a tu pedido.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cuándo recibiré mi código de acceso?</summary>
+      <div class="faq-answer">Una vez verificado tu pago, te enviaremos manualmente por WhatsApp el código de acceso de tu película, cuando corresponda a la modalidad CINECLIK PLAY.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué es CINECLIK PLAY?</summary>
+      <div class="faq-answer">Es nuestra plataforma de reproducción para las películas que se entregan mediante esta modalidad. Si tu pedido requiere un código de acceso, te lo enviaremos por WhatsApp después de verificar el pago.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué hago si mi código o enlace no funciona?</summary>
+      <div class="faq-answer">Contáctanos por WhatsApp e indícanos el problema para que podamos revisar tu pedido y ayudarte.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo ver una película gratis?</summary>
+      <div class="faq-answer">Sí. Visita la sección «Ver película gratis» de nuestra página para acceder a la opción gratuita disponible.</div>
+    </details>
+  </div>
+  <div class="faq-contact">
+    <p>¿Tienes otra consulta? Estamos para ayudarte.</p>
+    <a class="btn outline" href="#contacto">💬 Escríbenos por WhatsApp</a>
+  </div>
+</section>
 <footer id="contacto"><div class="wrap"><div class="footrow"><div><div class="footbrand gradient" id="footerName">▶ CINECLIK</div><div id="footerTagline">Tus películas, en un solo clic</div></div><div>💬 Pedidos por WhatsApp</div><div>🎥 Catálogo de películas</div><div>⚡ Atención rápida</div><a id="footerWhatsApp" href="#" target="_blank" rel="noopener">Contactar ↗</a></div><div class="copyright" id="copyright">© 2026 CINECLIK. Todos los derechos reservados.</div></div></footer>
 <a class="whatsapp-float" id="whatsappFloat" href="#" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp" title="Consultas o dudas"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.87 11.87 0 0 0 12.05 0C5.48 0 .13 5.34.13 11.91c0 2.1.55 4.15 1.6 5.96L.03 24l6.27-1.64a11.9 11.9 0 0 0 5.74 1.46h.01c6.57 0 11.92-5.35 11.92-11.92 0-3.18-1.24-6.17-3.45-8.42ZM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.85 9.85 0 1 1 8.37 4.61Zm5.41-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg></a><div class="whatsapp-hint">¿Consultas o dudas?</div>
 <div class="modal-backdrop" id="detailBackdrop" onclick="if(event.target===this)closeDetail()"><section class="modal" role="dialog" aria-modal="true" aria-label="Detalles de película"><button class="close" onclick="closeDetail()" aria-label="Cerrar">×</button><div id="detailContent"></div></section></div>
@@ -223,18 +241,18 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
    =========================================================== */
 const CONFIG = {
  nombreTienda: "CINECLIK",
- eslogan: "Tus películas de estreno",
+ eslogan: "Tus películas, en un solo clic",
  whatsapp: "51967776959", // Reemplaza por 51 + tu número, solo números.
  logo: "assets/logo.jpg",
  portada: "assets/portada.jpg",
  tituloPrincipal: "Grandes historias,",
  subtituloPrincipal: "en tu pantalla",
- descripcionPrincipal: "Los mejores estrenos, al mejor precio y calidad.",
+ descripcionPrincipal: "Los mejores estrenos, al mejor precio.",
  textoMarquesina: "🔥 ¡OFERTA POR TIEMPO LIMITADO!",
  textoFranja: "🎬 ¡Tu entretenimiento empieza aquí, con nosotros! 🍿",
  tituloCombo: "¡Desconéctate de todo!",
  textoCombo: "Prepara las palomitas y disfruta tu película.",
- urlPeliculaGratis: "https://player.mux.com/TVGChgxcWXTPh56SAMj6cok8hEPYDCrJZlOCXRMDYiI",
+ urlPeliculaGratis: "https://player.mux.com/S2QvM74UDL6ef65xNvjUTafEB6gQDunIe01oyzS00ycR8",
  duracionOfertaHoras: 24, // Cuenta regresiva de demostración por visita.
  tiendaAbierta: true, // Cambia a false cuando no estés atendiendo.
  moneda: "S/",
@@ -249,14 +267,13 @@ const CONFIG = {
    precioAnterior: 0 si no hay oferta; activa:false oculta la película.
    =========================================================== */
 const PELICULAS = [
- {id:1,titulo:"Tadeo y La Lámpara Maravillosa (2026) - Latino",categoria:"Animación",anio:2026,duracion:"1h 34min",descripcion:"Tadeo y Sara son ahora padres de Olimpia (Oli), una adorable e intrépida niña de dos años. Y Momia no lleva nada bien haber dejado de ser el centro de atención. Mientras están de vacaciones en Londres, Sara sigue la pista hacia un objeto único: la lámpara maravillosa de Las mil y una noches.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/71G1b8bqa7gzP9yU7q2fgNf2t0D.jpg",trailer:"https://www.youtube.com/watch?v=6LCjjVj3oAY",precio:3,precioAnterior:10,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
- {id:2,titulo:"Entrega al límite (Runner) - (2026) - Latino",categoria:"Acción",anio:2026,duracion:"1h 37min",descripcion:"Un exsoldado se ve envuelto en una brutal carrera contrarreloj cuando una entrega médica crucial los convierte, a él y a su inesperada compañera, en el objetivo de un cártel despiadado.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/pmjSjZtFOYDWhAs4B2AbBE8hTQf.jpg",trailer:"https://www.youtube.com/watch?v=bwG-gF3a5f4&t=4s",precio:5,precioAnterior:0,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
- {id:3,titulo:"Resident Evil (Noche Cero) - (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 34min",descripcion:"En una reinvención totalmente nueva, el mensajero médico Bryan se ve inmerso en una carrera de acción sin descanso por la supervivencia, mientras el caos se desata a su alrededor.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/vrLEVObLGbUinE4sC4Lqao2dK0E.jpg",trailer:"https://www.youtube.com/watch?v=anjYhRPoROE",precio:3,precioAnterior:0,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
- {id:4,titulo:"Zona Cero (Colony) 2026 - Audio Latino",categoria:"Terror",anio:2026,duracion:"2h 3min",descripcion:"El profesor Se-jeong es arrojado a una pesadilla cuando un virus en rápida mutación se libera durante una conferencia de biotecnología, lo que lleva a las autoridades a sellar las instalaciones. Atrapado dentro sin escapatoria, Se-jeong, junto a un pequeño grupo de supervivientes, debe luchar por mantenerse con vida mientras los infectados sufren transformaciones horribles.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/bWzwORubAQ40nvzsTZidle19Dbm.jpg",trailer:"https://www.youtube.com/watch?v=_Ru4_LzLg_E",precio:3,precioAnterior:8,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
- {id:5,titulo:"Vertigo 2 - 2026 - Audio Latino",categoria:"Suspenso",anio:2026,duracion:"1h 38min",descripcion:"Tras perder a su intrépida hermana Shiloh, Jax, profundamente dolida, emprende una peligrosa escalada con Luce, una vieja amiga de Shiloh, para honrar su memoria. Mientras caminan sobre la cuerda floja por los peligrosos tablones del monte Kwan, un aterrador desprendimiento de rocas les deja varados a 1.500 metros de altura.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/ccBIyg1ITvuCDr4eMeEH0ZgNh4t.jpg",trailer:"https://www.youtube.com/watch?v=07oN9U9HTrM",precio:5,precioAnterior:10,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
- {id:6,titulo:"Cable Mortal (2026) - Audio Latino",categoria:"Suspenso",anio:2026,duracion:"1h 35min",descripcion:"Para burlar a sus misteriosos perseguidores, tendrá que reunir hasta la última pizca de valor para proteger el descubrimiento científico que cambiará el mundo, y a sí misma, antes de que sea demasiado tarde.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/eLMHUOQ4mCMxePMbv0TIVB48zfe.jpg",trailer:"https://www.youtube.com/watch?v=aXiwe6Q6Ftc",precio:5,precioAnterior:10,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
-     {id:7,titulo:"Scary Movie: Terroríficamente incorrecta (2026) Latino",categoria:"Comedia",anio:2026,duracion:"1h 36min",descripcion:"Veintiséis años después de conseguir escapar de un asesino enmascarado sospechosamente familiar, el Core Four están de vuelta en el punto de mira del asesino y ninguna película de terror está a salvo.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/qhGf7btEU9hcGz3A0lneNptJKL7.jpg",trailer:"https://www.youtube.com/watch?v=HMTKiPCKgpw&t=125s",precio:5,precioAnterior:8,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
-     {id:8,titulo:"Hope: El primer impacto (2026) - Subtitulado",categoria:"Acción",anio:2026,duracion:"1h 36min",descripcion:"Lo que comienza como ignorancia siembra la semilla del desastre, que se intensifica a través del conflicto humano hasta convertirse en una tragedia de proporciones cósmicas.",poster:"https://media.themoviedb.org/t/p/w188_and_h282_face/hHPIefotew38oJm3YCJPAzpi26c.jpg",trailer:"https://www.youtube.com/watch?v=od8tguSc0Es&t=12s",precio:5,precioAnterior:8,stock:2,etiqueta:"DRIVE",activa:true},
+ {id:1,titulo:"Tadeo y La Lámpara Maravillosa (2026) - Latino",categoria:"Animación",anio:2026,duracion:"1h 34min",descripcion:"Tadeo y Sara son ahora padres de Olimpia (Oli), una adorable e intrépida niña de dos años. Y Momia no lleva nada bien haber dejado de ser el centro de atención. Mientras están de vacaciones en Londres, Sara sigue la pista hacia un objeto único: la lámpara maravillosa de Las mil y una noches.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/71G1b8bqa7gzP9yU7q2fgNf2t0D.jpg",trailer:"https://www.youtube.com/watch?v=6LCjjVj3oAY",precio:3,precioAnterior:10,stock:2,etiqueta:"OFERTA",activa:true},
+ {id:2,titulo:"Entrega al límite (Runner) - (2026) - Latino",categoria:"Acción",anio:2026,duracion:"1h 37min",descripcion:"Un exsoldado se ve envuelto en una brutal carrera contrarreloj cuando una entrega médica crucial los convierte, a él y a su inesperada compañera, en el objetivo de un cártel despiadado.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/pmjSjZtFOYDWhAs4B2AbBE8hTQf.jpg",trailer:"https://www.youtube.com/watch?v=bwG-gF3a5f4&t=4s",precio:5,precioAnterior:0,stock:5,etiqueta:"ESTRENO",activa:true},
+ {id:3,titulo:"Resident Evil (Noche Cero) - (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 34min",descripcion:"En una reinvención totalmente nueva, el mensajero médico Bryan se ve inmerso en una carrera de acción sin descanso por la supervivencia, mientras el caos se desata a su alrededor.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/vrLEVObLGbUinE4sC4Lqao2dK0E.jpg",trailer:"https://www.youtube.com/watch?v=anjYhRPoROE",precio:5,precioAnterior:0,stock:5,etiqueta:"",activa:true},
+ {id:4,titulo:"Zona Cero (Colony) 2026 - Audio Latino",categoria:"Terror",anio:2026,duracion:"2h 3min",descripcion:"El profesor Se-jeong es arrojado a una pesadilla cuando un virus en rápida mutación se libera durante una conferencia de biotecnología, lo que lleva a las autoridades a sellar las instalaciones. Atrapado dentro sin escapatoria, Se-jeong, junto a un pequeño grupo de supervivientes, debe luchar por mantenerse con vida mientras los infectados sufren transformaciones horribles.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/bWzwORubAQ40nvzsTZidle19Dbm.jpg",trailer:"https://www.youtube.com/watch?v=_Ru4_LzLg_E",precio:5,precioAnterior:8,stock:2,etiqueta:"",activa:true},
+ {id:5,titulo:"Vertigo 2 - 2026 - Audio Latino",categoria:"Suspenso",anio:2026,duracion:"1h 38min",descripcion:"Tras perder a su intrépida hermana Shiloh, Jax, profundamente dolida, emprende una peligrosa escalada con Luce, una vieja amiga de Shiloh, para honrar su memoria. Mientras caminan sobre la cuerda floja por los peligrosos tablones del monte Kwan, un aterrador desprendimiento de rocas les deja varados a 1.500 metros de altura.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/ccBIyg1ITvuCDr4eMeEH0ZgNh4t.jpg",trailer:"https://www.youtube.com/watch?v=07oN9U9HTrM",precio:5,precioAnterior:10,stock:2,etiqueta:"ESTRENO",activa:true},
+ {id:6,titulo:"Cable Mortal (2026) - Audio Latino",categoria:"Suspenso",anio:2026,duracion:"1h 35min",descripcion:"Para burlar a sus misteriosos perseguidores, tendrá que reunir hasta la última pizca de valor para proteger el descubrimiento científico que cambiará el mundo, y a sí misma, antes de que sea demasiado tarde.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/eLMHUOQ4mCMxePMbv0TIVB48zfe.jpg",trailer:"https://www.youtube.com/watch?v=aXiwe6Q6Ftc",precio:5,precioAnterior:10,stock:5,etiqueta:"ESTRENO",activa:true},
+     {id:7,titulo:"Scary Movie: Terroríficamente incorrecta (2026) Latino",categoria:"Comedia",anio:2026,duracion:"1h 36min",descripcion:"Veintiséis años después de conseguir escapar de un asesino enmascarado sospechosamente familiar, el Core Four están de vuelta en el punto de mira del asesino y ninguna película de terror está a salvo.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/qhGf7btEU9hcGz3A0lneNptJKL7.jpg",trailer:"https://www.youtube.com/watch?v=HMTKiPCKgpw&t=125s",precio:5,precioAnterior:8,stock:2,etiqueta:"",activa:true}
 ];
 let cart={},currentCategory="Todas";
 const money=n=>`${CONFIG.moneda} ${Number(n).toFixed(2)}`;
@@ -279,7 +296,7 @@ function renderCatalog(){
  const items=PELICULAS.filter(m=>m.activa&&(currentCategory==="Todas"||m.categoria===currentCategory)&&m.titulo.toLowerCase().includes(query));
  const catalog=document.getElementById("catalog");
  if(!items.length){catalog.innerHTML='<div class="empty">No encontramos películas con ese nombre. Prueba otra búsqueda.</div>';return}
- catalog.innerHTML=items.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon ${m.etiqueta.toLowerCase().replace(/\s+/g,"-")}">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
+ catalog.innerHTML=items.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
 }
 document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-category]");if(!b)return;currentCategory=b.dataset.category;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===b));renderCatalog()});
 function openDetail(id){
@@ -308,7 +325,7 @@ function closeTrailer(){document.getElementById("trailerBackdrop").classList.rem
   const backdrop = document.getElementById("trailerBackdrop");
 
   document.getElementById("trailerTitle").textContent =
-    "¡Vértigo 1!";
+    "¡Cable Mortal!";
 
   let video = "";
 
@@ -391,3 +408,4 @@ applyConfig();renderCatalog();renderCart();setHeroOffer();startTimer();
 </script>
 </body>
 </html>
+
