@@ -188,6 +188,91 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 .faq-contact .btn{display:inline-block;margin-top:10px}
 @media(max-width:620px){.faq-section{padding:18px 12px;margin:32px auto}.faq-item summary{padding:14px 42px 14px 13px;font-size:14px}.faq-answer{padding:0 13px 14px;font-size:13px}}
 
+
+/* ===== NUEVO HERO CINECLIK: estreno protagonista + recomendaciones ===== */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin:18px auto 26px;padding:clamp(16px,2.5vw,30px);
+  border:1px solid #6437e8;border-radius:22px;
+  background-color:#070b24;background-position:center;background-size:cover;
+  box-shadow:0 0 35px #612bff32;
+}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(115deg,#05091ff2 0%,#080d28ed 58%,#080d28c9 100%)}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple))}
+.hero-featured{
+  display:grid;grid-template-columns:minmax(190px, .72fr) minmax(0,1.28fr);
+  gap:clamp(18px,3vw,36px);align-items:center;max-width:1040px;margin:0 auto 28px;
+}
+.hero-featured-poster-wrap{position:relative;max-width:310px;width:100%;justify-self:center}
+.hero-featured-poster{
+  display:block;width:100%;max-height:390px;aspect-ratio:2/3;object-fit:cover;
+  border-radius:16px;border:1px solid #9b65ff;box-shadow:0 12px 38px #0009,0 0 24px #873dff45;
+}
+.hero-featured-copy{min-width:0}
+.hero-kicker,.hero-eyebrow{display:inline-block;color:var(--cyan);font-size:11px;
+  font-weight:900;letter-spacing:1.6px}
+.hero-kicker{padding:8px 11px;border:1px solid #00e5ff70;border-radius:99px;
+  background:#061b31b8;box-shadow:0 0 16px #00e5ff20}
+.hero-featured-copy h1{font-size:clamp(29px,4.5vw,52px);line-height:1.05;
+  margin:15px 0 10px;text-transform:uppercase;overflow-wrap:anywhere}
+.hero-featured-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.hero-meta-pill{font-size:11px;color:#dce7ff;background:#111d40;border:1px solid #354b7c;
+  padding:6px 9px;border-radius:99px}
+.hero-featured-description{max-width:650px;color:#d2dcf7;font-size:14px;line-height:1.7;margin:0 0 18px}
+.hero-featured-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.hero-featured-price strong{font-size:clamp(25px,3vw,34px);color:#ff62d9}
+.hero-featured-price del{font-size:13px;color:#9ba9cb}
+.hero-featured-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-featured-actions .btn{min-width:145px}
+.hero-recommendations{border-top:1px solid #34436d;padding-top:19px}
+.hero-recommendations-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}
+.hero-recommendations-heading h2{font-size:clamp(17px,2.2vw,22px);margin:5px 0 0}
+.hero-recommendations-note{font-size:11px;color:var(--muted)}
+.hero-recommendation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.hero-rec-card{display:grid;grid-template-columns:76px minmax(0,1fr);gap:11px;align-items:center;
+  min-width:0;padding:10px;border:1px solid #2b3e70;border-radius:13px;
+  background:linear-gradient(135deg,#101a3bdf,#090f26f2);transition:transform .2s,border-color .2s,box-shadow .2s}
+.hero-rec-card:hover{transform:translateY(-3px);border-color:var(--pink);box-shadow:0 0 17px #873dff35}
+.hero-rec-poster{width:76px;height:108px;object-fit:cover;border-radius:8px;background:#131d3c}
+.hero-rec-copy{min-width:0}
+.hero-rec-copy h3{font-size:13px;line-height:1.35;margin:0 0 6px;overflow-wrap:anywhere}
+.hero-rec-category{font-size:10px;color:var(--muted);margin-bottom:7px}
+.hero-rec-price{font-size:14px;font-weight:900;color:#ff62d9;margin-bottom:8px}
+.hero-rec-actions{display:flex;gap:6px;flex-wrap:wrap}
+.hero-rec-actions .mini-btn{flex:0 1 auto;padding:7px 9px}
+.hero-unavailable{padding:20px;border:1px dashed #53658f;border-radius:12px;color:var(--muted);text-align:center}
+@media(max-width:760px){
+ .hero-featured{grid-template-columns:minmax(110px,.65fr) minmax(0,1.35fr);gap:16px}
+ .hero-featured-poster{max-height:300px}
+ .hero-featured-description{font-size:12px;line-height:1.55}
+ .hero-recommendation-grid{grid-template-columns:1fr}
+ .hero-rec-card{grid-template-columns:66px minmax(0,1fr)}
+ .hero-rec-poster{width:66px;height:94px}
+}
+@media(max-width:520px){
+ .hero{padding:14px;margin-top:12px;border-radius:16px}
+ .hero-featured{grid-template-columns:100px minmax(0,1fr);gap:12px;margin-bottom:20px}
+ .hero-featured-poster{max-height:155px;border-radius:10px}
+ .hero-kicker{font-size:9px;padding:6px 8px;letter-spacing:1px}
+ .hero-featured-copy h1{font-size:clamp(19px,5.6vw,26px);margin:9px 0 7px}
+ .hero-featured-meta{gap:5px;margin-bottom:8px}
+ .hero-meta-pill{font-size:9px;padding:5px 7px}
+ .hero-featured-description{font-size:11px;line-height:1.45;margin-bottom:9px;
+   display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+ .hero-featured-price{gap:7px;margin-bottom:10px}
+ .hero-featured-price strong{font-size:21px}
+ .hero-featured-price del{font-size:10px}
+ .hero-featured-actions{gap:6px}
+ .hero-featured-actions .btn{min-width:0;padding:9px 10px;font-size:10px}
+ .hero-recommendations-heading{align-items:start;flex-direction:column;gap:4px}
+ .hero-recommendations-note{font-size:10px}
+ .hero-rec-card{padding:8px}
+ .hero-rec-copy h3{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.hero-rec-card{transition:none}.hero-rec-card:hover{transform:none}}
+
 </style>
 </head>
 <body>
@@ -203,16 +288,19 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
  <div class="nav-actions"><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener" aria-label="Entrar a CINECLIK Play">▶ CINECLIK PLAY</a><button class="store-state" id="storeState" title="Estado de la tienda">🟢 Tienda abierta</button><button class="iconbtn" aria-label="Buscar" onclick="focusSearch()">⌕</button><button class="iconbtn" aria-label="Abrir carrito" onclick="toggleCart(true)">🛒<span class="cart-count" id="cartCount">0</span></button></div>
 </div></header>
 <main class="wrap">
-<section class="hero" id="inicio"><div class="hero-content">
- <div class="ticker" id="marqueeText">🔥 ¡OFERTA POR TIEMPO LIMITADO!</div>
- <h1 id="heroTitle">Grandes historias,</h1><div class="script gradient" id="heroSubtitle">en tu pantalla</div><p id="heroDescription">Las mejores películas, al mejor precio.</p>
- <div class="timer" id="countdownTimer" style="display: none;">
-  <div class="timebox"><b id="days">00</b><span>Días</span></div>
-  <div class="timebox"><b id="hours">00</b><span>Horas</span></div>
-  <div class="timebox"><b id="minutes">00</b><span>Minutos</span></div>
-  <div class="timebox"><b id="seconds">00</b><span>Segundos</span></div>
-</div>
-</div><div class="hero-offer" id="heroOffer"><small>OFERTA DESTACADA</small><div class="old" id="heroOld">Antes: S/ 25.00</div><strong id="heroPrice">S/ 18.00</strong><div class="stock" id="heroStock">STOCK: 8</div></div></section>
+<section class="hero" id="inicio" aria-label="Estreno destacado y recomendaciones">
+  <div class="hero-featured" id="heroFeatured" aria-live="polite"></div>
+  <div class="hero-recommendations">
+    <div class="hero-recommendations-heading">
+      <div>
+        <span class="hero-eyebrow">SELECCIÓN CINECLIK</span>
+        <h2>También te recomendamos</h2>
+      </div>
+      <span class="hero-recommendations-note">Más historias para disfrutar</span>
+    </div>
+    <div class="hero-recommendation-grid" id="heroRecommendations"></div>
+  </div>
+</section>
 
  <section class="play-cta" aria-label="Acceso a CINECLIK Play"><div><h2>🍿 ¿Ya compraste tu película?</h2><p>Entra a CINECLIK PLAY e introduce tu código de acceso para comenzar a verla.</p></div><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener">▶ ENTRAR A CINECLIK PLAY ↗</a></section>
  <div class="section-head" id="peliculas">
@@ -346,8 +434,7 @@ function applyConfig(){
  document.title=`${CONFIG.nombreTienda} | ${CONFIG.eslogan}`;
  document.getElementById("brandName").textContent=CONFIG.nombreTienda;document.getElementById("brandTagline").textContent=CONFIG.eslogan;
  document.getElementById("footerName").textContent="▶ "+CONFIG.nombreTienda;document.getElementById("footerTagline").textContent=CONFIG.eslogan;
- document.getElementById("heroTitle").textContent=CONFIG.tituloPrincipal;document.getElementById("heroSubtitle").textContent=CONFIG.subtituloPrincipal;document.getElementById("heroDescription").textContent=CONFIG.descripcionPrincipal;
- document.getElementById("marqueeText").textContent=CONFIG.textoMarquesina;document.getElementById("stripText").textContent=CONFIG.textoFranja;document.getElementById("comboTitle").textContent=CONFIG.tituloCombo;document.getElementById("comboText").textContent=CONFIG.textoCombo;
+document.getElementById("stripText").textContent=CONFIG.textoFranja;document.getElementById("comboTitle").textContent=CONFIG.tituloCombo;document.getElementById("comboText").textContent=CONFIG.textoCombo;
  document.getElementById("copyright").textContent=`© ${CONFIG.anioCopyright} ${CONFIG.nombreTienda}. Todos los derechos reservados.`;
  const logo=document.getElementById("brandLogo");logo.src=CONFIG.logo;logo.onerror=()=>{logo.style.display="none";document.getElementById("logoFallback").style.display="inline"};
  const hero=document.querySelector(".hero");hero.style.backgroundImage=`linear-gradient(90deg,#070b24 2%,#0a0b25d9 42%,#0a0b2530 100%),url("${CONFIG.portada}")`;
@@ -539,9 +626,61 @@ function startTimer(){
  function tick(){const d=Math.floor(remaining/86400),h=Math.floor(remaining%86400/3600),m=Math.floor(remaining%3600/60),s=remaining%60;for(const [id,val] of [["days",d],["hours",h],["minutes",m],["seconds",s]])document.getElementById(id).textContent=String(val).padStart(2,"0");if(remaining>0)remaining--;else remaining=Math.max(1,Number(CONFIG.duracionOfertaHoras)||24)*3600}
  tick();setInterval(tick,1000);
 }
-function setHeroOffer(){const m=PELICULAS.find(x=>x.activa&&x.precioAnterior>0)||PELICULAS.find(x=>x.activa);if(!m)return;document.getElementById("heroOld").textContent=m.precioAnterior>m.precio?`Antes: ${money(m.precioAnterior)}`:"Precio especial";document.getElementById("heroPrice").textContent=money(m.precio);document.getElementById("heroStock").textContent=`STOCK: ${m.stock}`;document.getElementById("heroOffer").onclick=()=>openDetail(m.id);document.getElementById("heroOffer").style.cursor="pointer"}
-applyConfig();renderCatalog();renderCart();setHeroOffer();startTimer();
+function renderHero(){
+ const featured=PELICULAS.find(m=>m.id===Number(CONFIG.peliculaDestacada)&&m.activa);
+ const featuredHost=document.getElementById("heroFeatured");
+ const recommendationsHost=document.getElementById("heroRecommendations");
+ if(!featured){
+   featuredHost.innerHTML='<div class="hero-unavailable">El estreno destacado no está disponible en este momento.</div>';
+ }else{
+   featuredHost.innerHTML=`
+    <div class="hero-featured-poster-wrap">
+      <img class="hero-featured-poster" src="${esc(featured.poster)}" alt="Póster de ${esc(featured.titulo)}"
+       onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'">
+    </div>
+    <div class="hero-featured-copy">
+      <span class="hero-kicker">★ ESTRENO DESTACADO</span>
+      <h1>${esc(featured.titulo)}</h1>
+      <div class="hero-featured-meta">
+        <span class="hero-meta-pill">${esc(featured.categoria)}</span>
+        <span class="hero-meta-pill">${esc(String(featured.anio))}</span>
+        <span class="hero-meta-pill">${esc(featured.duracion)}</span>
+      </div>
+      <p class="hero-featured-description">${esc(featured.descripcion)}</p>
+      <div class="hero-featured-price">
+        <strong>${money(featured.precio)}</strong>
+        ${featured.precioAnterior>featured.precio?`<del>${money(featured.precioAnterior)}</del>`:""}
+      </div>
+      <div class="hero-featured-actions">
+        <button class="btn" onclick="openDetail(${featured.id})">Ver película</button>
+        <button class="btn green" onclick="addToCart(${featured.id})">＋ Añadir al carrito</button>
+      </div>
+    </div>`;
+ }
+ const recommendedIds=Array.isArray(CONFIG.peliculasRecomendadas)?CONFIG.peliculasRecomendadas:[];
+ const recommended=recommendedIds
+   .map(id=>PELICULAS.find(m=>m.id===Number(id)&&m.activa))
+   .filter(m=>m&&m.id!==Number(CONFIG.peliculaDestacada));
+ if(!recommended.length){
+   recommendationsHost.innerHTML='<div class="hero-unavailable">Pronto añadiremos más recomendaciones.</div>';
+   return;
+ }
+ recommendationsHost.innerHTML=recommended.map(m=>`
+   <article class="hero-rec-card">
+     <img class="hero-rec-poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}"
+       onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'">
+     <div class="hero-rec-copy">
+       <h3>${esc(m.titulo)}</h3>
+       <div class="hero-rec-category">${esc(m.categoria)} · ${esc(String(m.anio))}</div>
+       <div class="hero-rec-price">${money(m.precio)}</div>
+       <div class="hero-rec-actions">
+         <button class="mini-btn" onclick="openDetail(${m.id})">Ver detalles</button>
+         <button class="mini-btn primary" onclick="addToCart(${m.id})">＋ Añadir</button>
+       </div>
+     </div>
+   </article>`).join("");
+}
+applyConfig();renderHero();renderCatalog();renderCart();
 </script>
 </body>
 </html>
-
