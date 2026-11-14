@@ -364,7 +364,7 @@ function renderCatalog(){
    m.activa &&
    (currentCategory==="Todas"||m.categoria===currentCategory) &&
    m.titulo.toLowerCase().includes(query)
- );
+ ).sort((a,b)=>Number(b.id)-Number(a.id)); // Más recientes primero según el ID
 
  const catalog=document.getElementById("catalog");
  const pagination=document.getElementById("pagination");
@@ -422,7 +422,7 @@ function goToPage(page){
    m.activa &&
    (currentCategory==="Todas"||m.categoria===currentCategory) &&
    m.titulo.toLowerCase().includes(query)
- );
+ ).sort((a,b)=>Number(b.id)-Number(a.id)); // Más recientes primero según el ID
  const totalPages=Math.ceil(items.length/ITEMS_PER_PAGE);
  if(page<1||page>totalPages)return;
  currentPage=page;
