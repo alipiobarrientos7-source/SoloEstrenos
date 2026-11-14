@@ -24,7 +24,15 @@ display: none;
 @media(max-width:620px){.play-link{padding:8px 9px;font-size:10px;gap:4px}.play-cta{align-items:stretch;flex-direction:column;text-align:center}.play-cta .play-link{justify-content:center;width:100%}}
 
 .hero{position:relative;overflow:hidden;min-height:355px;margin:18px auto 26px;border:1px solid #6437e8;border-radius:20px;background:linear-gradient(90deg,#070b24 2%,#0a0b25d9 42%,#0a0b2530 100%),url('assets/portada.jpg') center/cover no-repeat;box-shadow:0 0 35px #612bff32}.hero:after{content:"";position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple))}.hero-content{position:relative;z-index:1;padding:34px;max-width:650px}.ticker{display:inline-block;border:1px solid var(--pink);border-radius:9px;padding:8px 12px;color:#fff;font-size:12px;font-weight:bold;box-shadow:0 0 15px #ff22c85c;animation:pulse 2s infinite}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.02;margin:18px 0 8px;text-transform:uppercase}.script{font-style:italic;font-size:clamp(27px,4vw,43px);font-weight:bold}.hero p{color:#e2e9ff}.timer{display:flex;gap:8px;margin-top:18px}.timebox{background:#070b23db;border:1px solid #743cff;border-radius:9px;padding:9px 12px;text-align:center;min-width:63px}.timebox b{display:block;font-size:21px}.timebox span{font-size:10px;color:#bdc8ea}.hero-offer{position:absolute;right:25px;bottom:25px;background:#070b23e8;border:1px solid var(--cyan);padding:17px;border-radius:14px;min-width:155px;box-shadow:0 0 25px #00e5ff30;z-index:2}.hero-offer small{color:var(--muted)}.old{text-decoration:line-through;color:#9aa7c9}.hero-offer strong{display:block;font-size:27px;color:#fff;background:linear-gradient(90deg,#ff1767,#ff22c8);padding:8px;border-radius:8px;margin:7px 0}.stock{font-size:11px;color:var(--cyan);font-weight:bold}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:30px 0 16px}.section-head h2{font-size:21px;margin:0}.filters{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #283966;background:#0a1230;color:#d8e4ff;padding:8px 13px;border-radius:99px;font-size:12px}.chip.active,.chip:hover{border-color:var(--cyan);background:#182c63;box-shadow:0 0 12px #00e5ff30}.search{display:flex;gap:10px;margin-bottom:14px}.search input{flex:1;min-width:0;background:#0b1230;border:1px solid #293d70;border-radius:9px;color:white;padding:11px 13px}.catalog{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}.movie-card{position:relative;overflow:hidden;border-radius:13px;border:1px solid #30477e;background:#080e28;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:pointer;min-width:0}.movie-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 0 1px var(--cyan),0 0 24px #ad25ff58}.poster{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#131d3c}.movie-info{padding:10px}.movie-title{font-weight:bold;font-size:13px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.4;min-height:2.8em}.price-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:7px 0}.price{font-weight:900;color:#ff4ed5}.old-price{font-size:10px;color:#8492b8;text-decoration:line-through}.stockline{font-size:10px;color:var(--green)}.card-actions{display:flex;gap:6px;margin-top:9px}.mini-btn{flex:1;background:#0e1b3f;color:white;border:1px solid #3c4f84;border-radius:7px;padding:7px 4px;font-size:11px}.mini-btn:hover{border-color:var(--cyan)}.mini-btn.primary{background:linear-gradient(100deg,#5540ff,#d51bdf);border:0}.ribbon{position:absolute;top:9px;left:8px;background:#ff1767;border-radius:5px;padding:5px 7px;font-size:10px;font-weight:bold;z-index:1}.empty{grid-column:1/-1;color:var(--muted);padding:35px;text-align:center}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:30px 0 16px}.section-head h2{font-size:21px;margin:0}.filters{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #283966;background:#0a1230;color:#d8e4ff;padding:8px 13px;border-radius:99px;font-size:12px}.chip.active,.chip:hover{border-color:var(--cyan);background:#182c63;box-shadow:0 0 12px #00e5ff30}.search{display:flex;gap:10px;margin-bottom:14px}.search input{flex:1;min-width:0;background:#0b1230;border:1px solid #293d70;border-radius:9px;color:white;padding:11px 13px}.catalog{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.catalog-count{text-align:center;color:var(--muted);font-size:13px;margin:24px 0 18px}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:0 auto 30px;padding:14px 8px;border-top:1px solid #24345e;border-bottom:1px solid #24345e;background:#080e20}
+.page-btn{min-width:42px;height:42px;padding:0 11px;border:1px solid #34466f;border-radius:11px;background:#090d20;color:#cbd7f5;font-weight:700}
+.page-btn:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 12px #00e5ff25}
+.page-btn.active{border-color:var(--cyan);background:#142653;color:#fff;box-shadow:0 0 12px #00e5ff35}
+.page-dots{color:var(--muted);padding:0 3px}
+@media(max-width:620px){.pagination{gap:6px;padding:12px 4px}.page-btn{min-width:36px;height:38px;padding:0 8px;border-radius:9px;font-size:13px}.catalog-count{font-size:12px}}
+.movie-card{position:relative;overflow:hidden;border-radius:13px;border:1px solid #30477e;background:#080e28;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:pointer;min-width:0}.movie-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 0 1px var(--cyan),0 0 24px #ad25ff58}.poster{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#131d3c}.movie-info{padding:10px}.movie-title{font-weight:bold;font-size:13px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.4;min-height:2.8em}.price-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:7px 0}.price{font-weight:900;color:#ff4ed5}.old-price{font-size:10px;color:#8492b8;text-decoration:line-through}.stockline{font-size:10px;color:var(--green)}.card-actions{display:flex;gap:6px;margin-top:9px}.mini-btn{flex:1;background:#0e1b3f;color:white;border:1px solid #3c4f84;border-radius:7px;padding:7px 4px;font-size:11px}.mini-btn:hover{border-color:var(--cyan)}.mini-btn.primary{background:linear-gradient(100deg,#5540ff,#d51bdf);border:0}.ribbon{position:absolute;top:9px;left:8px;background:#ff1767;border-radius:5px;padding:5px 7px;font-size:10px;font-weight:bold;z-index:1}.empty{grid-column:1/-1;color:var(--muted);padding:35px;text-align:center}
 .promo-strip{margin:30px 0;padding:16px;text-align:center;border-radius:12px;border:1px solid #5733bd;background:linear-gradient(90deg,#13113d,#111a3d,#271039);font-weight:bold}.promo-strip span{color:var(--cyan)}.how{margin:48px 0 32px;display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:center}.how h2{font-size:29px;margin:0 0 8px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}.step{border-right:1px solid #26355f;padding-right:12px}.step:last-child{border:0}.step-num{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));font-weight:bold;margin-bottom:10px}.step p{font-size:13px;color:var(--muted);line-height:1.5}.combo{border:1px solid #273d76;border-radius:15px;padding:20px;background:linear-gradient(135deg,#12143c,#07122b);text-align:center}.combo .pop{font-size:42px}.combo h3{font-size:24px;margin:8px 0;color:#ff72dc}.muted{color:var(--muted);font-size:13px;line-height:1.5}.btn{border:0;border-radius:9px;padding:12px 16px;color:white;font-weight:bold;background:linear-gradient(100deg,#4b40ff,#d622df);box-shadow:0 5px 20px #762dff38}.btn.green{background:linear-gradient(100deg,#00a96b,#00d68f);color:#031b19}.btn.outline{background:#09132d;border:1px solid var(--cyan)}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
 footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:12px}.footrow{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.footbrand{font-size:21px;font-weight:900;color:white}.copyright{text-align:center;margin-top:20px;color:#8291b8}
 .modal-backdrop{position:fixed;inset:0;background:#02040bd9;z-index:60;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.show{display:flex}.modal{position:relative;width:min(900px,100%);max-height:92vh;overflow:auto;border:1px solid #7545f5;border-radius:18px;background:#080e27;box-shadow:0 0 45px #7e32ff44;padding:20px}.close{position:absolute;right:14px;top:12px;border:0;background:#182348;color:white;border-radius:50%;width:34px;height:34px;font-size:20px;z-index:2}.detail-grid{display:grid;grid-template-columns:210px minmax(0,1fr) 210px;gap:18px}.detail-poster{width:100%;border-radius:12px;border:1px solid var(--cyan)}.detail h2{margin:0 0 8px}.detail-price{font-size:26px;color:#ff5bd5;font-weight:bold;margin:14px 0}.detail-box{background:#0c1532;border:1px solid #263963;border-radius:10px;padding:12px;margin-bottom:10px}.suggestions{display:flex;gap:8px;flex-wrap:wrap}.suggestion{width:58px;cursor:pointer}.suggestion img{width:58px;height:78px;object-fit:cover;border-radius:5px}.suggestion small{font-size:9px;display:block;margin-top:4px}
@@ -225,6 +233,8 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 </div>
 <div class="search"><input id="searchInput" aria-label="Buscar película" placeholder="Buscar película..." oninput="renderCatalog()"></div>
 <section class="catalog" id="catalog" aria-live="polite"></section>
+ <div class="catalog-count" id="catalogCount" aria-live="polite"></div>
+ <nav class="pagination" id="pagination" aria-label="Páginas del catálogo"></nav>
 <div class="promo-strip" id="ofertas"><span id="stripText">🎬 ¡Tu entretenimiento empieza aquí, con nosotros! 🍿</span></div>
 <section class="how"><div><h2><span class="gradient">¡Es muy fácil!</span></h2><div class="muted">Disfruta tus películas en solo 3 pasos</div><div class="steps"><div class="step"><div class="step-num">1</div><div>🎞️ <b>Elige tu película</b></div><p>Explora el catálogo y agrega tus estrenos favoritos.</p></div><div class="step"><div class="step-num">2</div><div>🛒 <b>Añade al carrito</b></div><p>Puedes elegir varias películas antes de finalizar.</p></div><div class="step"><div class="step-num">3</div><div>💬 <b>Envíanos tu pedido</b></div><p>Te contactaremos por WhatsApp para confirmar tu código de acceso.</p></div></div></div><aside class="combo"><div class="pop">🍿</div><h3 id="comboTitle">Lleva más por menos</h3><p class="muted" id="comboText">Combos especiales y promociones exclusivas.</p><button class="btn outline" onclick="openFreeMovie()">▶ Ver película gratis</button></aside></section>
 
@@ -322,6 +332,9 @@ const PELICULAS = [
      {id:19,titulo:"Madre Siniestra (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 33min",descripcion:"Bela, una niña de 8 años que vive en un hogar con problemas matrimoniales, enfrenta a una entidad siniestra que sale de su armario. La presencia, a quien llama *Otra mamá*, se vuelve cada vez más amenazante para ella y su familia.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/USCOKXrHBCeeK96qXmS0NyDHYL.jpg",trailer:"https://www.youtube.com/watch?v=slo0-_20uWg&t=4s",precio:5,precioAnterior:10,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
 ];
 let cart={},currentCategory="Todas";
+let currentPage=1;
+const ITEMS_PER_PAGE=12;
+let lastCatalogFilter="";
 const money=n=>`${CONFIG.moneda} ${Number(n).toFixed(2)}`;
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function whatsappBase(){const n=String(CONFIG.whatsapp||"").replace(/\D/g,"");return n.length>=10&&!n.includes("XXXXXXXX")?`https://wa.me/${n}`:""}
@@ -338,12 +351,85 @@ function applyConfig(){
  const wa=whatsappBase();const mensaje="Hola! Llegue a CINECLIK y quisiera hacer una consulta sobre sus peliculas y pedidos.";const waMensaje=wa?wa+"?text="+encodeURIComponent(mensaje):"";for(const id of ["footerWhatsApp","whatsappFloat"]){const el=document.getElementById(id);el.href=waMensaje||"#";el.onclick=e=>{if(!wa){e.preventDefault();alert("Configura tu numero de WhatsApp en CONFIG al comienzo del codigo HTML.")}}}
 }
 function renderCatalog(){
- const query=(document.getElementById("searchInput").value||"").toLowerCase();
- const items=PELICULAS.filter(m=>m.activa&&(currentCategory==="Todas"||m.categoria===currentCategory)&&m.titulo.toLowerCase().includes(query));
+ const query=(document.getElementById("searchInput").value||"").toLowerCase().trim();
+ const filterKey=query+"|"+currentCategory;
+
+ // Reinicia a la primera página cuando cambia la búsqueda o categoría.
+ if(filterKey!==lastCatalogFilter){
+   currentPage=1;
+   lastCatalogFilter=filterKey;
+ }
+
+ const items=PELICULAS.filter(m=>
+   m.activa &&
+   (currentCategory==="Todas"||m.categoria===currentCategory) &&
+   m.titulo.toLowerCase().includes(query)
+ );
+
  const catalog=document.getElementById("catalog");
- if(!items.length){catalog.innerHTML='<div class="empty">No encontramos películas con ese nombre. Prueba otra búsqueda.</div>';return}
- catalog.innerHTML=items.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon ${m.etiqueta.toLowerCase().replace(/\s+/g,"-")}">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
+ const pagination=document.getElementById("pagination");
+ const count=document.getElementById("catalogCount");
+
+ if(!items.length){
+   catalog.innerHTML='<div class="empty">No encontramos películas con ese nombre. Prueba otra búsqueda.</div>';
+   pagination.innerHTML="";
+   count.textContent="";
+   return;
+ }
+
+ const totalPages=Math.ceil(items.length/ITEMS_PER_PAGE);
+ currentPage=Math.min(Math.max(1,currentPage),totalPages);
+ const start=(currentPage-1)*ITEMS_PER_PAGE;
+ const pageItems=items.slice(start,start+ITEMS_PER_PAGE);
+
+ catalog.innerHTML=pageItems.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon ${m.etiqueta.toLowerCase().replace(/\s+/g,"-")}">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
+
+ count.textContent=`Mostrando ${start+1}–${Math.min(start+ITEMS_PER_PAGE,items.length)} de ${items.length} películas`;
+
+ let buttons="";
+ const addPageButton=(page,label=page)=>{
+   buttons+=`<button class="page-btn ${page===currentPage?"active":""}" ${page===currentPage?'aria-current="page"':""} onclick="goToPage(${page})">${label}</button>`;
+ };
+
+ if(currentPage>1){
+   buttons+=`<button class="page-btn" aria-label="Página anterior" onclick="goToPage(${currentPage-1})">←</button>`;
+ }
+
+ if(totalPages<=7){
+   for(let page=1;page<=totalPages;page++) addPageButton(page);
+ }else{
+   addPageButton(1);
+   if(currentPage>3) buttons+='<span class="page-dots">…</span>';
+
+   const first=Math.max(2,currentPage-1);
+   const last=Math.min(totalPages-1,currentPage+1);
+   for(let page=first;page<=last;page++) addPageButton(page);
+
+   if(currentPage<totalPages-2) buttons+='<span class="page-dots">…</span>';
+   addPageButton(totalPages);
+ }
+
+ if(currentPage<totalPages){
+   buttons+=`<button class="page-btn" aria-label="Página siguiente" onclick="goToPage(${currentPage+1})">→</button>`;
+ }
+
+ pagination.innerHTML=buttons;
 }
+
+function goToPage(page){
+ const query=(document.getElementById("searchInput").value||"").toLowerCase().trim();
+ const items=PELICULAS.filter(m=>
+   m.activa &&
+   (currentCategory==="Todas"||m.categoria===currentCategory) &&
+   m.titulo.toLowerCase().includes(query)
+ );
+ const totalPages=Math.ceil(items.length/ITEMS_PER_PAGE);
+ if(page<1||page>totalPages)return;
+ currentPage=page;
+ renderCatalog();
+ document.getElementById("peliculas").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
 document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-category]");if(!b)return;currentCategory=b.dataset.category;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===b));renderCatalog()});
 function openDetail(id){
  const m=PELICULAS.find(x=>x.id===id);if(!m)return;
