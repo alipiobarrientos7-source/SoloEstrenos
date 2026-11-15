@@ -273,6 +273,91 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 }
 @media(prefers-reduced-motion:reduce){.hero-rec-card{transition:none}.hero-rec-card:hover{transform:none}}
 
+
+/* ===== CARRUSEL COMPACTO CINECLIK ===== */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:0;margin:16px auto 24px;padding:0;
+  border:1px solid #6437e8;border-radius:17px;
+  background:#070b24;box-shadow:0 0 28px #612bff28;
+}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 85% 20%,#6428a52b,transparent 45%);z-index:0}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple));z-index:3}
+.hero-carousel{position:relative;z-index:1}
+.hero-slide{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;align-items:center;
+  min-height:218px;padding:18px 62px;cursor:pointer;outline-offset:-4px}
+.hero-slide-poster{width:126px;height:182px;object-fit:cover;border-radius:11px;
+  border:1px solid #9b65ff;box-shadow:0 8px 24px #0008;justify-self:center}
+.hero-slide-copy{min-width:0}
+.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;
+  letter-spacing:1.4px;margin-bottom:7px}
+.hero-slide-copy h1{font-size:clamp(21px,3vw,34px);line-height:1.1;margin:0 0 8px;
+  text-transform:uppercase;overflow-wrap:anywhere}
+.hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.hero-meta-pill{font-size:10px;color:#dce7ff;background:#111d40;border:1px solid #354b7c;padding:5px 8px;border-radius:99px}
+.hero-slide-description{max-width:720px;color:#cbd7f3;font-size:12px;line-height:1.5;margin:0 0 9px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hero-slide-actions{display:flex;gap:8px;flex-wrap:wrap}
+.hero-slide-actions .btn{padding:9px 13px;font-size:11px;min-width:112px}
+.hero-carousel-arrow{position:absolute;z-index:4;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:50%;border:1px solid #6276b7;
+  background:#080e27e8;color:white;font-size:21px;display:grid;place-items:center}
+.hero-carousel-arrow:hover{border-color:var(--cyan);box-shadow:0 0 14px #00e5ff55}
+.hero-carousel-arrow.prev{left:13px}.hero-carousel-arrow.next{right:13px}
+.hero-carousel-dots{position:absolute;z-index:4;right:17px;bottom:12px;display:flex;gap:6px}
+.hero-carousel-dot{width:7px;height:7px;border:0;border-radius:99px;padding:0;background:#68769c;opacity:.7}
+.hero-carousel-dot.active{width:20px;background:var(--cyan);opacity:1}
+.hero-empty{padding:28px;color:var(--muted);text-align:center}
+@media(max-width:620px){
+ .hero{margin:12px auto 20px;border-radius:14px}
+ .hero-slide{grid-template-columns:92px minmax(0,1fr);gap:12px;min-height:172px;padding:14px 39px}
+ .hero-slide-poster{width:88px;height:132px;border-radius:8px}
+ .hero-slide-kicker{font-size:8px;letter-spacing:1px;margin-bottom:5px}
+ .hero-slide-copy h1{font-size:clamp(16px,4.8vw,21px);margin-bottom:6px}
+ .hero-slide-meta{gap:4px;margin-bottom:6px}
+ .hero-meta-pill{font-size:8px;padding:4px 6px}
+ .hero-slide-description{font-size:10px;line-height:1.35;-webkit-line-clamp:2;margin-bottom:6px}
+ .hero-slide-actions{gap:5px}
+ .hero-slide-actions .btn{min-width:0;padding:7px 8px;font-size:9px}
+ .hero-carousel-arrow{width:27px;height:27px;font-size:17px}
+ .hero-carousel-arrow.prev{left:6px}.hero-carousel-arrow.next{right:6px}
+ .hero-carousel-dots{right:10px;bottom:8px}
+}
+@media(prefers-reduced-motion:reduce){.hero-slide,.hero-carousel-arrow{transition:none}}
+
+
+/* ===== HERO CINEMATOGRÁFICO CON TRÁILER AUTOMÁTICO ===== */
+.hero{min-height:0;padding:0;background:#05081c;}
+.hero-carousel{position:relative;z-index:1;min-height:245px;overflow:hidden;}
+.hero-slide{position:relative;display:flex;align-items:center;min-height:245px;padding:28px 64px;overflow:hidden;isolation:isolate;cursor:pointer;}
+.hero-slide-poster{position:absolute;inset:0;z-index:-3;width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:cover;object-position:center 30%;border:0;border-radius:0;box-shadow:none;filter:blur(1px);transform:scale(1.025);}
+.hero-slide-video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;border:0;pointer-events:none;object-fit:cover;}
+.hero-slide::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,7,24,.97) 0%,rgba(4,7,24,.84) 38%,rgba(4,7,24,.38) 72%,rgba(4,7,24,.24) 100%),linear-gradient(0deg,rgba(4,7,24,.48),transparent 55%);}
+.hero-slide-copy{width:min(760px,78%);min-width:0;}
+.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:1.5px;margin-bottom:7px;text-shadow:0 2px 8px #000;}
+.hero-slide-copy h1{font-size:clamp(23px,3.5vw,42px);line-height:1.08;margin:0 0 9px;text-transform:uppercase;text-shadow:0 2px 12px #000;}
+.hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px;}
+.hero-slide-description{max-width:650px;color:#eef2ff;font-size:12px;line-height:1.5;margin:0 0 12px;text-shadow:0 2px 8px #000;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.hero-slide-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.hero-slide-actions .btn{padding:9px 16px;font-size:11px;min-width:125px;}
+.hero-carousel-arrow{background:#080e27d9;backdrop-filter:blur(5px);}
+.hero-carousel-dots{bottom:11px;right:18px;}
+@media(max-width:620px){
+ .hero-carousel{min-height:220px;}
+ .hero-slide{min-height:220px;padding:22px 42px;}
+ .hero-slide-poster{object-position:center 25%;}
+ .hero-slide-copy{width:100%;}
+ .hero-slide-copy h1{font-size:clamp(19px,5.5vw,27px);}
+ .hero-slide-description{font-size:10px;-webkit-line-clamp:3;max-width:100%;}
+ .hero-slide-meta{gap:4px;margin-bottom:7px;}
+ .hero-meta-pill{font-size:8px;padding:4px 6px;}
+ .hero-slide-actions .btn{padding:8px 12px;font-size:10px;}
+ .hero-carousel-dots{bottom:8px;right:12px;}
+}
+@media(prefers-reduced-motion:reduce){.hero-slide-video{display:none!important;}}
+
 </style>
 </head>
 <body>
@@ -288,18 +373,13 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
  <div class="nav-actions"><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener" aria-label="Entrar a CINECLIK Play">▶ CINECLIK PLAY</a><button class="store-state" id="storeState" title="Estado de la tienda">🟢 Tienda abierta</button><button class="iconbtn" aria-label="Buscar" onclick="focusSearch()">⌕</button><button class="iconbtn" aria-label="Abrir carrito" onclick="toggleCart(true)">🛒<span class="cart-count" id="cartCount">0</span></button></div>
 </div></header>
 <main class="wrap">
-<section class="hero" id="inicio" aria-label="Estreno destacado y recomendaciones">
-  <div class="hero-featured" id="heroFeatured" aria-live="polite"></div>
-  <div class="hero-recommendations">
-    <div class="hero-recommendations-heading">
-      <div>
-        <span class="hero-eyebrow">SELECCIÓN CINECLIK</span>
-        <h2>También te recomendamos</h2>
-      </div>
-      <span class="hero-recommendations-note">Más historias para disfrutar</span>
-    </div>
-    <div class="hero-recommendation-grid" id="heroRecommendations"></div>
+<section class="hero" id="inicio" aria-label="Películas destacadas">
+  <div class="hero-carousel" id="heroCarousel" aria-live="polite">
+    <div class="hero-empty">Cargando estrenos de CINECLIK...</div>
   </div>
+  <button class="hero-carousel-arrow prev" type="button" aria-label="Película anterior" onclick="moveHero(-1)">‹</button>
+  <button class="hero-carousel-arrow next" type="button" aria-label="Siguiente película" onclick="moveHero(1)">›</button>
+  <div class="hero-carousel-dots" id="heroCarouselDots" aria-label="Seleccionar película"></div>
 </section>
 
  <section class="play-cta" aria-label="Acceso a CINECLIK Play"><div><h2>🍿 ¿Ya compraste tu película?</h2><p>Entra a CINECLIK PLAY e introduce tu código de acceso para comenzar a verla.</p></div><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener">▶ ENTRAR A CINECLIK PLAY ↗</a></section>
@@ -473,7 +553,7 @@ function renderCatalog(){
  const start=(currentPage-1)*ITEMS_PER_PAGE;
  const pageItems=items.slice(start,start+ITEMS_PER_PAGE);
 
- catalog.innerHTML=pageItems.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon ${m.etiqueta.toLowerCase().replace(/\s+/g,"-")}">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();addToCart(${m.id})">＋ Añadir</button></div></div></article>`).join("");
+ catalog.innerHTML=pageItems.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon ${m.etiqueta.toLowerCase().replace(/\s+/g,"-")}">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();buyNow(${m.id})">Comprar</button></div></div></article>`).join("");
 
  count.textContent=`Mostrando ${start+1}–${Math.min(start+ITEMS_PER_PAGE,items.length)} de ${items.length} películas`;
 
@@ -626,61 +706,90 @@ function startTimer(){
  function tick(){const d=Math.floor(remaining/86400),h=Math.floor(remaining%86400/3600),m=Math.floor(remaining%3600/60),s=remaining%60;for(const [id,val] of [["days",d],["hours",h],["minutes",m],["seconds",s]])document.getElementById(id).textContent=String(val).padStart(2,"0");if(remaining>0)remaining--;else remaining=Math.max(1,Number(CONFIG.duracionOfertaHoras)||24)*3600}
  tick();setInterval(tick,1000);
 }
+let heroItems = [];
+let heroIndex = 0;
+let heroTimer = null;
+let heroTrailerDelay = null;
+const HERO_TRAILER_DELAY_MS = 3000;
+// Se amplía el tiempo de cada banner para que el tráiler alcance a verse.
+const HERO_SLIDE_DURATION_MS = 18000;
+
+function getHeroItems(){
+ const ids=[CONFIG.peliculaDestacada,...(Array.isArray(CONFIG.peliculasRecomendadas)?CONFIG.peliculasRecomendadas:[])];
+ const uniqueIds=[...new Set(ids.map(Number))];
+ return uniqueIds.map(id=>PELICULAS.find(m=>m.id===id&&m.activa&&m.stock>0)).filter(Boolean);
+}
+function stopHeroTrailer(){
+ if(heroTrailerDelay){clearTimeout(heroTrailerDelay);heroTrailerDelay=null;}
+ const oldFrame=document.querySelector('#heroCarousel .hero-slide-video');
+ if(oldFrame)oldFrame.remove();
+}
+function startHeroTrailer(movie){
+ stopHeroTrailer();
+ const videoId=getYouTubeId(movie.trailer);
+ if(!videoId)return;
+ heroTrailerDelay=setTimeout(()=>{
+   const slide=document.querySelector('#heroCarousel .hero-slide');
+   if(!slide || Number(slide.dataset.movieId)!==Number(movie.id))return;
+   const frame=document.createElement('iframe');
+   frame.className='hero-slide-video';
+   frame.title='Tráiler de '+movie.titulo;
+   frame.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(videoId)+'?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&loop=1&playlist='+encodeURIComponent(videoId)+'&iv_load_policy=3&disablekb=1';
+   frame.allow='autoplay; encrypted-media; picture-in-picture';
+   frame.setAttribute('aria-hidden','true');
+   frame.tabIndex=-1;
+   slide.prepend(frame);
+   heroTrailerDelay=null;
+ },HERO_TRAILER_DELAY_MS);
+}
 function renderHero(){
- const featured=PELICULAS.find(m=>m.id===Number(CONFIG.peliculaDestacada)&&m.activa);
- const featuredHost=document.getElementById("heroFeatured");
- const recommendationsHost=document.getElementById("heroRecommendations");
- if(!featured){
-   featuredHost.innerHTML='<div class="hero-unavailable">El estreno destacado no está disponible en este momento.</div>';
- }else{
-   featuredHost.innerHTML=`
-    <div class="hero-featured-poster-wrap">
-      <img class="hero-featured-poster" src="${esc(featured.poster)}" alt="Póster de ${esc(featured.titulo)}"
-       onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'">
-    </div>
-    <div class="hero-featured-copy">
-      <span class="hero-kicker">★ ESTRENO DESTACADO</span>
-      <h1>${esc(featured.titulo)}</h1>
-      <div class="hero-featured-meta">
-        <span class="hero-meta-pill">${esc(featured.categoria)}</span>
-        <span class="hero-meta-pill">${esc(String(featured.anio))}</span>
-        <span class="hero-meta-pill">${esc(featured.duracion)}</span>
-      </div>
-      <p class="hero-featured-description">${esc(featured.descripcion)}</p>
-      <div class="hero-featured-price">
-        <strong>${money(featured.precio)}</strong>
-        ${featured.precioAnterior>featured.precio?`<del>${money(featured.precioAnterior)}</del>`:""}
-      </div>
-      <div class="hero-featured-actions">
-        <button class="btn" onclick="openDetail(${featured.id})">Ver película</button>
-        <button class="btn green" onclick="addToCart(${featured.id})">＋ Añadir al carrito</button>
-      </div>
-    </div>`;
- }
- const recommendedIds=Array.isArray(CONFIG.peliculasRecomendadas)?CONFIG.peliculasRecomendadas:[];
- const recommended=recommendedIds
-   .map(id=>PELICULAS.find(m=>m.id===Number(id)&&m.activa))
-   .filter(m=>m&&m.id!==Number(CONFIG.peliculaDestacada));
- if(!recommended.length){
-   recommendationsHost.innerHTML='<div class="hero-unavailable">Pronto añadiremos más recomendaciones.</div>';
+ stopHeroTrailer();
+ heroItems=getHeroItems();
+ const host=document.getElementById('heroCarousel');
+ const dots=document.getElementById('heroCarouselDots');
+ if(!heroItems.length){
+   host.innerHTML='<div class="hero-empty">Pronto anunciaremos nuevos estrenos.</div>';
+   dots.innerHTML='';
    return;
  }
- recommendationsHost.innerHTML=recommended.map(m=>`
-   <article class="hero-rec-card">
-     <img class="hero-rec-poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}"
-       onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'">
-     <div class="hero-rec-copy">
-       <h3>${esc(m.titulo)}</h3>
-       <div class="hero-rec-category">${esc(m.categoria)} · ${esc(String(m.anio))}</div>
-       <div class="hero-rec-price">${money(m.precio)}</div>
-       <div class="hero-rec-actions">
-         <button class="mini-btn" onclick="openDetail(${m.id})">Ver detalles</button>
-         <button class="mini-btn primary" onclick="addToCart(${m.id})">＋ Añadir</button>
-       </div>
-     </div>
-   </article>`).join("");
+ heroIndex=Math.min(heroIndex,heroItems.length-1);
+ const m=heroItems[heroIndex];
+ host.innerHTML=`
+  <article class="hero-slide" data-movie-id="${m.id}" role="button" tabindex="0" aria-label="Ver detalles de ${esc(m.titulo)}"
+    onclick="openDetail(${m.id})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDetail(${m.id})}">
+    <img class="hero-slide-poster" src="${esc(m.poster)}" alt="" aria-hidden="true"
+      onerror="this.onerror=null;this.src='https://placehold.co/1200x500/10183c/ffffff?text=CINECLIK'">
+    <div class="hero-slide-copy">
+      <span class="hero-slide-kicker">${heroIndex===0?'★ ESTRENO DESTACADO':'★ SELECCIÓN CINECLIK'}</span>
+      <h1>${esc(m.titulo)}</h1>
+      <div class="hero-slide-meta">
+        <span class="hero-meta-pill">${esc(m.categoria)}</span>
+        <span class="hero-meta-pill">${esc(String(m.anio))}</span>
+        <span class="hero-meta-pill">${esc(m.duracion)}</span>
+      </div>
+      <p class="hero-slide-description">${esc(m.descripcion)}</p>
+      <div class="hero-slide-actions">
+        <button class="btn" type="button" onclick="event.stopPropagation();openDetail(${m.id})">Ver película</button>
+      </div>
+    </div>
+  </article>`;
+ dots.innerHTML=heroItems.map((item,index)=>`<button type="button" class="hero-carousel-dot ${index===heroIndex?'active':''}"
+   aria-label="Mostrar ${esc(item.titulo)}" aria-current="${index===heroIndex?'true':'false'}"
+   onclick="showHero(${index})"></button>`).join('');
+ startHeroTrailer(m);
 }
-applyConfig();renderHero();renderCatalog();renderCart();
+function showHero(index){
+ if(!heroItems.length)return;
+ heroIndex=(index+heroItems.length)%heroItems.length;
+ renderHero();
+}
+function moveHero(direction){showHero(heroIndex+direction)}
+function startHeroAutoplay(){
+ if(heroTimer)clearInterval(heroTimer);
+ if(heroItems.length>1)heroTimer=setInterval(()=>moveHero(1),HERO_SLIDE_DURATION_MS);
+}
+
+applyConfig();renderHero();startHeroAutoplay();renderCatalog();renderCart();
 </script>
 </body>
 </html>
