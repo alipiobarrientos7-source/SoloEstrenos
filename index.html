@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05081c">
+<title>CINECLIK | Tus películas, en un solo clic</title>
+<style>
+:root{--bg:#05081c;--panel:#0b1230;--cyan:#00e5ff;--pink:#ff22c8;--purple:#873dff;--green:#00d68f;--text:#f6f7ff;--muted:#aab6d8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#171044 0,transparent 34%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1240px,94%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:#05081cf2;backdrop-filter:blur(12px);border-bottom:1px solid #24345e}.nav{min-height:70px;display:flex;align-items:center;gap:20px}.brand{display:flex;align-items:center;gap:10px;min-width:205px}.brand-mark{width:64px;height:64px;object-fit:contain;font-size:34px;color:var(--cyan);filter:none}.brand-name{font-size:24px;font-weight:900;letter-spacing:1px}.gradient{background:linear-gradient(90deg,var(--cyan),#9a5cff,var(--pink),var(--cyan));background-size:250% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:shine 5s linear infinite}.tagline{font-size:11px;color:#c6d2f2;margin-top:2px}.navlinks{display:flex;gap:23px;margin:auto}.navlinks a{font-size:14px}.navlinks a:hover{color:var(--cyan)}.nav-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}.iconbtn{background:transparent;color:white;border:0;font-size:22px;position:relative;padding:8px}.cart-count{position:absolute;right:-1px;top:0;background:var(--pink);font-size:10px;border-radius:50%;padding:3px 6px}.store-state{border:1px solid var(--green);color:var(--green);background:#062b26;border-radius:99px;padding:8px 10px;font-size:11px;font-weight:bold;white-space:nowrap}.store-state.closed{border-color:#ff5a7a;color:#ff9aaf;background:#32101f}.nav-actions .iconbtn[aria-label="Buscar"],
+.nav-actions .iconbtn[aria-label="Buscar películas"] {
+display: none;
+}
+.nav-actions > .play-link {
+  display: none;
+}                                                                                                                           
+.play-link{display:inline-flex;align-items:center;gap:7px;border:1px solid #00e5ff;border-radius:9px;padding:9px 12px;background:linear-gradient(105deg,#4b40ff,#d622df);color:#fff;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 0 16px #873dff45;transition:transform .2s,filter .2s}
+.play-link:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 0 20px #00e5ff35}
+.play-cta{margin:22px auto 28px;padding:18px 20px;border:1px solid #5733bd;border-radius:14px;background:linear-gradient(100deg,#11133a,#171039,#24102f);display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 0 22px #873dff18}
+.play-cta h2{font-size:clamp(17px,2.5vw,22px);margin:0 0 5px}
+.play-cta p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.play-cta .play-link{padding:12px 16px;font-size:13px}
+@media(max-width:620px){.play-link{padding:8px 9px;font-size:10px;gap:4px}.play-cta{align-items:stretch;flex-direction:column;text-align:center}.play-cta .play-link{justify-content:center;width:100%}}
+
+.hero{position:relative;overflow:hidden;min-height:355px;margin:18px auto 26px;border:1px solid #6437e8;border-radius:20px;background:linear-gradient(90deg,#070b24 2%,#0a0b25d9 42%,#0a0b2530 100%),url('assets/portada.jpg') center/cover no-repeat;box-shadow:0 0 35px #612bff32}.hero:after{content:"";position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple))}.hero-content{position:relative;z-index:1;padding:34px;max-width:650px}.ticker{display:inline-block;border:1px solid var(--pink);border-radius:9px;padding:8px 12px;color:#fff;font-size:12px;font-weight:bold;box-shadow:0 0 15px #ff22c85c;animation:pulse 2s infinite}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.02;margin:18px 0 8px;text-transform:uppercase}.script{font-style:italic;font-size:clamp(27px,4vw,43px);font-weight:bold}.hero p{color:#e2e9ff}.timer{display:flex;gap:8px;margin-top:18px}.timebox{background:#070b23db;border:1px solid #743cff;border-radius:9px;padding:9px 12px;text-align:center;min-width:63px}.timebox b{display:block;font-size:21px}.timebox span{font-size:10px;color:#bdc8ea}.hero-offer{position:absolute;right:25px;bottom:25px;background:#070b23e8;border:1px solid var(--cyan);padding:17px;border-radius:14px;min-width:155px;box-shadow:0 0 25px #00e5ff30;z-index:2}.hero-offer small{color:var(--muted)}.old{text-decoration:line-through;color:#9aa7c9}.hero-offer strong{display:block;font-size:27px;color:#fff;background:linear-gradient(90deg,#ff1767,#ff22c8);padding:8px;border-radius:8px;margin:7px 0}.stock{font-size:11px;color:var(--cyan);font-weight:bold}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:30px 0 16px}.section-head h2{font-size:21px;margin:0}.filters{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #283966;background:#0a1230;color:#d8e4ff;padding:8px 13px;border-radius:99px;font-size:12px}.chip.active,.chip:hover{border-color:var(--cyan);background:#182c63;box-shadow:0 0 12px #00e5ff30}.search{display:flex;gap:10px;margin-bottom:14px}.search input{flex:1;min-width:0;background:#0b1230;border:1px solid #293d70;border-radius:9px;color:white;padding:11px 13px}.catalog{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.catalog-count{text-align:center;color:var(--muted);font-size:13px;margin:24px 0 18px}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:0 auto 30px;padding:14px 8px;border-top:1px solid #24345e;border-bottom:1px solid #24345e;background:#080e20}
+.page-btn{min-width:42px;height:42px;padding:0 11px;border:1px solid #34466f;border-radius:11px;background:#090d20;color:#cbd7f5;font-weight:700}
+.page-btn:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 12px #00e5ff25}
+.page-btn.active{border-color:var(--cyan);background:#142653;color:#fff;box-shadow:0 0 12px #00e5ff35}
+.page-dots{color:var(--muted);padding:0 3px}
+@media(max-width:620px){.pagination{gap:6px;padding:12px 4px}.page-btn{min-width:36px;height:38px;padding:0 8px;border-radius:9px;font-size:13px}.catalog-count{font-size:12px}}
+.movie-card{position:relative;overflow:hidden;border-radius:13px;border:1px solid #30477e;background:#080e28;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:pointer;min-width:0}.movie-card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 0 1px var(--cyan),0 0 24px #ad25ff58}.poster{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#131d3c}.movie-info{padding:10px}.movie-title{font-weight:bold;font-size:13px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.4;min-height:2.8em}.price-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:7px 0}.price{font-weight:900;color:#ff4ed5}.old-price{font-size:10px;color:#8492b8;text-decoration:line-through}.stockline{font-size:10px;color:var(--green)}.card-actions{display:flex;gap:6px;margin-top:9px}.mini-btn{flex:1;background:#0e1b3f;color:white;border:1px solid #3c4f84;border-radius:7px;padding:7px 4px;font-size:11px}.mini-btn:hover{border-color:var(--cyan)}.mini-btn.primary{background:linear-gradient(100deg,#5540ff,#d51bdf);border:0}.ribbon{position:absolute;top:9px;left:8px;background:#ff1767;border-radius:5px;padding:5px 7px;font-size:10px;font-weight:bold;z-index:1}.empty{grid-column:1/-1;color:var(--muted);padding:35px;text-align:center}
+.promo-strip{margin:30px 0;padding:16px;text-align:center;border-radius:12px;border:1px solid #5733bd;background:linear-gradient(90deg,#13113d,#111a3d,#271039);font-weight:bold}.promo-strip span{color:var(--cyan)}.how{margin:48px 0 32px;display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:center}.how h2{font-size:29px;margin:0 0 8px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}.step{border-right:1px solid #26355f;padding-right:12px}.step:last-child{border:0}.step-num{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));font-weight:bold;margin-bottom:10px}.step p{font-size:13px;color:var(--muted);line-height:1.5}.combo{border:1px solid #273d76;border-radius:15px;padding:20px;background:linear-gradient(135deg,#12143c,#07122b);text-align:center}.combo .pop{font-size:42px}.combo h3{font-size:24px;margin:8px 0;color:#ff72dc}.muted{color:var(--muted);font-size:13px;line-height:1.5}.btn{border:0;border-radius:9px;padding:12px 16px;color:white;font-weight:bold;background:linear-gradient(100deg,#4b40ff,#d622df);box-shadow:0 5px 20px #762dff38}.btn.green{background:linear-gradient(100deg,#00a96b,#00d68f);color:#031b19}.btn.outline{background:#09132d;border:1px solid var(--cyan)}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:12px}.footrow{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.footbrand{font-size:21px;font-weight:900;color:white}.copyright{text-align:center;margin-top:20px;color:#8291b8}
+.modal-backdrop{position:fixed;inset:0;background:#02040bd9;z-index:60;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.show{display:flex}.modal{position:relative;width:min(900px,100%);max-height:92vh;overflow:auto;border:1px solid #7545f5;border-radius:18px;background:#080e27;box-shadow:0 0 45px #7e32ff44;padding:20px}.close{position:absolute;right:14px;top:12px;border:0;background:#182348;color:white;border-radius:50%;width:34px;height:34px;font-size:20px;z-index:2}.detail-grid{display:grid;grid-template-columns:210px minmax(0,1fr) 210px;gap:18px}.detail-poster{width:100%;border-radius:12px;border:1px solid var(--cyan)}.detail h2{margin:0 0 8px}.detail-price{font-size:26px;color:#ff5bd5;font-weight:bold;margin:14px 0}.detail-box{background:#0c1532;border:1px solid #263963;border-radius:10px;padding:12px;margin-bottom:10px}.suggestions{display:flex;gap:8px;flex-wrap:wrap}.suggestion{width:58px;cursor:pointer}.suggestion img{width:58px;height:78px;object-fit:cover;border-radius:5px}.suggestion small{font-size:9px;display:block;margin-top:4px}
+.trailer-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#000}.trailer-title{padding-right:42px}
+.cart-drawer{position:fixed!important;right:0!important;left:auto!important;top:0!important;bottom:0!important;width:min(390px,100%)!important;height:100dvh!important;z-index:80!important;background:#080e27;border-left:1px solid #623be5;box-shadow:-15px 0 40px #0008;transform:translateX(110%);transition:transform .25s;padding:20px;display:flex;flex-direction:column;overflow:hidden}.cart-drawer.show{transform:translateX(0)!important}.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #27365e;padding-bottom:14px;flex-shrink:0}.cart-items{overflow:auto;flex:1;min-height:0}.cart-item{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:10px;padding:14px 0;border-bottom:1px solid #26345a}.cart-item img{width:60px;height:82px;object-fit:cover;border-radius:6px}.cart-item h4{font-size:12px;margin:2px 0 7px}.qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{background:#111e42;border:1px solid #344a7e;color:white;border-radius:5px}.remove{background:none;border:0;color:#ff78b8}.cart-bottom{padding-top:15px;flex-shrink:0}.subtotal{display:flex;justify-content:space-between;margin-bottom:14px;font-weight:bold}.cart-note{font-size:11px;color:var(--muted);line-height:1.4;margin-top:10px}
+.whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:30;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#20c969;color:#fff;font-size:29px;box-shadow:0 5px 22px #00d68f55;border:2px solid #b7ffd9}.whatsapp-float:hover{transform:scale(1.07)}.whatsapp-hint{position:fixed;right:86px;bottom:31px;z-index:29;background:#0a1830;border:1px solid #20c969;border-radius:9px;padding:9px 12px;font-size:12px}
+@keyframes shine{to{background-position:250% center}}@keyframes pulse{50%{box-shadow:0 0 24px #ff22c8a8}}
+@media(max-width:950px){.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}.detail-grid{grid-template-columns:170px minmax(0,1fr)}.detail-side{grid-column:1/-1}.navlinks{gap:12px}.brand{min-width:auto}.hero-offer{right:15px;bottom:15px}}
+@media(max-width:620px){.wrap{width:94%}.nav{min-height:62px;gap:8px}.brand{gap:6px}.brand-mark{width:32px;height:32px}.brand-name{font-size:18px}.tagline{font-size:9px}.navlinks{display:none}.nav-actions{margin-left:auto;gap:2px}.iconbtn{font-size:20px;padding:7px}.store-state{font-size:10px;padding:7px 8px;max-width:92px;white-space:normal;line-height:1.1}.hero{min-height:410px;background-position:center;background-size:cover}.hero-content{padding:20px}.hero h1{font-size:34px}.hero-offer{position:relative;left:20px;right:auto;bottom:auto;display:inline-block;margin:0 0 20px}.timer{gap:5px}.timebox{min-width:49px;padding:7px}.timebox b{font-size:17px}.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.movie-info{padding:8px}.section-head h2{font-size:18px}.how{grid-template-columns:1fr}.steps{grid-template-columns:1fr;gap:10px}.step{border-right:0;border-bottom:1px solid #26355f;padding-bottom:8px}.detail-grid{grid-template-columns:110px minmax(0,1fr);gap:12px}.detail-poster{max-width:170px}.detail-side{grid-column:1/-1}.modal{padding:14px}.detail h2{font-size:19px}.cart-drawer{width:min(390px,100vw)!important;right:0!important;left:auto!important;top:0!important;bottom:0!important;height:100dvh!important}.whatsapp-float{right:14px;bottom:14px;width:54px;height:54px}.whatsapp-hint{display:none}}
+
+/* Botón amarillo de tráiler dentro de la ficha */
+.trailer-detail {
+  color: #FFC928 !important;
+  border: 1px solid #FFC928 !important;
+  background: #10152B !important;
+  box-shadow: 0 0 10px #FFC92835;
+  font-weight: 700;
+  transition: background .2s, box-shadow .2s, transform .2s;
+}
+
+.trailer-detail:hover {
+  background: #24213A !important;
+  box-shadow: 0 0 18px #FFC92875;
+  transform: translateY(-2px);
+}
+  /* Botón de tráiler en las tarjetas del catálogo */
+.trailer-catalog {
+  color: #FFC928 !important;
+  border: 1px solid #FFC928 !important;
+  background: #10152B !important;
+  box-shadow: 0 0 8px #FFC92825;
+  font-weight: 700;
+  transition: background .2s, box-shadow .2s, transform .2s;
+}
+
+.trailer-catalog:hover {
+  background: #24213A !important;
+  box-shadow: 0 0 16px #FFC92870;
+  transform: translateY(-2px);
+}
+  
+/* CINECLIK: brillo neón para la tarjeta de película gratis */
+.combo {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #6655ff !important;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 0 12px #6755ff55,
+    0 0 28px #00d9ff22,
+    inset 0 0 18px #6655ff12;
+  animation: comboGlow 3s ease-in-out infinite alternate;
+}
+
+/* Destello que recorre el borde */
+.combo::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    #00d9ff 310deg,
+    #ff55d6 330deg,
+    transparent 350deg
+  );
+  animation: comboSpark 7s linear infinite;
+}
+
+/* Fondo interior de la tarjeta */
+.combo::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 20px;
+  background: #0d1532;
+}
+
+@keyframes comboSpark {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes comboGlow {
+  from {
+    box-shadow:
+      0 0 8px #6655ff44,
+      0 0 18px #00d9ff18,
+      inset 0 0 12px #6655ff10;
+  }
+  to {
+    box-shadow:
+      0 0 15px #6655ff88,
+      0 0 32px #00d9ff44,
+      inset 0 0 20px #ff55d61a;
+  }
+}
+
+/* Resplandor al pasar el ratón */
+.combo:hover {
+  border-color: #00d9ff !important;
+  box-shadow:
+    0 0 18px #00d9ff77,
+    0 0 38px #ff55d644;
+}
+/* Respeta a quien prefiere menos animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .combo,
+  .combo::before {
+    animation: none;
+  }
+}
+  #heroStock {
+  display: none;
+}
+  .stock {
+  display: none !important;
+}
+  /* Colores de etiquetas CINECLIK */
+.ribbon.cineclik-play {
+  background: #ff1767;
+  color: #ffffff;
+}
+
+.ribbon.drive {
+  background: #168bff;
+  color: #ffffff;
+}
+
+.ribbon.mux {
+  background: #00b894;
+  color: #061525;
+}
+
+/* Preguntas frecuentes CINECLIK */
+.faq-section{margin:42px auto 36px;padding:26px;border:1px solid #30477e;border-radius:18px;background:linear-gradient(135deg,#0b1230,#0a0d25);box-shadow:0 0 24px #00e5ff12}
+.faq-heading{text-align:center;margin:0 0 8px;font-size:clamp(24px,3vw,32px)}
+.faq-intro{text-align:center;color:var(--muted);font-size:13px;line-height:1.6;margin:0 auto 22px;max-width:650px}
+.faq-list{max-width:900px;margin:0 auto}
+.faq-item{border:1px solid #293d70;border-radius:11px;background:#080e28;margin:10px 0;overflow:hidden}
+.faq-item summary{cursor:pointer;list-style:none;padding:16px 48px 16px 16px;position:relative;font-weight:700;line-height:1.45}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';position:absolute;right:17px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--cyan);font-weight:400}
+.faq-item[open] summary::after{content:'−';color:var(--pink)}
+.faq-item summary:hover{color:var(--cyan)}
+.faq-answer{padding:0 16px 16px;color:var(--muted);font-size:14px;line-height:1.7}
+.faq-contact{text-align:center;margin:22px 0 0;color:var(--muted);font-size:13px}
+.faq-contact .btn{display:inline-block;margin-top:10px}
+@media(max-width:620px){.faq-section{padding:18px 12px;margin:32px auto}.faq-item summary{padding:14px 42px 14px 13px;font-size:14px}.faq-answer{padding:0 13px 14px;font-size:13px}}
+
+
+/* ===== NUEVO HERO CINECLIK: estreno protagonista + recomendaciones ===== */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin:18px auto 26px;padding:clamp(16px,2.5vw,30px);
+  border:1px solid #6437e8;border-radius:22px;
+  background-color:#070b24;background-position:center;background-size:cover;
+  box-shadow:0 0 35px #612bff32;
+}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(115deg,#05091ff2 0%,#080d28ed 58%,#080d28c9 100%)}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple))}
+.hero-featured{
+  display:grid;grid-template-columns:minmax(190px, .72fr) minmax(0,1.28fr);
+  gap:clamp(18px,3vw,36px);align-items:center;max-width:1040px;margin:0 auto 28px;
+}
+.hero-featured-poster-wrap{position:relative;max-width:310px;width:100%;justify-self:center}
+.hero-featured-poster{
+  display:block;width:100%;max-height:390px;aspect-ratio:2/3;object-fit:cover;
+  border-radius:16px;border:1px solid #9b65ff;box-shadow:0 12px 38px #0009,0 0 24px #873dff45;
+}
+.hero-featured-copy{min-width:0}
+.hero-kicker,.hero-eyebrow{display:inline-block;color:var(--cyan);font-size:11px;
+  font-weight:900;letter-spacing:1.6px}
+.hero-kicker{padding:8px 11px;border:1px solid #00e5ff70;border-radius:99px;
+  background:#061b31b8;box-shadow:0 0 16px #00e5ff20}
+.hero-featured-copy h1{font-size:clamp(29px,4.5vw,52px);line-height:1.05;
+  margin:15px 0 10px;text-transform:uppercase;overflow-wrap:anywhere}
+.hero-featured-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.hero-meta-pill{font-size:11px;color:#dce7ff;background:#111d40;border:1px solid #354b7c;
+  padding:6px 9px;border-radius:99px}
+.hero-featured-description{max-width:650px;color:#d2dcf7;font-size:14px;line-height:1.7;margin:0 0 18px}
+.hero-featured-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.hero-featured-price strong{font-size:clamp(25px,3vw,34px);color:#ff62d9}
+.hero-featured-price del{font-size:13px;color:#9ba9cb}
+.hero-featured-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-featured-actions .btn{min-width:145px}
+.hero-recommendations{border-top:1px solid #34436d;padding-top:19px}
+.hero-recommendations-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}
+.hero-recommendations-heading h2{font-size:clamp(17px,2.2vw,22px);margin:5px 0 0}
+.hero-recommendations-note{font-size:11px;color:var(--muted)}
+.hero-recommendation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.hero-rec-card{display:grid;grid-template-columns:76px minmax(0,1fr);gap:11px;align-items:center;
+  min-width:0;padding:10px;border:1px solid #2b3e70;border-radius:13px;
+  background:linear-gradient(135deg,#101a3bdf,#090f26f2);transition:transform .2s,border-color .2s,box-shadow .2s}
+.hero-rec-card:hover{transform:translateY(-3px);border-color:var(--pink);box-shadow:0 0 17px #873dff35}
+.hero-rec-poster{width:76px;height:108px;object-fit:cover;border-radius:8px;background:#131d3c}
+.hero-rec-copy{min-width:0}
+.hero-rec-copy h3{font-size:13px;line-height:1.35;margin:0 0 6px;overflow-wrap:anywhere}
+.hero-rec-category{font-size:10px;color:var(--muted);margin-bottom:7px}
+.hero-rec-price{font-size:14px;font-weight:900;color:#ff62d9;margin-bottom:8px}
+.hero-rec-actions{display:flex;gap:6px;flex-wrap:wrap}
+.hero-rec-actions .mini-btn{flex:0 1 auto;padding:7px 9px}
+.hero-unavailable{padding:20px;border:1px dashed #53658f;border-radius:12px;color:var(--muted);text-align:center}
+@media(max-width:760px){
+ .hero-featured{grid-template-columns:minmax(110px,.65fr) minmax(0,1.35fr);gap:16px}
+ .hero-featured-poster{max-height:300px}
+ .hero-featured-description{font-size:12px;line-height:1.55}
+ .hero-recommendation-grid{grid-template-columns:1fr}
+ .hero-rec-card{grid-template-columns:66px minmax(0,1fr)}
+ .hero-rec-poster{width:66px;height:94px}
+}
+@media(max-width:520px){
+ .hero{padding:14px;margin-top:12px;border-radius:16px}
+ .hero-featured{grid-template-columns:100px minmax(0,1fr);gap:12px;margin-bottom:20px}
+ .hero-featured-poster{max-height:155px;border-radius:10px}
+ .hero-kicker{font-size:9px;padding:6px 8px;letter-spacing:1px}
+ .hero-featured-copy h1{font-size:clamp(19px,5.6vw,26px);margin:9px 0 7px}
+ .hero-featured-meta{gap:5px;margin-bottom:8px}
+ .hero-meta-pill{font-size:9px;padding:5px 7px}
+ .hero-featured-description{font-size:11px;line-height:1.45;margin-bottom:9px;
+   display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+ .hero-featured-price{gap:7px;margin-bottom:10px}
+ .hero-featured-price strong{font-size:21px}
+ .hero-featured-price del{font-size:10px}
+ .hero-featured-actions{gap:6px}
+ .hero-featured-actions .btn{min-width:0;padding:9px 10px;font-size:10px}
+ .hero-recommendations-heading{align-items:start;flex-direction:column;gap:4px}
+ .hero-recommendations-note{font-size:10px}
+ .hero-rec-card{padding:8px}
+ .hero-rec-copy h3{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.hero-rec-card{transition:none}.hero-rec-card:hover{transform:none}}
+
+
+/* ===== CARRUSEL COMPACTO CINECLIK ===== */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:0;margin:16px auto 24px;padding:0;
+  border:1px solid #6437e8;border-radius:17px;
+  background:#070b24;box-shadow:0 0 28px #612bff28;
+}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 85% 20%,#6428a52b,transparent 45%);z-index:0}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple));z-index:3}
+.hero-carousel{position:relative;z-index:1}
+.hero-slide{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;align-items:center;
+  min-height:218px;padding:18px 62px;cursor:pointer;outline-offset:-4px}
+.hero-slide-poster{width:126px;height:182px;object-fit:cover;border-radius:11px;
+  border:1px solid #9b65ff;box-shadow:0 8px 24px #0008;justify-self:center}
+.hero-slide-copy{min-width:0}
+.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;
+  letter-spacing:1.4px;margin-bottom:7px}
+.hero-slide-copy h1{font-size:clamp(21px,3vw,34px);line-height:1.1;margin:0 0 8px;
+  text-transform:uppercase;overflow-wrap:anywhere}
+.hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.hero-meta-pill{font-size:10px;color:#dce7ff;background:#111d40;border:1px solid #354b7c;padding:5px 8px;border-radius:99px}
+.hero-slide-description{max-width:720px;color:#cbd7f3;font-size:12px;line-height:1.5;margin:0 0 9px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hero-slide-actions{display:flex;gap:8px;flex-wrap:wrap}
+.hero-slide-actions .btn{padding:9px 13px;font-size:11px;min-width:112px}
+.hero-carousel-arrow{position:absolute;z-index:4;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:50%;border:1px solid #6276b7;
+  background:#080e27e8;color:white;font-size:21px;display:grid;place-items:center}
+.hero-carousel-arrow:hover{border-color:var(--cyan);box-shadow:0 0 14px #00e5ff55}
+.hero-carousel-arrow.prev{left:13px}.hero-carousel-arrow.next{right:13px}
+.hero-carousel-dots{position:absolute;z-index:4;right:17px;bottom:12px;display:flex;gap:6px}
+.hero-carousel-dot{width:7px;height:7px;border:0;border-radius:99px;padding:0;background:#68769c;opacity:.7}
+.hero-carousel-dot.active{width:20px;background:var(--cyan);opacity:1}
+.hero-empty{padding:28px;color:var(--muted);text-align:center}
+@media(max-width:620px){
+ .hero{margin:12px auto 20px;border-radius:14px}
+ .hero-slide{grid-template-columns:92px minmax(0,1fr);gap:12px;min-height:172px;padding:14px 39px}
+ .hero-slide-poster{width:88px;height:132px;border-radius:8px}
+ .hero-slide-kicker{font-size:8px;letter-spacing:1px;margin-bottom:5px}
+ .hero-slide-copy h1{font-size:clamp(16px,4.8vw,21px);margin-bottom:6px}
+ .hero-slide-meta{gap:4px;margin-bottom:6px}
+ .hero-meta-pill{font-size:8px;padding:4px 6px}
+ .hero-slide-description{font-size:10px;line-height:1.35;-webkit-line-clamp:2;margin-bottom:6px}
+ .hero-slide-actions{gap:5px}
+ .hero-slide-actions .btn{min-width:0;padding:7px 8px;font-size:9px}
+ .hero-carousel-arrow{width:27px;height:27px;font-size:17px}
+ .hero-carousel-arrow.prev{left:6px}.hero-carousel-arrow.next{right:6px}
+ .hero-carousel-dots{right:10px;bottom:8px}
+}
+@media(prefers-reduced-motion:reduce){.hero-slide,.hero-carousel-arrow{transition:none}}
+
+
+/* ===== HERO CINEMATOGRÁFICO CON TRÁILER AUTOMÁTICO ===== */
+.hero{min-height:0;padding:0;background:#05081c;}
+.hero-carousel{position:relative;z-index:1;min-height:245px;overflow:hidden;}
+.hero-slide{position:relative;display:flex;align-items:center;min-height:245px;padding:28px 64px;overflow:hidden;isolation:isolate;cursor:pointer;}
+.hero-slide-poster{position:absolute;inset:0;z-index:-3;width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:cover;object-position:center 30%;border:0;border-radius:0;box-shadow:none;filter:blur(1px);transform:scale(1.025);}
+.hero-slide-video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;border:0;pointer-events:none;object-fit:cover;}
+.hero-slide::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,7,24,.97) 0%,rgba(4,7,24,.84) 38%,rgba(4,7,24,.38) 72%,rgba(4,7,24,.24) 100%),linear-gradient(0deg,rgba(4,7,24,.48),transparent 55%);}
+.hero-slide-copy{width:min(760px,78%);min-width:0;}
+.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:1.5px;margin-bottom:7px;text-shadow:0 2px 8px #000;}
+.hero-slide-copy h1{font-size:clamp(23px,3.5vw,42px);line-height:1.08;margin:0 0 9px;text-transform:uppercase;text-shadow:0 2px 12px #000;}
+.hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px;}
+.hero-slide-description{max-width:650px;color:#eef2ff;font-size:12px;line-height:1.5;margin:0 0 12px;text-shadow:0 2px 8px #000;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.hero-slide-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.hero-slide-actions .btn{padding:9px 16px;font-size:11px;min-width:125px;}
+.hero-carousel-arrow{background:#080e27d9;backdrop-filter:blur(5px);}
+.hero-carousel-dots{bottom:11px;right:18px;}
+@media(max-width:620px){
+ .hero-carousel{min-height:220px;}
+ .hero-slide{min-height:220px;padding:22px 42px;}
+ .hero-slide-poster{object-position:center 25%;}
+ .hero-slide-copy{width:100%;}
+ .hero-slide-copy h1{font-size:clamp(19px,5.5vw,27px);}
+ .hero-slide-description{font-size:10px;-webkit-line-clamp:3;max-width:100%;}
+ .hero-slide-meta{gap:4px;margin-bottom:7px;}
+ .hero-meta-pill{font-size:8px;padding:4px 6px;}
+ .hero-slide-actions .btn{padding:8px 12px;font-size:10px;}
+ .hero-carousel-dots{bottom:8px;right:12px;}
+}
+@media(prefers-reduced-motion:reduce){.hero-slide-video{display:none!important;}}
+
+</style>
+</head>
+<body>
+<!-- ==========================================================
+     CINECLIK — PERSONALIZA TODO DESDE ESTA ZONA DEL CÓDIGO
+     Logo: sube tu JPG a GitHub dentro de assets/logo.jpg
+     Portada: sube tu imagen a assets/portada.jpg
+     Pósteres: usa URL directa a una imagen accesible por internet.
+     ========================================================== -->
+<header><div class="wrap nav">
+ <a class="brand" href="#inicio"><img class="brand-mark" id="brandLogo" src="assets/logo.jpg" alt="Logo de la tienda" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='inline'"><span id="logoFallback" class="brand-mark" style="display:none">▶</span><div><div class="brand-name gradient" id="brandName">CINECLIK</div><div class="tagline" id="brandTagline">Tus películas, en un solo clic</div></div></a>
+ <nav class="navlinks"><a href="#inicio">Inicio</a><a href="#peliculas">Películas</a><a href="#ofertas">Ofertas</a><a href="#contacto">Contacto</a></nav>
+ <div class="nav-actions"><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener" aria-label="Entrar a CINECLIK Play">▶ CINECLIK PLAY</a><button class="store-state" id="storeState" title="Estado de la tienda">🟢 Tienda abierta</button><button class="iconbtn" aria-label="Buscar" onclick="focusSearch()">⌕</button><button class="iconbtn" aria-label="Abrir carrito" onclick="toggleCart(true)">🛒<span class="cart-count" id="cartCount">0</span></button></div>
+</div></header>
+<main class="wrap">
+<section class="hero" id="inicio" aria-label="Películas destacadas">
+  <div class="hero-carousel" id="heroCarousel" aria-live="polite">
+    <div class="hero-empty">Cargando estrenos de CINECLIK...</div>
+  </div>
+  <button class="hero-carousel-arrow prev" type="button" aria-label="Película anterior" onclick="moveHero(-1)">‹</button>
+  <button class="hero-carousel-arrow next" type="button" aria-label="Siguiente película" onclick="moveHero(1)">›</button>
+  <div class="hero-carousel-dots" id="heroCarouselDots" aria-label="Seleccionar película"></div>
+</section>
+
+ <section class="play-cta" aria-label="Acceso a CINECLIK Play"><div><h2>🍿 ¿Ya compraste tu película?</h2><p>Entra a CINECLIK PLAY e introduce tu código de acceso para comenzar a verla.</p></div><a class="play-link" href="https://alipiobarrientos7-source.github.io/SoloEstrenos/cineclik-play.html" target="_blank" rel="noopener">▶ ENTRAR A CINECLIK PLAY ↗</a></section>
+ <div class="section-head" id="peliculas">
+  <h2>🎬 Películas destacadas</h2>
+  <div class="filters" id="filters">
+    <button class="chip active" data-category="Todas">Todas</button>
+    <button class="chip" data-category="Acción">Acción</button>
+    <button class="chip" data-category="Aventura">Aventura</button>
+    <button class="chip" data-category="Comedia">Comedia</button>
+    <button class="chip" data-category="Animación">Animación</button>
+    <button class="chip" data-category="Drama">Drama</button>
+    <button class="chip" data-category="Terror">Terror</button>
+    <button class="chip" data-category="Ciencia ficción">Ciencia ficción</button>
+    <button class="chip" data-category="Romance">Romance</button>
+    <button class="chip" data-category="Suspenso">Suspenso</button>
+    <button class="chip" data-category="Documental">Documental</button>
+  </div>
+</div>
+<div class="search"><input id="searchInput" aria-label="Buscar película" placeholder="Buscar película..." oninput="renderCatalog()"></div>
+<section class="catalog" id="catalog" aria-live="polite"></section>
+ <div class="catalog-count" id="catalogCount" aria-live="polite"></div>
+ <nav class="pagination" id="pagination" aria-label="Páginas del catálogo"></nav>
+<div class="promo-strip" id="ofertas"><span id="stripText">🎬 ¡Tu entretenimiento empieza aquí, con nosotros! 🍿</span></div>
+<section class="how"><div><h2><span class="gradient">¡Es muy fácil!</span></h2><div class="muted">Disfruta tus películas en solo 3 pasos</div><div class="steps"><div class="step"><div class="step-num">1</div><div>🎞️ <b>Elige tu película</b></div><p>Explora el catálogo y agrega tus estrenos favoritos.</p></div><div class="step"><div class="step-num">2</div><div>🛒 <b>Añade al carrito</b></div><p>Puedes elegir varias películas antes de finalizar.</p></div><div class="step"><div class="step-num">3</div><div>💬 <b>Envíanos tu pedido</b></div><p>Te contactaremos por WhatsApp para confirmar tu código de acceso.</p></div></div></div><aside class="combo"><div class="pop">🍿</div><h3 id="comboTitle">Lleva más por menos</h3><p class="muted" id="comboText">Combos especiales y promociones exclusivas.</p><button class="btn outline" onclick="openFreeMovie()">▶ Ver película gratis</button></aside></section>
+
+<section class="faq-section" id="preguntas-frecuentes" aria-labelledby="faq-title">
+  <h2 class="faq-heading gradient" id="faq-title"> Preguntas frecuentes</h2>
+  <p class="faq-intro">Resolvemos tus dudas para que disfrutes tu película favorita con tranquilidad.</p>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>¿En qué calidad están disponibles las películas?</summary>
+      <div class="faq-answer">Todas nuestras películas están disponibles en calidad Full HD 1080p.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo recibiré mi película después de comprarla?</summary>
+      <div class="faq-answer">La modalidad de entrega depende de la película: puede ser mediante streaming con CINECLIK PLAY o a través de un enlace de Google Drive. Te indicaremos cuál corresponde a tu pedido.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cuándo recibiré mi código de acceso?</summary>
+      <div class="faq-answer">Después de verificar tu pago y el comprobante que nos envíes por WhatsApp, te enviaremos manualmente el código de acceso cuando tu película corresponda a la modalidad CINECLIK PLAY.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué es CINECLIK PLAY?</summary>
+      <div class="faq-answer">Es nuestra plataforma de reproducción para las películas disponibles en esta modalidad. Si tu pedido requiere un código de acceso, te lo enviaremos por WhatsApp una vez verificado el pago.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué hago si mi código o enlace no funciona?</summary>
+      <div class="faq-answer">Escríbenos por WhatsApp e indícanos el problema para que podamos revisar tu pedido y ayudarte.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo ver una película gratis?</summary>
+      <div class="faq-answer">Sí. Visita la sección «Ver película gratis» de nuestra página para acceder a la opción gratuita disponible.</div>
+    </details>
+  </div>
+  <div class="faq-contact">¿Tienes otra duda? Estamos para ayudarte.<br>
+    <a class="btn green" href="https://wa.me/51967776959?text=Hola%2C%20tengo%20una%20consulta%20sobre%20CINECLIK" target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
+  </div>
+</section>
+
+</main>
+<footer id="contacto"><div class="wrap"><div class="footrow"><div><div class="footbrand gradient" id="footerName">▶ CINECLIK</div><div id="footerTagline">Tus películas, en un solo clic</div></div><div>💬 Pedidos por WhatsApp</div><div>🎥 Catálogo de películas</div><div>⚡ Atención rápida</div><a id="footerWhatsApp" href="#" target="_blank" rel="noopener">Contactar ↗</a></div><div class="copyright" id="copyright">© 2026 CINECLIK. Todos los derechos reservados.</div></div></footer>
+<a class="whatsapp-float" id="whatsappFloat" href="#" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp" title="Consultas o dudas"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.87 11.87 0 0 0 12.05 0C5.48 0 .13 5.34.13 11.91c0 2.1.55 4.15 1.6 5.96L.03 24l6.27-1.64a11.9 11.9 0 0 0 5.74 1.46h.01c6.57 0 11.92-5.35 11.92-11.92 0-3.18-1.24-6.17-3.45-8.42ZM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.85 9.85 0 1 1 8.37 4.61Zm5.41-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg></a><div class="whatsapp-hint">¿Consultas o dudas?</div>
+<div class="modal-backdrop" id="detailBackdrop" onclick="if(event.target===this)closeDetail()"><section class="modal" role="dialog" aria-modal="true" aria-label="Detalles de película"><button class="close" onclick="closeDetail()" aria-label="Cerrar">×</button><div id="detailContent"></div></section></div>
+<div class="modal-backdrop" id="trailerBackdrop" onclick="if(event.target===this)closeTrailer()"><section class="modal" role="dialog" aria-modal="true" aria-label="Tráiler de película"><button class="close" onclick="closeTrailer()" aria-label="Cerrar">×</button><h2 class="trailer-title" id="trailerTitle">Tráiler</h2><div id="trailerPlayer"></div><p class="muted">El tráiler se reproduce dentro de CINECLIK. Algunos videos pueden tener la inserción desactivada por su propietario.</p></section></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras"><div class="cart-top"><h3>🛒 Tu carrito (<span id="cartQtyTitle">0</span>)</h3><button class="close" style="position:static" onclick="toggleCart(false)">×</button></div><div class="cart-items" id="cartItems"></div><div class="cart-bottom"><div class="subtotal"><span>Subtotal</span><span id="subtotal">S/ 0.00</span></div><button class="btn green" style="width:100%" onclick="sendWhatsApp()">💬 Continuar con WhatsApp</button><div class="cart-note">El pedido queda sujeto a confirmación de stock y pago.</div></div></aside>
+<script>
+/* ======================= CONFIGURACIÓN =======================
+   Cambia estos valores. tiendaAbierta: true = abierta; false = cerrada.
+   Logo y portada: sube los archivos a la carpeta assets de GitHub.
+   =========================================================== */
+const CONFIG = {
+ nombreTienda: "CINECLIK",
+ eslogan: "Tus películas de estreno",
+ whatsapp: "51967776959", // Reemplaza por 51 + tu número, solo números.
+ logo: "assets/logo.jpg",
+ portada: "assets/portada.jpg",
+ tituloPrincipal: "¡Grandes historias,",
+ subtituloPrincipal: "en tu pantalla!",
+ descripcionPrincipal: "Los mejores estrenos, al mejor precio y calidad.",
+ textoMarquesina: "🔥 ¡OFERTA POR TIEMPO LIMITADO!",
+ textoFranja: "🎬 ¡Tu entretenimiento empieza aquí, con nosotros! 🍿",
+ tituloCombo: "¡Desconéctate de todo!",
+ textoCombo: "Prepara las palomitas y disfruta tu película de muestra.",
+ urlPeliculaGratis: "https://player.mux.com/uIoXCi00H5j02NlhOFJ2mAdarn02P7kiqkrZhEtcUj5CAM",
+ duracionOfertaHoras: 24, // Cuenta regresiva de demostración por visita.
+ tiendaAbierta: true, // Cambia a false cuando no estés atendiendo.
+ 
+moneda: "S/",
+anioCopyright: 2026,
+
+peliculaDestacada: 19,
+peliculasRecomendadas: [17, 16, 13]
+};
+
+/* ========================= CATÁLOGO =========================
+   Para YouTube pega la URL normal del video o solo su ID después de v=.
+   Ejemplos: https://www.youtube.com/watch?v=AbCdEf12345
+             AbCdEf12345
+   Para añadir una película, duplica un objeto completo.
+   precioAnterior: 0 si no hay oferta; activa:false oculta la película.
+   =========================================================== */
+const PELICULAS = [
+ {id:1,titulo:"Tadeo y La Lámpara Maravillosa (2026) - Latino",categoria:"Animación",anio:2026,duracion:"1h 34min",descripcion:"Tadeo y Sara son ahora padres de Olimpia (Oli), una adorable e intrépida niña de dos años. Y Momia no lleva nada bien haber dejado de ser el centro de atención. Mientras están de vacaciones en Londres, Sara sigue la pista hacia un objeto único: la lámpara maravillosa de Las mil y una noches.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/71G1b8bqa7gzP9yU7q2fgNf2t0D.jpg",trailer:"https://www.youtube.com/watch?v=6LCjjVj3oAY",precio:3,precioAnterior:10,stock:2,etiqueta:"DRIVE",activa:true},
+ {id:2,titulo:"Entrega al límite (Runner) - (2026) - Latino",categoria:"Acción",anio:2026,duracion:"1h 37min",descripcion:"Un exsoldado se ve envuelto en una brutal carrera contrarreloj cuando una entrega médica crucial los convierte, a él y a su inesperada compañera, en el objetivo de un cártel despiadado.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/pmjSjZtFOYDWhAs4B2AbBE8hTQf.jpg",trailer:"https://www.youtube.com/watch?v=bwG-gF3a5f4&t=4s",precio:5,precioAnterior:0,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
+ {id:3,titulo:"Resident Evil (Noche Cero) - (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 34min",descripcion:"En una reinvención totalmente nueva, el mensajero médico Bryan se ve inmerso en una carrera de acción sin descanso por la supervivencia, mientras el caos se desata a su alrededor.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/vrLEVObLGbUinE4sC4Lqao2dK0E.jpg",trailer:"https://www.youtube.com/watch?v=anjYhRPoROE",precio:3,precioAnterior:0,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
+ {id:4,titulo:"Zona Cero (Colony) 2026 - Audio Latino",categoria:"Terror",anio:2026,duracion:"2h 3min",descripcion:"El profesor Se-jeong es arrojado a una pesadilla cuando un virus en rápida mutación se libera durante una conferencia de biotecnología, lo que lleva a las autoridades a sellar las instalaciones. Atrapado dentro sin escapatoria, Se-jeong, junto a un pequeño grupo de supervivientes, debe luchar por mantenerse con vida mientras los infectados sufren transformaciones horribles.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/bWzwORubAQ40nvzsTZidle19Dbm.jpg",trailer:"https://www.youtube.com/watch?v=_Ru4_LzLg_E",precio:3,precioAnterior:8,stock:2,etiqueta:"DRIVE",activa:true},
+ {id:5,titulo:"Vertigo 2 - 2026 - Audio Latino",categoria:"Suspenso",anio:2026,duracion:"1h 38min",descripcion:"Tras perder a su intrépida hermana Shiloh, Jax, profundamente dolida, emprende una peligrosa escalada con Luce, una vieja amiga de Shiloh, para honrar su memoria. Mientras caminan sobre la cuerda floja por los peligrosos tablones del monte Kwan, un aterrador desprendimiento de rocas les deja varados a 1.500 metros de altura.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/ccBIyg1ITvuCDr4eMeEH0ZgNh4t.jpg",trailer:"https://www.youtube.com/watch?v=07oN9U9HTrM",precio:5,precioAnterior:10,stock:2,etiqueta:"DRIVE",activa:true},
+ {id:6,titulo:"Cable Mortal (2026) - Audio Latino",categoria:"Suspenso",anio:2026,duracion:"1h 35min",descripcion:"Para burlar a sus misteriosos perseguidores, tendrá que reunir hasta la última pizca de valor para proteger el descubrimiento científico que cambiará el mundo, y a sí misma, antes de que sea demasiado tarde.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/eLMHUOQ4mCMxePMbv0TIVB48zfe.jpg",trailer:"https://www.youtube.com/watch?v=aXiwe6Q6Ftc",precio:3,precioAnterior:5,stock:1,etiqueta:"DRIVE",activa:true},
+     {id:7,titulo:"Scary Movie: Terroríficamente incorrecta (2026) Latino",categoria:"Comedia",anio:2026,duracion:"1h 36min",descripcion:"Veintiséis años después de conseguir escapar de un asesino enmascarado sospechosamente familiar, el Core Four están de vuelta en el punto de mira del asesino y ninguna película de terror está a salvo.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/qhGf7btEU9hcGz3A0lneNptJKL7.jpg",trailer:"https://www.youtube.com/watch?v=HMTKiPCKgpw&t=125s",precio:5,precioAnterior:8,stock:2,etiqueta:"DRIVE",activa:true},
+     {id:8,titulo:"Hope: El primer impacto (2026) - Subtitulado",categoria:"Acción",anio:2026,duracion:"1h 36min",descripcion:"Lo que comienza como ignorancia siembra la semilla del desastre, que se intensifica a través del conflicto humano hasta convertirse en una tragedia de proporciones cósmicas.",poster:"https://media.themoviedb.org/t/p/w188_and_h282_face/hHPIefotew38oJm3YCJPAzpi26c.jpg",trailer:"https://www.youtube.com/watch?v=od8tguSc0Es&t=12s",precio:5,precioAnterior:8,stock:2,etiqueta:"DRIVE",activa:true},
+     {id:9,titulo:"La noche del demonio: Están entre nosotros (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 36min",descripcion:"La saga de terror vuelve a sus raíces sobrenaturales. Una nueva protagonista se enfrenta a misteriosas apariciones que van mucho más allá de los fenómenos de embrujamiento clásicos.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/uIMddTcnM9P6PrJiDjsXIeYp902.jpg",trailer:"https://www.youtube.com/watch?v=9efsBOK-k1M",precio:3,precioAnterior:8,stock:2,etiqueta:"DRIVE",activa:true},
+     {id:10,titulo:"Spider-Man: Un nuevo día (2026) - Latino",categoria:"Ciencia ficción",anio:2026,duracion:"2h 25min",descripcion:"Han pasado cuatro años desde los acontecimientos de No Way Home, y Peter Parker ahora es un adulto que vive completamente solo, ha desaparecido voluntariamente de las vidas y recuerdos de quienes ama.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/9g0sEFhmvmK4nGhXj8DHuv2noYI.jpg",trailer:"https://www.youtube.com/watch?v=Pw1X-57Ms-8&t=31s",precio:3,precioAnterior:10,stock:2,etiqueta:"DRIVE",activa:true},
+     {id:11,titulo:"Street Fighter (2026) - Latino",categoria:"Ciencia ficción",anio:2026,duracion:"2h 05min",descripcion:"En 1993, los distanciados luchadores callejeros Ryu y Ken Masters se ven arrastrados de nuevo al combate cuando la misteriosa Chun-Li los recluta para el próximo Torneo World Warrior: un enfrentamiento brutal de puños, destino y furia.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/2kdEEUkbkJe08kTDMCUbBrZ71Aw.jpg",trailer:"https://www.youtube.com/watch?v=mzYHS4VIjgY",precio:5,precioAnterior:10,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:12,titulo:"La Isla olvidada (2026) - Latino",categoria:"Animación",anio:2026,duracion:"1h 49min",descripcion:"Dos amigas se quedan varadas en el místico mundo de Nakali, donde su único escape podría costarles su vida compartida de recuerdos.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/vpTdXFoZGzwnCWzkVYU7JH8teAZ.jpg",trailer:"https://www.youtube.com/watch?v=8cI5Bl-v-p8",precio:5,precioAnterior:10,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:13,titulo:"Clayface (2026) - Latino",categoria:"Ciencia ficción",anio:2026,duracion:"1h 48min",descripcion:"Una criatura cambiante hecha de arcilla mágica acecha Ciudad Gótica, alternando entre villano y aliado de Batman. Varias figuras trágicas han asumido el manto de Cara de Barro a lo largo de los años.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/6ihSDJlBNcvoTWzSA0jonZyOXTs.jpg",trailer:"https://www.youtube.com/watch?v=VSzxoTJELik",precio:5,precioAnterior:10,stock:2,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:14,titulo:"Pinocho: Sin Cuerdas (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 22min",descripcion:"Gepetto le regala para el cumple de su nieto James un titere llamado Pinocho, aunque no sabian que estaria desquiciado, donde buscaria matar a quien fuera junto con su consciencia llamada Pepe Grillo para convertirse en un niño de verdad",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/gdR1YLb7697IQZMdmA1EIJYFm9h.jpg",trailer:"https://www.youtube.com/watch?v=DxZT5Z2RD7I",precio:5,precioAnterior:10,stock:3,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:15,titulo:"La guerra de los últimos (2026) - Latino",categoria:"Acción",anio:2026,duracion:"1h 59min",descripcion:"En un mundo postapocalíptico, un virus aniquila a prácticamente toda la humanidad. Los supervivientes se enfrentan a unos carroñeros errantes llamados Segadores.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/yLF5V8Ca1cyp8avqABzTZuoHc2K.jpg",trailer:"https://www.youtube.com/watch?v=8E1pkrmZQ0o&t=46s",precio:3,precioAnterior:8,stock:1,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:16,titulo:"Verity: La sombra de un engaño (2026) - Latino",categoria:"Suspenso",anio:2026,duracion:"1h 57min",descripcion:"Lowen Ashleigh es contratada como escritora fantasma por Jeremy Crawford para escribir las novelas de su esposa Verity, autora de bestsellers, impedida tras un accidente. Lowen descubre las inquietantes verdades de Verity mientras reside en casa de los Crawford para trabajar.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/5j1YUuamobLACkzlkzvWfNuzFNg.jpg",trailer:"https://www.youtube.com/watch?v=2AckZubjDiU",precio:3,precioAnterior:8,stock:2,etiqueta:"DRIVE",activa:true},
+     {id:17,titulo:"El corazón de la bestia (2026) - Latino",categoria:"Aventura",anio:2026,duracion:"1h 41min",descripcion:"Tras sobrevivir a un brutal accidente aéreo, el oficial de las Fuerzas Especiales James Belmont y su perro de combate Odín intentarán regresar a la civilización desde un remoto lugar en medio de los parajes salvajes de Alaska.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/ygerWK11AeNZkzs7UNP36Attv6d.jpg",trailer:"https://www.youtube.com/watch?v=OAGoEmCirOY&t=2s",precio:5,precioAnterior:10,stock:1,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:18,titulo:"La Odisea (2026) - Latino",categoria:"Aventura",anio:2026,duracion:"2h 53min",descripcion:"Tras la caída de Troya, el legendario rey de Ítaca, Odiseo a.k.a. Ulises, emprende un largo y peligroso viaje para regresar junto a su esposa Penélope y su hijo Telémaco. En el camino deberá enfrentarse a criaturas mitológicas, dioses caprichosos y pruebas que pondrán a prueba su ingenio",poster:"https://media.themoviedb.org/t/p/w188_and_h282_face/9aeb5U0saB7Tuu0QITaoENZBxFF.jpg",trailer:"https://www.youtube.com/watch?v=ub41K58GvFg",precio:5,precioAnterior:10,stock:1,etiqueta:"CINECLIK PLAY",activa:true},
+     {id:19,titulo:"Madre Siniestra (2026) - Latino",categoria:"Terror",anio:2026,duracion:"1h 33min",descripcion:"Bela, una niña de 8 años que vive en un hogar con problemas matrimoniales, enfrenta a una entidad siniestra que sale de su armario. La presencia, a quien llama *Otra mamá*, se vuelve cada vez más amenazante para ella y su familia.",poster:"https://media.themoviedb.org/t/p/w600_and_h900_face/USCOKXrHBCeeK96qXmS0NyDHYL.jpg",trailer:"https://www.youtube.com/watch?v=slo0-_20uWg&t=4s",precio:5,precioAnterior:10,stock:5,etiqueta:"CINECLIK PLAY",activa:true},
+];
+let cart={},currentCategory="Todas";
+let currentPage=1;
+const ITEMS_PER_PAGE=12;
+let lastCatalogFilter="";
+const money=n=>`${CONFIG.moneda} ${Number(n).toFixed(2)}`;
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function whatsappBase(){const n=String(CONFIG.whatsapp||"").replace(/\D/g,"");return n.length>=10&&!n.includes("XXXXXXXX")?`https://wa.me/${n}`:""}
+function applyConfig(){
+ document.title=`${CONFIG.nombreTienda} | ${CONFIG.eslogan}`;
+ document.getElementById("brandName").textContent=CONFIG.nombreTienda;document.getElementById("brandTagline").textContent=CONFIG.eslogan;
+ document.getElementById("footerName").textContent="▶ "+CONFIG.nombreTienda;document.getElementById("footerTagline").textContent=CONFIG.eslogan;
+document.getElementById("stripText").textContent=CONFIG.textoFranja;document.getElementById("comboTitle").textContent=CONFIG.tituloCombo;document.getElementById("comboText").textContent=CONFIG.textoCombo;
+ document.getElementById("copyright").textContent=`© ${CONFIG.anioCopyright} ${CONFIG.nombreTienda}. Todos los derechos reservados.`;
+ const logo=document.getElementById("brandLogo");logo.src=CONFIG.logo;logo.onerror=()=>{logo.style.display="none";document.getElementById("logoFallback").style.display="inline"};
+ const hero=document.querySelector(".hero");hero.style.backgroundImage=`linear-gradient(90deg,#070b24 2%,#0a0b25d9 42%,#0a0b2530 100%),url("${CONFIG.portada}")`;
+ const status=document.getElementById("storeState");status.textContent=CONFIG.tiendaAbierta?"🟢 Tienda abierta":"🔴 Tienda cerrada";status.classList.toggle("closed",!CONFIG.tiendaAbierta);
+ const wa=whatsappBase();const mensaje="Hola! Llegue a CINECLIK y quisiera hacer una consulta sobre sus peliculas y pedidos.";const waMensaje=wa?wa+"?text="+encodeURIComponent(mensaje):"";for(const id of ["footerWhatsApp","whatsappFloat"]){const el=document.getElementById(id);el.href=waMensaje||"#";el.onclick=e=>{if(!wa){e.preventDefault();alert("Configura tu numero de WhatsApp en CONFIG al comienzo del codigo HTML.")}}}
+}
+function renderCatalog(){
+ const query=(document.getElementById("searchInput").value||"").toLowerCase().trim();
+ const filterKey=query+"|"+currentCategory;
+
+ // Reinicia a la primera página cuando cambia la búsqueda o categoría.
+ if(filterKey!==lastCatalogFilter){
+   currentPage=1;
+   lastCatalogFilter=filterKey;
+ }
+
+ const items=PELICULAS.filter(m=>
+   m.activa &&
+   (currentCategory==="Todas"||m.categoria===currentCategory) &&
+   m.titulo.toLowerCase().includes(query)
+ ).sort((a,b)=>Number(b.id)-Number(a.id)); // Más recientes primero según el ID
+
+ const catalog=document.getElementById("catalog");
+ const pagination=document.getElementById("pagination");
+ const count=document.getElementById("catalogCount");
+
+ if(!items.length){
+   catalog.innerHTML='<div class="empty">No encontramos películas con ese nombre. Prueba otra búsqueda.</div>';
+   pagination.innerHTML="";
+   count.textContent="";
+   return;
+ }
+
+ const totalPages=Math.ceil(items.length/ITEMS_PER_PAGE);
+ currentPage=Math.min(Math.max(1,currentPage),totalPages);
+ const start=(currentPage-1)*ITEMS_PER_PAGE;
+ const pageItems=items.slice(start,start+ITEMS_PER_PAGE);
+
+ catalog.innerHTML=pageItems.map(m=>`<article class="movie-card" onclick="openDetail(${m.id})" tabindex="0" onkeydown="if(event.key==='Enter')openDetail(${m.id})">${m.etiqueta?`<span class="ribbon ${m.etiqueta.toLowerCase().replace(/\s+/g,"-")}">${esc(m.etiqueta)}</span>`:""}<img class="poster" loading="lazy" src="${esc(m.poster)}" alt="Póster de ${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><div class="movie-info"><div class="movie-title">${esc(m.titulo)}</div><div class="price-row"><span class="price">${money(m.precio)}</span>${m.precioAnterior>m.precio?`<span class="old-price">${money(m.precioAnterior)}</span>`:""}</div><div class="stockline">STOCK: ${m.stock}</div><div class="card-actions"><button class="mini-btn trailer-catalog" onclick="event.stopPropagation();openTrailer(${m.id})">▶ Ver tráiler</button><button class="mini-btn primary" onclick="event.stopPropagation();buyNow(${m.id})">Comprar</button></div></div></article>`).join("");
+
+ count.textContent=`Mostrando ${start+1}–${Math.min(start+ITEMS_PER_PAGE,items.length)} de ${items.length} películas`;
+
+ let buttons="";
+ const addPageButton=(page,label=page)=>{
+   buttons+=`<button class="page-btn ${page===currentPage?"active":""}" ${page===currentPage?'aria-current="page"':""} onclick="goToPage(${page})">${label}</button>`;
+ };
+
+ if(currentPage>1){
+   buttons+=`<button class="page-btn" aria-label="Página anterior" onclick="goToPage(${currentPage-1})">←</button>`;
+ }
+
+ if(totalPages<=7){
+   for(let page=1;page<=totalPages;page++) addPageButton(page);
+ }else{
+   addPageButton(1);
+   if(currentPage>3) buttons+='<span class="page-dots">…</span>';
+
+   const first=Math.max(2,currentPage-1);
+   const last=Math.min(totalPages-1,currentPage+1);
+   for(let page=first;page<=last;page++) addPageButton(page);
+
+   if(currentPage<totalPages-2) buttons+='<span class="page-dots">…</span>';
+   addPageButton(totalPages);
+ }
+
+ if(currentPage<totalPages){
+   buttons+=`<button class="page-btn" aria-label="Página siguiente" onclick="goToPage(${currentPage+1})">→</button>`;
+ }
+
+ pagination.innerHTML=buttons;
+}
+
+function goToPage(page){
+ const query=(document.getElementById("searchInput").value||"").toLowerCase().trim();
+ const items=PELICULAS.filter(m=>
+   m.activa &&
+   (currentCategory==="Todas"||m.categoria===currentCategory) &&
+   m.titulo.toLowerCase().includes(query)
+ ).sort((a,b)=>Number(b.id)-Number(a.id)); // Más recientes primero según el ID
+ const totalPages=Math.ceil(items.length/ITEMS_PER_PAGE);
+ if(page<1||page>totalPages)return;
+ currentPage=page;
+ renderCatalog();
+ document.getElementById("peliculas").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button[data-category]");if(!b)return;currentCategory=b.dataset.category;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===b));renderCatalog()});
+function openDetail(id){
+ const m=PELICULAS.find(x=>x.id===id);if(!m)return;
+ const related=PELICULAS.filter(x=>x.activa&&x.id!==id).slice(0,3);
+ document.getElementById("detailContent").innerHTML=`<div class="detail-grid"><div><img class="detail-poster" src="${esc(m.poster)}" alt="${esc(m.titulo)}" onerror="this.onerror=null;this.src='https://placehold.co/500x750/10183c/ffffff?text=Poster+pendiente'"><button class="btn outline trailer-detail" style="width:100%;margin-top:10px" onclick="openTrailer(${m.id})">▶ Ver tráiler</button></div><div class="detail"><h2>${esc(m.titulo)}</h2><div class="muted">★★★★☆　${esc(m.categoria)} · ${m.anio} · ${esc(m.duracion)}</div><p class="muted">${esc(m.descripcion)}</p><div class="detail-price">${money(m.precio)} ${m.precioAnterior>m.precio?`<small class="old-price">${money(m.precioAnterior)}</small>`:""}</div><div class="stockline">● Stock disponible: ${m.stock}</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px"><button class="btn" onclick="addToCart(${m.id})">🛒 Añadir al carrito</button><button class="btn green" onclick="buyNow(${m.id})">Comprar ahora</button></div><div class="muted" style="margin-top:10px">Confirmación mediante WhatsApp.</div></div><aside class="detail-side"><div class="detail-box"><b>Detalles del producto</b><p class="muted">Género: ${esc(m.categoria)}<br>Año: ${m.anio}<br>Duración: ${esc(m.duracion)}<br>Precio en soles peruanos</p></div><div class="detail-box"><b>También te puede interesar</b><div class="suggestions">${related.map(r=>`<div class="suggestion" onclick="openDetail(${r.id})"><img src="${esc(r.poster)}" alt="" onerror="this.src='https://placehold.co/100x140/10183c/ffffff?text=Poster'"><small>${esc(r.titulo)}<br>${money(r.precio)}</small></div>`).join("")}</div></div></aside></div>`;
+ document.getElementById("detailBackdrop").classList.add("show");
+}
+function closeDetail(){document.getElementById("detailBackdrop").classList.remove("show")}
+function getYouTubeId(input){
+ const raw=String(input||"").trim();if(!raw)return "";
+ if(/^[\w-]{11}$/.test(raw))return raw;
+ try{const u=new URL(raw);if(u.hostname.includes("youtu.be"))return u.pathname.split("/").filter(Boolean)[0]||"";if(u.hostname.includes("youtube.com")){if(u.pathname==="/watch")return u.searchParams.get("v")||"";const p=u.pathname.split("/").filter(Boolean);if(["embed","shorts","live"].includes(p[0]))return p[1]||"";}}catch(e){}
+ const match=raw.match(/[?&]v=([\w-]{11})/);return match?match[1]:"";
+}
+function openTrailer(id){
+ const m=PELICULAS.find(x=>x.id===id);if(!m)return;const videoId=getYouTubeId(m.trailer);
+ document.getElementById("trailerTitle").textContent=`Tráiler: ${m.titulo}`;
+ document.getElementById("trailerPlayer").innerHTML=videoId?`<iframe class="trailer-frame" src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0" title="Tráiler de ${esc(m.titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`:'<p class="muted">Todavía no has añadido una URL o ID de YouTube válido para este tráiler. Edita el campo trailer de esta película en el código.</p>';
+ document.getElementById("trailerBackdrop").classList.add("show");
+}
+function closeTrailer(){document.getElementById("trailerBackdrop").classList.remove("show");document.getElementById("trailerPlayer").innerHTML=""}
+  function openFreeMovie(){
+  const url = String(CONFIG.urlPeliculaGratis || "").trim();
+  const player = document.getElementById("trailerPlayer");
+  const backdrop = document.getElementById("trailerBackdrop");
+
+  document.getElementById("trailerTitle").textContent =
+    "¡Rápidos y Furiosos X!";
+
+  let video = "";
+
+  if (!url || url.includes("ID_DEL_VIDEO")) {
+    player.innerHTML =
+      '<p class="muted">Pronto tendremos una pelicula disponible.</p>';
+  } else {
+    try {
+      const link = new URL(url);
+      let youtubeId = "";
+
+      if (link.hostname === "youtu.be") {
+        youtubeId = link.pathname.slice(1);
+      } else if (
+        link.hostname === "youtube.com" ||
+        link.hostname === "www.youtube.com" ||
+        link.hostname === "m.youtube.com"
+      ) {
+        if (link.pathname === "/watch") {
+          youtubeId = link.searchParams.get("v") || "";
+        } else if (link.pathname.startsWith("/embed/")) {
+          youtubeId = link.pathname.split("/")[2] || "";
+        }
+      }
+
+      if (/^[\w-]{11}$/.test(youtubeId)) {
+        video =
+          "https://www.youtube-nocookie.com/embed/" +
+          youtubeId + "?autoplay=1";
+      } else if (
+        link.protocol === "https:" &&
+        (
+          link.hostname === "stream.mux.com" ||
+          link.hostname === "player.mux.com"
+        )
+      ) {
+        video = link.hostname === "player.mux.com"
+          ? url
+          : "https://player.mux.com/" +
+            link.pathname.split("/").filter(Boolean)[0];
+      }
+    } catch (error) {}
+
+    player.innerHTML = video
+      ? `<iframe class="trailer-frame"
+          src="${video}"
+          title="Momento de peli gratis"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen></iframe>`
+      : '<p class="muted">Enlace no valido. Usa una URL de YouTube o MUX.</p>';
+  }
+
+  backdrop.classList.add("show");
+}
+function addToCart(id){const m=PELICULAS.find(x=>x.id===id);if(!m||m.stock<=0){alert("Esta película figura sin stock.");return}if((cart[id]||0)>=m.stock){alert("Has alcanzado el stock indicado para esta película.");return}cart[id]=(cart[id]||0)+1;renderCart();closeDetail();toggleCart(true)}
+function buyNow(id){addToCart(id);toggleCart(true)}
+function changeQty(id,delta){const m=PELICULAS.find(x=>x.id===id);if(!m)return;const next=(cart[id]||0)+delta;if(next<=0)delete cart[id];else if(next<=m.stock)cart[id]=next;else alert("La cantidad supera el stock indicado.");renderCart()}
+function removeItem(id){delete cart[id];renderCart()}
+function renderCart(){
+ const entries=Object.entries(cart).filter(([,q])=>q>0);const qty=entries.reduce((s,[,q])=>s+q,0);const total=entries.reduce((s,[id,q])=>s+PELICULAS.find(m=>m.id===Number(id)).precio*q,0);
+ document.getElementById("cartCount").textContent=qty;document.getElementById("cartQtyTitle").textContent=qty;document.getElementById("subtotal").textContent=money(total);
+ document.getElementById("cartItems").innerHTML=entries.length?entries.map(([id,q])=>{const m=PELICULAS.find(x=>x.id===Number(id));return `<div class="cart-item"><img src="${esc(m.poster)}" alt="" onerror="this.src='https://placehold.co/100x140/10183c/ffffff?text=Poster'"><div><h4>${esc(m.titulo)}</h4><b>${money(m.precio)}</b><div class="qty"><button onclick="changeQty(${m.id},-1)">−</button><span>${q}</span><button onclick="changeQty(${m.id},1)">＋</button></div></div><button class="remove" onclick="removeItem(${m.id})" aria-label="Eliminar">⌫</button></div>`}).join(""):'<div class="empty">Tu carrito está vacío 🍿<br>Añade alguna película para comenzar.</div>';
+}
+function toggleCart(show){document.getElementById("cartDrawer").classList.toggle("show",show)}
+function sendWhatsApp(){
+ const entries=Object.entries(cart).filter(([,q])=>q>0);if(!entries.length){alert("Tu carrito está vacío.");return}
+ const n=whatsappBase();if(!n){alert("Antes de recibir pedidos, reemplaza CONFIG.whatsapp por tu número peruano real en el código HTML.");return}
+ let total=0;const lines=entries.map(([id,q])=>{const m=PELICULAS.find(x=>x.id===Number(id));total+=m.precio*q;return `• ${m.titulo} x${q} — ${money(m.precio*q)}`});
+ const msg=`¡Hola! Quiero realizar este pedido en ${CONFIG.nombreTienda}:\n\n${lines.join("\n")}\n\nTotal: ${money(total)}\nPor favor, confírmame disponibilidad y forma de pago.`;
+ window.open(`${n}?text=${encodeURIComponent(msg)}`,"_blank","noopener");
+}
+function focusSearch(){document.getElementById("searchInput").focus();document.getElementById("peliculas").scrollIntoView({behavior:"smooth"})}
+function startTimer(){
+ let remaining=Math.max(1,Number(CONFIG.duracionOfertaHoras)||24)*3600;
+ function tick(){const d=Math.floor(remaining/86400),h=Math.floor(remaining%86400/3600),m=Math.floor(remaining%3600/60),s=remaining%60;for(const [id,val] of [["days",d],["hours",h],["minutes",m],["seconds",s]])document.getElementById(id).textContent=String(val).padStart(2,"0");if(remaining>0)remaining--;else remaining=Math.max(1,Number(CONFIG.duracionOfertaHoras)||24)*3600}
+ tick();setInterval(tick,1000);
+}
+let heroItems = [];
+let heroIndex = 0;
+let heroTimer = null;
+let heroTrailerDelay = null;
+const HERO_TRAILER_DELAY_MS = 3000;
+// Se amplía el tiempo de cada banner para que el tráiler alcance a verse.
+const HERO_SLIDE_DURATION_MS = 18000;
+
+function getHeroItems(){
+ const ids=[CONFIG.peliculaDestacada,...(Array.isArray(CONFIG.peliculasRecomendadas)?CONFIG.peliculasRecomendadas:[])];
+ const uniqueIds=[...new Set(ids.map(Number))];
+ return uniqueIds.map(id=>PELICULAS.find(m=>m.id===id&&m.activa&&m.stock>0)).filter(Boolean);
+}
+function stopHeroTrailer(){
+ if(heroTrailerDelay){clearTimeout(heroTrailerDelay);heroTrailerDelay=null;}
+ const oldFrame=document.querySelector('#heroCarousel .hero-slide-video');
+ if(oldFrame)oldFrame.remove();
+}
+function startHeroTrailer(movie){
+ stopHeroTrailer();
+ const videoId=getYouTubeId(movie.trailer);
+ if(!videoId)return;
+ heroTrailerDelay=setTimeout(()=>{
+   const slide=document.querySelector('#heroCarousel .hero-slide');
+   if(!slide || Number(slide.dataset.movieId)!==Number(movie.id))return;
+   const frame=document.createElement('iframe');
+   frame.className='hero-slide-video';
+   frame.title='Tráiler de '+movie.titulo;
+   frame.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(videoId)+'?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&loop=1&playlist='+encodeURIComponent(videoId)+'&iv_load_policy=3&disablekb=1';
+   frame.allow='autoplay; encrypted-media; picture-in-picture';
+   frame.setAttribute('aria-hidden','true');
+   frame.tabIndex=-1;
+   slide.prepend(frame);
+   heroTrailerDelay=null;
+ },HERO_TRAILER_DELAY_MS);
+}
+function renderHero(){
+ stopHeroTrailer();
+ heroItems=getHeroItems();
+ const host=document.getElementById('heroCarousel');
+ const dots=document.getElementById('heroCarouselDots');
+ if(!heroItems.length){
+   host.innerHTML='<div class="hero-empty">Pronto anunciaremos nuevos estrenos.</div>';
+   dots.innerHTML='';
+   return;
+ }
+ heroIndex=Math.min(heroIndex,heroItems.length-1);
+ const m=heroItems[heroIndex];
+ host.innerHTML=`
+  <article class="hero-slide" data-movie-id="${m.id}" role="button" tabindex="0" aria-label="Ver detalles de ${esc(m.titulo)}"
+    onclick="openDetail(${m.id})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDetail(${m.id})}">
+    <img class="hero-slide-poster" src="${esc(m.poster)}" alt="" aria-hidden="true"
+      onerror="this.onerror=null;this.src='https://placehold.co/1200x500/10183c/ffffff?text=CINECLIK'">
+    <div class="hero-slide-copy">
+      <span class="hero-slide-kicker">${heroIndex===0?'★ ESTRENO DESTACADO':'★ SELECCIÓN CINECLIK'}</span>
+      <h1>${esc(m.titulo)}</h1>
+      <div class="hero-slide-meta">
+        <span class="hero-meta-pill">${esc(m.categoria)}</span>
+        <span class="hero-meta-pill">${esc(String(m.anio))}</span>
+        <span class="hero-meta-pill">${esc(m.duracion)}</span>
+      </div>
+      <p class="hero-slide-description">${esc(m.descripcion)}</p>
+      <div class="hero-slide-actions">
+        <button class="btn" type="button" onclick="event.stopPropagation();openDetail(${m.id})">Ver película</button>
+      </div>
+    </div>
+  </article>`;
+ dots.innerHTML=heroItems.map((item,index)=>`<button type="button" class="hero-carousel-dot ${index===heroIndex?'active':''}"
+   aria-label="Mostrar ${esc(item.titulo)}" aria-current="${index===heroIndex?'true':'false'}"
+   onclick="showHero(${index})"></button>`).join('');
+ startHeroTrailer(m);
+}
+function showHero(index){
+ if(!heroItems.length)return;
+ heroIndex=(index+heroItems.length)%heroItems.length;
+ renderHero();
+}
+function moveHero(direction){showHero(heroIndex+direction)}
+function startHeroAutoplay(){
+ if(heroTimer)clearInterval(heroTimer);
+ if(heroItems.length>1)heroTimer=setInterval(()=>moveHero(1),HERO_SLIDE_DURATION_MS);
+}
+
+applyConfig();renderHero();startHeroAutoplay();renderCatalog();renderCart();
+</script>
+</body>
+</html>
