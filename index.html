@@ -333,7 +333,7 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 .hero-carousel{position:relative;z-index:1;min-height:300px;overflow:hidden;}
 .hero-slide{position:relative;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);align-items:stretch;gap:18px;min-height:300px;padding:20px 58px 28px;overflow:hidden;cursor:default;}
 .hero-slide-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:8px 0;}
-.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:1.5px;margin-bottom:8px;}
+.hero-slide-kicker{display:inline-block;color:#ff304f;font-size:10px;font-weight:900;letter-spacing:1.5px;margin-bottom:8px;text-shadow:0 0 12px #ff304f66;}
 .hero-slide-copy h1{font-size:clamp(22px,3vw,38px);line-height:1.08;margin:0 0 10px;text-transform:uppercase;overflow-wrap:anywhere;}
 .hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
 .hero-slide-description{max-width:600px;color:#dce5ff;font-size:12px;line-height:1.55;margin:0 0 15px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
@@ -342,8 +342,8 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 .hero-video-wrap{align-self:center;width:100%;min-width:0;display:flex;flex-direction:column;gap:8px;}
 .hero-video-panel{position:relative;width:100%;aspect-ratio:16/9;min-height:0;background:#000;border:1px solid #344875;border-radius:12px;overflow:hidden;box-shadow:0 8px 28px #0008;}
 .hero-video-panel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
-.hero-video-controls{display:flex;justify-content:flex-end;align-items:center;min-height:34px;}
-.hero-sound-toggle{position:static;z-index:5;display:inline-flex;align-items:center;gap:7px;border:1px solid #00e5ff80;border-radius:99px;background:#08152c;color:#fff;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;}
+.hero-video-controls{position:absolute;left:10px;bottom:10px;z-index:8;display:flex;justify-content:flex-start;align-items:center;pointer-events:none;}
+.hero-sound-toggle{position:relative;z-index:9;display:inline-flex;align-items:center;gap:6px;border:1px solid #00e5ff99;border-radius:999px;background:#08152ce8;color:#fff;padding:5px 9px;font-size:10px;line-height:1.1;font-weight:700;cursor:pointer;min-height:27px;pointer-events:auto;backdrop-filter:blur(5px);}
 .hero-sound-toggle:hover{border-color:var(--cyan);background:#102344;box-shadow:0 0 12px #00e5ff55;}
 .hero-video-placeholder{position:absolute;inset:0;display:grid;place-items:center;color:#cbd5ee;font-size:12px;background:linear-gradient(135deg,#101a38,#05081c);text-align:center;padding:15px;}
 .hero-carousel-arrow{background:#080e27e8;backdrop-filter:blur(5px);}
@@ -756,7 +756,8 @@ function createHeroYouTubePlayer(movie){
        // El autoplay se solicita silenciado para mejorar la compatibilidad del navegador.
        if(heroSoundEnabled){event.target.unMute();}else{event.target.mute();}
        event.target.playVideo();
-       updateHeroSoundButton();
+       // Espera a que YouTube aplique mute/unMute antes de leer el estado real.
+       setTimeout(updateHeroSoundButton,120);
      },
      onStateChange:function(event){
        if(event.data===YT.PlayerState.ENDED){
@@ -804,22 +805,29 @@ function startHeroTrailer(movie){
 function updateHeroSoundButton(){
  const button=document.getElementById('heroSoundToggle');
  if(!button)return;
- let enabled=heroSoundEnabled;
- if(heroYTPlayer){try{enabled=!heroYTPlayer.isMuted();heroSoundEnabled=enabled;}catch(e){}}
- button.innerHTML=enabled?'🔊 Silenciar':'🔇 Activar sonido';
- button.setAttribute('aria-pressed',enabled?'true':'false');
- button.setAttribute('aria-label',enabled?'Silenciar tráiler':'Activar sonido del tráiler');
+ // La preferencia local refleja el estado solicitado y se sincroniza con YouTube cuando está listo.
+ let muted=!heroSoundEnabled;
+ if(heroYTPlayer){
+   try{
+     muted=heroYTPlayer.isMuted();
+     heroSoundEnabled=!muted;
+   }catch(e){}
+ }
+ button.innerHTML=muted?'🔇 Activar sonido':'🔊 Silenciar sonido';
+ button.setAttribute('aria-pressed',muted?'false':'true');
+ button.setAttribute('aria-label',muted?'Activar sonido del tráiler':'Silenciar tráiler');
 }
 function toggleHeroSound(){
- if(!heroYTPlayer){
-   // Si el visitante pulsa antes de que el reproductor esté listo, guardamos su preferencia.
-   heroSoundEnabled=!heroSoundEnabled;updateHeroSoundButton();return;
+ // Cambiamos primero el estado deseado; si el player aún no está listo,
+ // onReady aplicará esta preferencia al reproductor de YouTube.
+ heroSoundEnabled=!heroSoundEnabled;
+ if(heroYTPlayer){
+   try{
+     if(heroSoundEnabled)heroYTPlayer.unMute();
+     else heroYTPlayer.mute();
+   }catch(e){}
  }
- try{
-   if(heroYTPlayer.isMuted()){heroYTPlayer.unMute();heroSoundEnabled=true;}
-   else{heroYTPlayer.mute();heroSoundEnabled=false;}
-   updateHeroSoundButton();
- }catch(e){console.warn('No se pudo cambiar el sonido del tráiler:',e);}
+ updateHeroSoundButton();
 }
 function renderHero(){
  stopHeroTrailer();
@@ -846,9 +854,9 @@ function renderHero(){
       <div class="hero-video-panel">
         <div class="hero-video-placeholder">El tráiler comenzará automáticamente en unos segundos…</div>
         <div id="heroYouTubePlayer"></div>
-      </div>
-      <div class="hero-video-controls">
-        <button class="hero-sound-toggle" id="heroSoundToggle" type="button" aria-pressed="false" onclick="toggleHeroSound()">🔇 Activar sonido</button>
+        <div class="hero-video-controls">
+          <button class="hero-sound-toggle" id="heroSoundToggle" type="button" aria-pressed="false" onclick="toggleHeroSound()">🔇 Activar sonido</button>
+        </div>
       </div>
     </div>
   </article>`;
