@@ -813,9 +813,9 @@ function updateHeroSoundButton(){
      heroSoundEnabled=!muted;
    }catch(e){}
  }
- button.innerHTML=muted?'🔇 Activar sonido':'🔊 Silenciar sonido';
+ button.innerHTML=muted?'🔇 Activar sonido':'🔊 Desactivar sonido';
  button.setAttribute('aria-pressed',muted?'false':'true');
- button.setAttribute('aria-label',muted?'Activar sonido del tráiler':'Silenciar tráiler');
+ button.setAttribute('aria-label',muted?'Activar sonido del tráiler':'Desactivar sonido del tráiler');
 }
 function toggleHeroSound(){
  // Cambiamos primero el estado deseado; si el player aún no está listo,
