@@ -718,7 +718,8 @@ let heroYTReady = false;
 let heroYTApiRequested = false;
 let heroYTWaitInterval = null;
 let heroYTWaitTimeout = null;
-let heroSoundEnabled = false;
+let heroSoundEnabled = false; // true = sonido activo; false = silenciado
+let heroYTPlayerReady = false;
 const HERO_TRAILER_DELAY_MS = 3000;
 
 function getHeroItems(){
@@ -738,6 +739,7 @@ window.onYouTubeIframeAPIReady=function(){
  heroYTReady=true;
 };
 function stopHeroTrailer(){
+ heroYTPlayerReady=false;
  if(heroTrailerDelay){clearTimeout(heroTrailerDelay);heroTrailerDelay=null;}
  if(heroYTWaitInterval){clearInterval(heroYTWaitInterval);heroYTWaitInterval=null;}
  if(heroYTWaitTimeout){clearTimeout(heroYTWaitTimeout);heroYTWaitTimeout=null;}
@@ -753,11 +755,12 @@ function createHeroYouTubePlayer(movie){
    playerVars:{autoplay:1,controls:1,rel:0,playsinline:1,enablejsapi:1,modestbranding:1,iv_load_policy:3,origin:window.location.origin},
    events:{
      onReady:function(event){
-       // El autoplay se solicita silenciado para mejorar la compatibilidad del navegador.
-       if(heroSoundEnabled){event.target.unMute();}else{event.target.mute();}
+       heroYTPlayerReady=true;
+       // Conserva la preferencia elegida y sincroniza el estado real con la API oficial.
+       if(heroSoundEnabled){event.target.unMute();event.target.setVolume(100);}
+       else{event.target.mute();}
        event.target.playVideo();
-       // Espera a que YouTube aplique mute/unMute antes de leer el estado real.
-       setTimeout(updateHeroSoundButton,120);
+       updateHeroSoundButton();
      },
      onStateChange:function(event){
        if(event.data===YT.PlayerState.ENDED){
@@ -805,27 +808,29 @@ function startHeroTrailer(movie){
 function updateHeroSoundButton(){
  const button=document.getElementById('heroSoundToggle');
  if(!button)return;
- // La preferencia local refleja el estado solicitado y se sincroniza con YouTube cuando está listo.
- let muted=!heroSoundEnabled;
- if(heroYTPlayer){
-   try{
-     muted=heroYTPlayer.isMuted();
-     heroSoundEnabled=!muted;
-   }catch(e){}
- }
- button.innerHTML=muted?'🔇 Activar sonido':'🔊 Desactivar sonido';
- button.setAttribute('aria-pressed',muted?'false':'true');
- button.setAttribute('aria-label',muted?'Activar sonido del tráiler':'Desactivar sonido del tráiler');
+ // Solo existen dos estados visibles: sonido apagado o sonido encendido.
+ button.textContent=heroSoundEnabled?'🔊 Desactivar sonido':'🔇 Activar sonido';
+ button.setAttribute('aria-pressed',heroSoundEnabled?'true':'false');
+ button.setAttribute('aria-label',heroSoundEnabled?'Desactivar sonido del tráiler':'Activar sonido del tráiler');
 }
 function toggleHeroSound(){
- // Cambiamos primero el estado deseado; si el player aún no está listo,
- // onReady aplicará esta preferencia al reproductor de YouTube.
- heroSoundEnabled=!heroSoundEnabled;
- if(heroYTPlayer){
+ // Consulta el estado de YouTube y lo invierte una sola vez por pulsación.
+ if(heroYTPlayer && heroYTPlayerReady){
    try{
-     if(heroSoundEnabled)heroYTPlayer.unMute();
-     else heroYTPlayer.mute();
-   }catch(e){}
+     const currentlyMuted=heroYTPlayer.isMuted();
+     heroSoundEnabled=currentlyMuted;
+     if(heroSoundEnabled){
+       heroYTPlayer.unMute();
+       heroYTPlayer.setVolume(100);
+     }else{
+       heroYTPlayer.mute();
+     }
+   }catch(e){
+     heroSoundEnabled=!heroSoundEnabled;
+   }
+ }else{
+   // Si la API aún está cargando, guarda la preferencia para aplicarla en onReady.
+   heroSoundEnabled=!heroSoundEnabled;
  }
  updateHeroSoundButton();
 }
@@ -855,7 +860,7 @@ function renderHero(){
         <div class="hero-video-placeholder">El tráiler comenzará automáticamente en unos segundos…</div>
         <div id="heroYouTubePlayer"></div>
         <div class="hero-video-controls">
-          <button class="hero-sound-toggle" id="heroSoundToggle" type="button" aria-pressed="false" onclick="toggleHeroSound()">🔇 Activar sonido</button>
+          <button class="hero-sound-toggle" id="heroSoundToggle" type="button" aria-pressed="false" onclick="toggleHeroSound(); event.stopPropagation();">🔇 Activar sonido</button>
         </div>
       </div>
     </div>
