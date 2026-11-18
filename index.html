@@ -328,35 +328,35 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 @media(prefers-reduced-motion:reduce){.hero-slide,.hero-carousel-arrow{transition:none}}
 
 
-/* ===== HERO CINEMATOGRÁFICO CON TRÁILER AUTOMÁTICO ===== */
+/* ===== HERO DIVIDIDO: INFORMACIÓN + TRÁILER YOUTUBE ===== */
 .hero{min-height:0;padding:0;background:#05081c;}
-.hero-carousel{position:relative;z-index:1;min-height:245px;overflow:hidden;}
-.hero-slide{position:relative;display:flex;align-items:center;min-height:245px;padding:28px 64px;overflow:hidden;isolation:isolate;cursor:pointer;}
-.hero-slide-poster{position:absolute;inset:0;z-index:-3;width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:cover;object-position:center 30%;border:0;border-radius:0;box-shadow:none;filter:blur(1px);transform:scale(1.025);}
-.hero-slide-video{position:absolute;inset:0;z-index:-2;width:100%;height:100%;border:0;pointer-events:none;object-fit:cover;}
-.hero-slide::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,7,24,.97) 0%,rgba(4,7,24,.84) 38%,rgba(4,7,24,.38) 72%,rgba(4,7,24,.24) 100%),linear-gradient(0deg,rgba(4,7,24,.48),transparent 55%);}
-.hero-slide-copy{width:min(760px,78%);min-width:0;}
-.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:1.5px;margin-bottom:7px;text-shadow:0 2px 8px #000;}
-.hero-slide-copy h1{font-size:clamp(23px,3.5vw,42px);line-height:1.08;margin:0 0 9px;text-transform:uppercase;text-shadow:0 2px 12px #000;}
-.hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px;}
-.hero-slide-description{max-width:650px;color:#eef2ff;font-size:12px;line-height:1.5;margin:0 0 12px;text-shadow:0 2px 8px #000;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.hero-carousel{position:relative;z-index:1;min-height:300px;overflow:hidden;}
+.hero-slide{position:relative;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);align-items:stretch;gap:18px;min-height:300px;padding:20px 58px 28px;overflow:hidden;cursor:default;}
+.hero-slide-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:8px 0;}
+.hero-slide-kicker{display:inline-block;color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:1.5px;margin-bottom:8px;}
+.hero-slide-copy h1{font-size:clamp(22px,3vw,38px);line-height:1.08;margin:0 0 10px;text-transform:uppercase;overflow-wrap:anywhere;}
+.hero-slide-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
+.hero-slide-description{max-width:600px;color:#dce5ff;font-size:12px;line-height:1.55;margin:0 0 15px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
 .hero-slide-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.hero-slide-actions .btn{padding:9px 16px;font-size:11px;min-width:125px;}
-.hero-carousel-arrow{background:#080e27d9;backdrop-filter:blur(5px);}
-.hero-carousel-dots{bottom:11px;right:18px;}
-@media(max-width:620px){
- .hero-carousel{min-height:220px;}
- .hero-slide{min-height:220px;padding:22px 42px;}
- .hero-slide-poster{object-position:center 25%;}
- .hero-slide-copy{width:100%;}
- .hero-slide-copy h1{font-size:clamp(19px,5.5vw,27px);}
- .hero-slide-description{font-size:10px;-webkit-line-clamp:3;max-width:100%;}
- .hero-slide-meta{gap:4px;margin-bottom:7px;}
- .hero-meta-pill{font-size:8px;padding:4px 6px;}
- .hero-slide-actions .btn{padding:8px 12px;font-size:10px;}
+.hero-slide-actions .btn{padding:10px 17px;font-size:11px;min-width:130px;}
+.hero-video-panel{position:relative;align-self:center;width:100%;aspect-ratio:16/9;min-height:0;background:#000;border:1px solid #344875;border-radius:12px;overflow:hidden;box-shadow:0 8px 28px #0008;}
+.hero-video-panel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.hero-sound-toggle{position:absolute;z-index:5;right:10px;top:10px;border:1px solid #ffffff55;border-radius:99px;background:#05081cdd;color:#fff;padding:7px 10px;font-size:11px;font-weight:700;cursor:pointer;}
+.hero-sound-toggle:hover{border-color:var(--cyan);box-shadow:0 0 12px #00e5ff55;}
+.hero-video-placeholder{position:absolute;inset:0;display:grid;place-items:center;color:#cbd5ee;font-size:12px;background:linear-gradient(135deg,#101a38,#05081c);text-align:center;padding:15px;}
+.hero-carousel-arrow{background:#080e27e8;backdrop-filter:blur(5px);}
+.hero-carousel-dots{bottom:9px;right:18px;}
+@media(max-width:760px){
+ .hero-carousel{min-height:0;}
+ .hero-slide{grid-template-columns:1fr;gap:13px;min-height:0;padding:18px 42px 30px;}
+ .hero-slide-copy{order:1;padding:0;}
+ .hero-video-panel{order:2;aspect-ratio:16/9;}
+ .hero-slide-copy h1{font-size:clamp(20px,5vw,29px);}
+ .hero-slide-description{font-size:11px;-webkit-line-clamp:3;margin-bottom:10px;}
+ .hero-slide-actions .btn{padding:8px 13px;}
  .hero-carousel-dots{bottom:8px;right:12px;}
 }
-@media(prefers-reduced-motion:reduce){.hero-slide-video{display:none!important;}}
+@media(prefers-reduced-motion:reduce){.hero-slide{transition:none;}}
 
 </style>
 </head>
@@ -710,55 +710,98 @@ let heroItems = [];
 let heroIndex = 0;
 let heroTimer = null;
 let heroTrailerDelay = null;
+let heroYTPlayer = null;
+let heroYTReady = false;
+let heroYTApiRequested = false;
+let heroSoundEnabled = false;
 const HERO_TRAILER_DELAY_MS = 3000;
-// Se amplía el tiempo de cada banner para que el tráiler alcance a verse.
-const HERO_SLIDE_DURATION_MS = 18000;
 
 function getHeroItems(){
  const ids=[CONFIG.peliculaDestacada,...(Array.isArray(CONFIG.peliculasRecomendadas)?CONFIG.peliculasRecomendadas:[])];
  const uniqueIds=[...new Set(ids.map(Number))];
  return uniqueIds.map(id=>PELICULAS.find(m=>m.id===id&&m.activa&&m.stock>0)).filter(Boolean);
 }
+function loadYouTubeAPI(){
+ if(heroYTApiRequested || window.YT?.Player)return;
+ heroYTApiRequested=true;
+ const tag=document.createElement('script');
+ tag.src='https://www.youtube.com/iframe_api';
+ document.head.appendChild(tag);
+}
+window.onYouTubeIframeAPIReady=function(){
+ heroYTReady=true;
+ const slide=document.querySelector('#heroCarousel .hero-slide');
+ if(slide){const m=heroItems[heroIndex];if(m)createHeroYouTubePlayer(m);}
+};
 function stopHeroTrailer(){
  if(heroTrailerDelay){clearTimeout(heroTrailerDelay);heroTrailerDelay=null;}
- const oldFrame=document.querySelector('#heroCarousel .hero-slide-video');
- if(oldFrame)oldFrame.remove();
+ if(heroYTPlayer){try{heroYTPlayer.stopVideo();heroYTPlayer.destroy();}catch(e){} heroYTPlayer=null;}
+}
+function createHeroYouTubePlayer(movie){
+ const videoId=getYouTubeId(movie.trailer);
+ const target=document.getElementById('heroYouTubePlayer');
+ if(!videoId || !target)return;
+ if(!window.YT?.Player){loadYouTubeAPI();return;}
+ heroYTPlayer=new YT.Player('heroYouTubePlayer',{
+   videoId,
+   playerVars:{autoplay:1,controls:1,rel:0,playsinline:1,enablejsapi:1,modestbranding:1,iv_load_policy:3},
+   events:{
+     onReady:function(event){
+       // Los navegadores suelen exigir silencio para permitir autoplay sin interacción.
+       if(heroSoundEnabled){event.target.unMute();}else{event.target.mute();}
+       event.target.playVideo();
+     },
+     onStateChange:function(event){
+       if(event.data===YT.PlayerState.ENDED){
+         // Solo avanzamos cuando YouTube confirma que el vídeo terminó.
+         if(heroYTPlayer){try{heroYTPlayer.destroy();}catch(e){} heroYTPlayer=null;}
+         moveHero(1);
+       }
+     },
+     onError:function(){
+       const box=document.querySelector('#heroCarousel .hero-video-placeholder');
+       if(box)box.textContent='Este tráiler no permite reproducción incrustada. Puedes avanzar con las flechas.';
+     }
+   }
+ });
 }
 function startHeroTrailer(movie){
  stopHeroTrailer();
  const videoId=getYouTubeId(movie.trailer);
- if(!videoId)return;
+ if(!videoId){const box=document.querySelector('#heroCarousel .hero-video-placeholder');if(box)box.textContent='Tráiler no disponible';return;}
+ loadYouTubeAPI();
  heroTrailerDelay=setTimeout(()=>{
    const slide=document.querySelector('#heroCarousel .hero-slide');
    if(!slide || Number(slide.dataset.movieId)!==Number(movie.id))return;
-   const frame=document.createElement('iframe');
-   frame.className='hero-slide-video';
-   frame.title='Tráiler de '+movie.titulo;
-   frame.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(videoId)+'?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&loop=1&playlist='+encodeURIComponent(videoId)+'&iv_load_policy=3&disablekb=1';
-   frame.allow='autoplay; encrypted-media; picture-in-picture';
-   frame.setAttribute('aria-hidden','true');
-   frame.tabIndex=-1;
-   slide.prepend(frame);
+   const target=document.getElementById('heroYouTubePlayer');
+   if(!target)return;
+   if(window.YT?.Player)createHeroYouTubePlayer(movie);
+   else {
+     // La API puede tardar unos instantes en estar disponible.
+     const wait=setInterval(()=>{
+       if(window.YT?.Player){clearInterval(wait);createHeroYouTubePlayer(movie);}
+     },250);
+     setTimeout(()=>clearInterval(wait),15000);
+   }
    heroTrailerDelay=null;
  },HERO_TRAILER_DELAY_MS);
+}
+function toggleHeroSound(){
+ heroSoundEnabled=!heroSoundEnabled;
+ if(heroYTPlayer){try{if(heroSoundEnabled)heroYTPlayer.unMute();else heroYTPlayer.mute();}catch(e){}}
+ const button=document.getElementById('heroSoundToggle');
+ if(button)button.textContent=heroSoundEnabled?'🔊 Sonido activado':'🔇 Activar sonido';
 }
 function renderHero(){
  stopHeroTrailer();
  heroItems=getHeroItems();
  const host=document.getElementById('heroCarousel');
  const dots=document.getElementById('heroCarouselDots');
- if(!heroItems.length){
-   host.innerHTML='<div class="hero-empty">Pronto anunciaremos nuevos estrenos.</div>';
-   dots.innerHTML='';
-   return;
- }
+ if(!heroItems.length){host.innerHTML='<div class="hero-empty">Pronto anunciaremos nuevos estrenos.</div>';dots.innerHTML='';return;}
  heroIndex=Math.min(heroIndex,heroItems.length-1);
  const m=heroItems[heroIndex];
  host.innerHTML=`
-  <article class="hero-slide" data-movie-id="${m.id}" role="button" tabindex="0" aria-label="Ver detalles de ${esc(m.titulo)}"
-    onclick="openDetail(${m.id})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDetail(${m.id})}">
-    <img class="hero-slide-poster" src="${esc(m.poster)}" alt="" aria-hidden="true"
-      onerror="this.onerror=null;this.src='https://placehold.co/1200x500/10183c/ffffff?text=CINECLIK'">
+  <article class="hero-slide" data-movie-id="${m.id}">
     <div class="hero-slide-copy">
       <span class="hero-slide-kicker">${heroIndex===0?'★ ESTRENO DESTACADO':'★ SELECCIÓN CINECLIK'}</span>
       <h1>${esc(m.titulo)}</h1>
@@ -768,26 +811,20 @@ function renderHero(){
         <span class="hero-meta-pill">${esc(m.duracion)}</span>
       </div>
       <p class="hero-slide-description">${esc(m.descripcion)}</p>
-      <div class="hero-slide-actions">
-        <button class="btn" type="button" onclick="event.stopPropagation();openDetail(${m.id})">Ver película</button>
-      </div>
+      <div class="hero-slide-actions"><button class="btn" type="button" onclick="openDetail(${m.id})">Ver película</button></div>
+    </div>
+    <div class="hero-video-panel">
+      <button class="hero-sound-toggle" id="heroSoundToggle" type="button" onclick="toggleHeroSound()">🔇 Activar sonido</button>
+      <div class="hero-video-placeholder">El tráiler comenzará automáticamente en unos segundos…</div>
+      <div id="heroYouTubePlayer"></div>
     </div>
   </article>`;
- dots.innerHTML=heroItems.map((item,index)=>`<button type="button" class="hero-carousel-dot ${index===heroIndex?'active':''}"
-   aria-label="Mostrar ${esc(item.titulo)}" aria-current="${index===heroIndex?'true':'false'}"
-   onclick="showHero(${index})"></button>`).join('');
+ dots.innerHTML=heroItems.map((item,index)=>`<button type="button" class="hero-carousel-dot ${index===heroIndex?'active':''}" aria-label="Mostrar ${esc(item.titulo)}" aria-current="${index===heroIndex?'true':'false'}" onclick="showHero(${index})"></button>`).join('');
  startHeroTrailer(m);
 }
-function showHero(index){
- if(!heroItems.length)return;
- heroIndex=(index+heroItems.length)%heroItems.length;
- renderHero();
-}
-function moveHero(direction){showHero(heroIndex+direction)}
-function startHeroAutoplay(){
- if(heroTimer)clearInterval(heroTimer);
- if(heroItems.length>1)heroTimer=setInterval(()=>moveHero(1),HERO_SLIDE_DURATION_MS);
-}
+function showHero(index){if(!heroItems.length)return;heroIndex=(index+heroItems.length)%heroItems.length;renderHero();}
+function moveHero(direction){showHero(heroIndex+direction);}
+function startHeroAutoplay(){if(heroTimer)clearInterval(heroTimer);/* El siguiente tráiler inicia cuando el actual termina. */}
 
 applyConfig();renderHero();startHeroAutoplay();renderCatalog();renderCart();
 </script>
