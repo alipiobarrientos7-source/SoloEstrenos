@@ -339,10 +339,12 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
 .hero-slide-description{max-width:600px;color:#dce5ff;font-size:12px;line-height:1.55;margin:0 0 15px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
 .hero-slide-actions{display:flex;gap:8px;flex-wrap:wrap;}
 .hero-slide-actions .btn{padding:10px 17px;font-size:11px;min-width:130px;}
-.hero-video-panel{position:relative;align-self:center;width:100%;aspect-ratio:16/9;min-height:0;background:#000;border:1px solid #344875;border-radius:12px;overflow:hidden;box-shadow:0 8px 28px #0008;}
+.hero-video-wrap{align-self:center;width:100%;min-width:0;display:flex;flex-direction:column;gap:8px;}
+.hero-video-panel{position:relative;width:100%;aspect-ratio:16/9;min-height:0;background:#000;border:1px solid #344875;border-radius:12px;overflow:hidden;box-shadow:0 8px 28px #0008;}
 .hero-video-panel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
-.hero-sound-toggle{position:absolute;z-index:5;right:10px;top:10px;border:1px solid #ffffff55;border-radius:99px;background:#05081cdd;color:#fff;padding:7px 10px;font-size:11px;font-weight:700;cursor:pointer;}
-.hero-sound-toggle:hover{border-color:var(--cyan);box-shadow:0 0 12px #00e5ff55;}
+.hero-video-controls{display:flex;justify-content:flex-end;align-items:center;min-height:34px;}
+.hero-sound-toggle{position:static;z-index:5;display:inline-flex;align-items:center;gap:7px;border:1px solid #00e5ff80;border-radius:99px;background:#08152c;color:#fff;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;}
+.hero-sound-toggle:hover{border-color:var(--cyan);background:#102344;box-shadow:0 0 12px #00e5ff55;}
 .hero-video-placeholder{position:absolute;inset:0;display:grid;place-items:center;color:#cbd5ee;font-size:12px;background:linear-gradient(135deg,#101a38,#05081c);text-align:center;padding:15px;}
 .hero-carousel-arrow{background:#080e27e8;backdrop-filter:blur(5px);}
 .hero-carousel-dots{bottom:9px;right:18px;}
@@ -350,7 +352,8 @@ footer{border-top:1px solid #24345e;padding:24px 0 15px;color:#aebbe0;font-size:
  .hero-carousel{min-height:0;}
  .hero-slide{grid-template-columns:1fr;gap:13px;min-height:0;padding:18px 42px 30px;}
  .hero-slide-copy{order:1;padding:0;}
- .hero-video-panel{order:2;aspect-ratio:16/9;}
+ .hero-video-wrap{order:2;}
+ .hero-video-panel{aspect-ratio:16/9;}
  .hero-slide-copy h1{font-size:clamp(20px,5vw,29px);}
  .hero-slide-description{font-size:11px;-webkit-line-clamp:3;margin-bottom:10px;}
  .hero-slide-actions .btn{padding:8px 13px;}
@@ -713,6 +716,8 @@ let heroTrailerDelay = null;
 let heroYTPlayer = null;
 let heroYTReady = false;
 let heroYTApiRequested = false;
+let heroYTWaitInterval = null;
+let heroYTWaitTimeout = null;
 let heroSoundEnabled = false;
 const HERO_TRAILER_DELAY_MS = 3000;
 
@@ -729,12 +734,13 @@ function loadYouTubeAPI(){
  document.head.appendChild(tag);
 }
 window.onYouTubeIframeAPIReady=function(){
+ // Solo marcamos la API como lista. startHeroTrailer controla una única creación del player.
  heroYTReady=true;
- const slide=document.querySelector('#heroCarousel .hero-slide');
- if(slide){const m=heroItems[heroIndex];if(m)createHeroYouTubePlayer(m);}
 };
 function stopHeroTrailer(){
  if(heroTrailerDelay){clearTimeout(heroTrailerDelay);heroTrailerDelay=null;}
+ if(heroYTWaitInterval){clearInterval(heroYTWaitInterval);heroYTWaitInterval=null;}
+ if(heroYTWaitTimeout){clearTimeout(heroYTWaitTimeout);heroYTWaitTimeout=null;}
  if(heroYTPlayer){try{heroYTPlayer.stopVideo();heroYTPlayer.destroy();}catch(e){} heroYTPlayer=null;}
 }
 function createHeroYouTubePlayer(movie){
@@ -744,18 +750,19 @@ function createHeroYouTubePlayer(movie){
  if(!window.YT?.Player){loadYouTubeAPI();return;}
  heroYTPlayer=new YT.Player('heroYouTubePlayer',{
    videoId,
-   playerVars:{autoplay:1,controls:1,rel:0,playsinline:1,enablejsapi:1,modestbranding:1,iv_load_policy:3},
+   playerVars:{autoplay:1,controls:1,rel:0,playsinline:1,enablejsapi:1,modestbranding:1,iv_load_policy:3,origin:window.location.origin},
    events:{
      onReady:function(event){
-       // Los navegadores suelen exigir silencio para permitir autoplay sin interacción.
+       // El autoplay se solicita silenciado para mejorar la compatibilidad del navegador.
        if(heroSoundEnabled){event.target.unMute();}else{event.target.mute();}
        event.target.playVideo();
+       updateHeroSoundButton();
      },
      onStateChange:function(event){
        if(event.data===YT.PlayerState.ENDED){
-         // Solo avanzamos cuando YouTube confirma que el vídeo terminó.
-         if(heroYTPlayer){try{heroYTPlayer.destroy();}catch(e){} heroYTPlayer=null;}
-         moveHero(1);
+         // Avanza únicamente cuando YouTube confirma que terminó el tráiler completo.
+         if(heroTrailerDelay){clearTimeout(heroTrailerDelay);heroTrailerDelay=null;}
+         setTimeout(()=>{if(heroYTPlayer){try{heroYTPlayer.destroy();}catch(e){} heroYTPlayer=null;}moveHero(1);},150);
        }
      },
      onError:function(){
@@ -778,19 +785,41 @@ function startHeroTrailer(movie){
    if(window.YT?.Player)createHeroYouTubePlayer(movie);
    else {
      // La API puede tardar unos instantes en estar disponible.
-     const wait=setInterval(()=>{
-       if(window.YT?.Player){clearInterval(wait);createHeroYouTubePlayer(movie);}
+     heroYTWaitInterval=setInterval(()=>{
+       if(window.YT?.Player){
+         clearInterval(heroYTWaitInterval);heroYTWaitInterval=null;
+         if(heroYTWaitTimeout){clearTimeout(heroYTWaitTimeout);heroYTWaitTimeout=null;}
+         const current=document.querySelector('#heroCarousel .hero-slide');
+         if(current && Number(current.dataset.movieId)===Number(movie.id))createHeroYouTubePlayer(movie);
+       }
      },250);
-     setTimeout(()=>clearInterval(wait),15000);
+     heroYTWaitTimeout=setTimeout(()=>{
+       if(heroYTWaitInterval){clearInterval(heroYTWaitInterval);heroYTWaitInterval=null;}
+       heroYTWaitTimeout=null;
+     },15000);
    }
    heroTrailerDelay=null;
  },HERO_TRAILER_DELAY_MS);
 }
-function toggleHeroSound(){
- heroSoundEnabled=!heroSoundEnabled;
- if(heroYTPlayer){try{if(heroSoundEnabled)heroYTPlayer.unMute();else heroYTPlayer.mute();}catch(e){}}
+function updateHeroSoundButton(){
  const button=document.getElementById('heroSoundToggle');
- if(button)button.textContent=heroSoundEnabled?'🔊 Sonido activado':'🔇 Activar sonido';
+ if(!button)return;
+ let enabled=heroSoundEnabled;
+ if(heroYTPlayer){try{enabled=!heroYTPlayer.isMuted();heroSoundEnabled=enabled;}catch(e){}}
+ button.innerHTML=enabled?'🔊 Silenciar':'🔇 Activar sonido';
+ button.setAttribute('aria-pressed',enabled?'true':'false');
+ button.setAttribute('aria-label',enabled?'Silenciar tráiler':'Activar sonido del tráiler');
+}
+function toggleHeroSound(){
+ if(!heroYTPlayer){
+   // Si el visitante pulsa antes de que el reproductor esté listo, guardamos su preferencia.
+   heroSoundEnabled=!heroSoundEnabled;updateHeroSoundButton();return;
+ }
+ try{
+   if(heroYTPlayer.isMuted()){heroYTPlayer.unMute();heroSoundEnabled=true;}
+   else{heroYTPlayer.mute();heroSoundEnabled=false;}
+   updateHeroSoundButton();
+ }catch(e){console.warn('No se pudo cambiar el sonido del tráiler:',e);}
 }
 function renderHero(){
  stopHeroTrailer();
@@ -813,10 +842,14 @@ function renderHero(){
       <p class="hero-slide-description">${esc(m.descripcion)}</p>
       <div class="hero-slide-actions"><button class="btn" type="button" onclick="openDetail(${m.id})">Ver película</button></div>
     </div>
-    <div class="hero-video-panel">
-      <button class="hero-sound-toggle" id="heroSoundToggle" type="button" onclick="toggleHeroSound()">🔇 Activar sonido</button>
-      <div class="hero-video-placeholder">El tráiler comenzará automáticamente en unos segundos…</div>
-      <div id="heroYouTubePlayer"></div>
+    <div class="hero-video-wrap">
+      <div class="hero-video-panel">
+        <div class="hero-video-placeholder">El tráiler comenzará automáticamente en unos segundos…</div>
+        <div id="heroYouTubePlayer"></div>
+      </div>
+      <div class="hero-video-controls">
+        <button class="hero-sound-toggle" id="heroSoundToggle" type="button" aria-pressed="false" onclick="toggleHeroSound()">🔇 Activar sonido</button>
+      </div>
     </div>
   </article>`;
  dots.innerHTML=heroItems.map((item,index)=>`<button type="button" class="hero-carousel-dot ${index===heroIndex?'active':''}" aria-label="Mostrar ${esc(item.titulo)}" aria-current="${index===heroIndex?'true':'false'}" onclick="showHero(${index})"></button>`).join('');
